@@ -1,9 +1,23 @@
-all: libft.a
+CC = gcc
+CFLAGS = -Wall -Wextra -Werror
+NAME = libft.a 
+SRC = ft_strlen.c \
+	  ft_memset.c 
 
-ft_strlen.o: ft_strlen.c
-	gcc -Wall -Wextra -Werror -c ft_strlen.c
+OBJ = $(SRC:c.o)
 
-ft_menset.o: ft_memset.c
-	gcc -Wall -Wextra -Werror -c ft_memset.c
-libft.a: ft_strlen.o ft_memset.o
-	ar rc -s libft.a ft_strlen.o ft_memset.o
+all: $(NAME)
+
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
+libft.a: $(OBJ)
+	ar rc -s libft.a $^
+
+re: fclean $(NAME) 
+
+.PHONY: fclean
+clean:
+	rm -rdf $(OBJ)
+fclean: clean
+	rm -rdf $(NAME)
