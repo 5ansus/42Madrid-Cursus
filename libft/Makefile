@@ -3,12 +3,10 @@ CFLAGS = -Wall -Wextra -Werror
 NAME = libft.a 
 SRC = ft_strlen.c \
 	  ft_memset.c 
-
-OBJ = $(SRC:c.o)
-
+OBJ = $(SRC:.c=.o)
 all: $(NAME)
 
-%.o: %.c
+%.o: %.c $(SRC)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 libft.a: $(OBJ)
@@ -18,6 +16,6 @@ re: fclean $(NAME)
 
 .PHONY: fclean
 clean:
-	rm -rdf $(OBJ)
+	rm -rfd $(OBJ)
 fclean: clean
-	rm -rdf $(NAME)
+	rm -rfd $(NAME)
