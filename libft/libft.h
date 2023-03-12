@@ -14,9 +14,11 @@
 
 # include <stddef.h>
 # include <unistd.h>
+# include <stdlib.h>
 
-int		ft_strlen(const char *s);
-void	*ft_memset(void *b, int c, size_t len);
 int		ft_isalpha(int c);
+int		ft_strlen(const char *s);
 void	ft_putstr_fd(char *s, int fd);
+void	*ft_memset(void *b, int c, size_t len);
+void	*ft_calloc(size_t count, size_t size);
 #endif

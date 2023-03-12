@@ -4,7 +4,8 @@ NAME = libft.a
 SRC = ft_strlen.c \
 	  ft_memset.c \
 	  ft_isalpha.c \
-	  ft_putstr_fd.c
+	  ft_putstr_fd.c \
+	  ft_calloc.c 
 OBJ = $(SRC:.c=.o)
 
 all: $(NAME)
@@ -12,8 +13,8 @@ all: $(NAME)
 %.o: %.c #$(SRC)
 	$(CC) $(CFLAGS) -c $< -o $@
 
-libft.a: $(OBJ)
-	ar rc -s libft.a $^
+$(NAME): $(OBJ)
+	ar rc -s $@ $^
 
 re: fclean $(NAME) 
 

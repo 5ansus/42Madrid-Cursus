@@ -9,7 +9,6 @@
 /*   Updated: 2023/03/12 18:47:31 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include <stdlib.h>
 #include "libft.h"
 
 void	*ft_calloc(size_t count, size_t size)
@@ -23,7 +22,7 @@ void	*ft_calloc(size_t count, size_t size)
 	i = 0;
 	while (i < count)
 	{
-		ft_memset(p, 0, size);
+		ft_memset(p + (size * i), 0, size);
 		i++;
 	}
 	return (p);

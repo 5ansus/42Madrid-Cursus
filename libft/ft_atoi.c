@@ -9,7 +9,6 @@
 /*   Updated: 2023/03/07 13:58:42 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#define :Wq
 
 int	ft_atoi(const char *str)
 {
@@ -20,7 +19,7 @@ int	ft_atoi(const char *str)
 	i = 0;
 	sign = 1;
 	while (str[i] != '\0'){
-		while (str[i] != '+' && str[i]) :wq
+		while (str[i] != '+' && str[i])
 
 	}
 }
