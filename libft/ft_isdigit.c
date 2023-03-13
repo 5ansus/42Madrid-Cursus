@@ -5,12 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/07 13:58:54 by sanferna          #+#    #+#             */
-/*   Updated: 2023/03/07 14:00:29 by sanferna         ###   ########.fr       */
+/*   Created: 2023/03/13 13:16:35 by sanferna          #+#    #+#             */
+/*   Updated: 2023/03/13 13:17:26 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-
-
-
-
+int	ft_isdigit(int c)
+{
+	if (c >= '0' && c <= '9')
+		return (1);
+	return (0);
+}

@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/12 18:13:03 by sanferna          #+#    #+#             */
-/*   Updated: 2023/03/13 13:23:23 by sanferna         ###   ########.fr       */
+/*   Created: 2023/03/13 13:40:45 by sanferna          #+#    #+#             */
+/*   Updated: 2023/03/13 13:42:25 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
 
-void	ft_putstr_fd(char *s, int fd)
+void	ft_bzero(void *s, size_t n)
 {
-	write(fd, s, ft_strlen(s));
+	ft_memset(s, 0, n);
 }

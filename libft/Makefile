@@ -1,11 +1,17 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 NAME = libft.a
-SRC = ft_strlen.c \
-	  ft_memset.c \
-	  ft_isalpha.c \
-	  ft_putstr_fd.c \
-	  ft_calloc.c 
+SRC = ft_isalpha.c \
+	ft_isdigit.c \
+	ft_isalnum.c \
+	ft_isascii.c \
+	ft_isprint.c \
+	ft_strlen.c \
+	ft_memset.c \
+	ft_bzero.c \
+	ft_memcpy.c \
+	ft_putstr_fd.c \
+	ft_calloc.c 
 OBJ = $(SRC:.c=.o)
 
 all: $(NAME)

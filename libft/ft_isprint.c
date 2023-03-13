@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_isprint.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/12 18:13:03 by sanferna          #+#    #+#             */
-/*   Updated: 2023/03/13 13:23:23 by sanferna         ###   ########.fr       */
+/*   Created: 2023/03/13 13:36:23 by sanferna          #+#    #+#             */
+/*   Updated: 2023/03/13 13:37:23 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libft.h"
-
-void	ft_putstr_fd(char *s, int fd)
+int	ft_isprint(int c)
 {
-	write(fd, s, ft_strlen(s));
+	if (c >= ' ' && c <= '~')
+		return (1);
+	return (0);
 }
