@@ -1,27 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sanferna <sanfernan@student.42madrid.com>  +#+  +:+       +#+        */
+/*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/07 13:44:15 by sanferna          #+#    #+#             */
-/*   Updated: 2023/03/07 13:58:42 by sanferna         ###   ########.fr       */
+/*   Created: 2023/03/14 17:13:02 by sanferna          #+#    #+#             */
+/*   Updated: 2023/03/14 17:13:44 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-int	ft_atoi(const char *str)
+unsigned int	ft_strlcpy(char *dest, char *src, unsigned int size)
 {
-	int	nb;
-	int	i;
-	int	sign;
+	unsigned int	i;
+	unsigned int	j;
 
 	i = 0;
-	sign = 1;
-	while (str[i] != '\0')
+	j = 0;
+	while (src[j] != '\0')
+		j++;
+	if (size < 1)
+		return (j);
+	while (src[i] && (i < size - 1))
 	{
-		while (str[i] != '+' && str[i])
-		{
-			return (0);
-		}
+		dest[i] = src[i];
+		i++;
 	}
+	dest[i] = '\0';
+	return (j);
 }
