@@ -1,34 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/14 17:33:07 by sanferna          #+#    #+#             */
-/*   Updated: 2023/03/15 15:13:37 by sanferna         ###   ########.fr       */
+/*   Created: 2023/03/19 19:39:46 by sanferna          #+#    #+#             */
+/*   Updated: 2023/03/19 19:40:19 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
 
-char	*ft_strchr(const char *s, int c)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	int				i;
-	int				len;
-	const char		*p;
-	unsigned char	car;
+	size_t	i;
 
 	i = 0;
-	car = c;
-	len = ft_strlen(s);
-	while (i <= len)
-	{
-		if ((unsigned char) s[i] == car)
-		{
-			p = s + i;
-			return ((char *)p);
-		}
+	while (i < n && s1[i] && s2[i] && s1[i] == s2[i])
 		i++;
-	}
-	return (NULL);
+	if (i == n)
+		return (0);
+	return (((unsigned char) s1[i]) - ((unsigned char) s2[i]));
 }

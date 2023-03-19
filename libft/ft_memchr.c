@@ -1,33 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/14 17:33:07 by sanferna          #+#    #+#             */
-/*   Updated: 2023/03/15 15:13:37 by sanferna         ###   ########.fr       */
+/*   Created: 2023/03/18 18:50:30 by sanferna          #+#    #+#             */
+/*   Updated: 2023/03/18 18:53:49 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
 
-char	*ft_strchr(const char *s, int c)
+/*void	*ft_memchr(const void *s, int c, size_t n)
 {
-	int				i;
-	int				len;
-	const char		*p;
+	char		*input;
+	char		*ret;
+
+	input = (char *) s;
+	ret = ft_strchr(input,(unsigned int) c);
+	if ((size_t) (ret - input) < n)
+		return ((void *)ret);
+	return (NULL);
+}*/
+
+void	*ft_memchr(const void *s, int c, size_t n)
+{
+	char			*p;
+	size_t			i;
 	unsigned char	car;
 
 	i = 0;
 	car = c;
-	len = ft_strlen(s);
-	while (i <= len)
+	p = (char *) s;
+	while (i < n)
 	{
-		if ((unsigned char) s[i] == car)
-		{
-			p = s + i;
-			return ((char *)p);
-		}
+		if ((unsigned char) p[i] == car)
+			return ((char *) &p[i]);
 		i++;
 	}
 	return (NULL);
