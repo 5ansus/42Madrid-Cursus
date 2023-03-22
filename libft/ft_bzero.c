@@ -6,9 +6,10 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 13:40:45 by sanferna          #+#    #+#             */
-/*   Updated: 2023/03/13 13:42:25 by sanferna         ###   ########.fr       */
+/*   Updated: 2023/03/22 16:41:43 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
 
 void	ft_bzero(void *s, size_t n)

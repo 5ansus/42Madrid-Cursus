@@ -6,9 +6,10 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 17:13:02 by sanferna          #+#    #+#             */
-/*   Updated: 2023/03/17 13:23:48 by sanferna         ###   ########.fr       */
+/*   Updated: 2023/03/22 16:42:23 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)

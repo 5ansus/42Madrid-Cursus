@@ -6,9 +6,10 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 13:36:23 by sanferna          #+#    #+#             */
-/*   Updated: 2023/03/13 13:37:23 by sanferna         ###   ########.fr       */
+/*   Updated: 2023/03/22 16:41:52 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 int	ft_isprint(int c)
 {
 	if (c >= ' ' && c <= '~')

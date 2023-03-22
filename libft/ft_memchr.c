@@ -6,22 +6,11 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 18:50:30 by sanferna          #+#    #+#             */
-/*   Updated: 2023/03/18 18:53:49 by sanferna         ###   ########.fr       */
+/*   Updated: 2023/03/22 16:41:54 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
-
-/*void	*ft_memchr(const void *s, int c, size_t n)
-{
-	char		*input;
-	char		*ret;
-
-	input = (char *) s;
-	ret = ft_strchr(input,(unsigned int) c);
-	if ((size_t) (ret - input) < n)
-		return ((void *)ret);
-	return (NULL);
-}*/
 
 void	*ft_memchr(const void *s, int c, size_t n)
 {

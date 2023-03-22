@@ -6,9 +6,10 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 13:34:54 by sanferna          #+#    #+#             */
-/*   Updated: 2023/03/13 13:36:13 by sanferna         ###   ########.fr       */
+/*   Updated: 2023/03/22 16:41:46 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
 
 int	ft_isalnum(int c)

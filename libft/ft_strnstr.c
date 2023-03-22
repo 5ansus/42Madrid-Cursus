@@ -6,9 +6,10 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:45:11 by sanferna          #+#    #+#             */
-/*   Updated: 2023/03/21 16:55:21 by sanferna         ###   ########.fr       */
+/*   Updated: 2023/03/22 16:42:31 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
 
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
@@ -28,7 +29,7 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 			return (NULL);
 		if (ft_strncmp(needle, ret, len_obj) == 0)
 			return (ret);
-		ret = ft_strchr(ret+1, needle[0]);
+		ret = ft_strchr(ret + 1, needle[0]);
 	}
 	return (NULL);
 }

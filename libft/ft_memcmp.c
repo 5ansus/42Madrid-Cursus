@@ -6,9 +6,10 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 20:03:04 by sanferna          #+#    #+#             */
-/*   Updated: 2023/03/19 20:08:14 by sanferna         ###   ########.fr       */
+/*   Updated: 2023/03/22 16:41:55 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
 
 int	ft_memcmp(const void *s1, const void *s2, size_t n)

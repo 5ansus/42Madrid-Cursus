@@ -6,9 +6,10 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 17:33:14 by sanferna          #+#    #+#             */
-/*   Updated: 2023/03/15 15:42:08 by sanferna         ###   ########.fr       */
+/*   Updated: 2023/03/22 16:42:34 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
 
 char	*ft_strrchr(const char *s, int c)

@@ -6,9 +6,10 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 19:39:46 by sanferna          #+#    #+#             */
-/*   Updated: 2023/03/19 19:40:19 by sanferna         ###   ########.fr       */
+/*   Updated: 2023/03/22 16:42:28 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
