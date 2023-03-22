@@ -20,6 +20,7 @@ SRC = ft_isalpha.c \
 	ft_strncmp.c \
 	ft_memchr.c \
 	ft_memcmp.c \
+	ft_strnstr.c \
 	ft_calloc.c \
 	ft_putstr_fd.c
 OBJ = $(SRC:.c=.o)
