@@ -24,6 +24,8 @@ SRC = ft_isalpha.c \
 	ft_atoi.c \
 	ft_calloc.c \
 	ft_strdup.c \
+	ft_substr.c \
+	ft_strjoin.c \
 	ft_putstr_fd.c
 OBJ = $(SRC:.c=.o)
 
@@ -35,7 +37,7 @@ all: $(NAME)
 $(NAME): $(OBJ)
 	ar rc -s $@ $^
 
-re: fclean $(NAME) 
+re: fclean $(NAME)
 
 .PHONY: all fclean clean re
 clean:
