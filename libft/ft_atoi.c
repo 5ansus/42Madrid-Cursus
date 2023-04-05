@@ -6,13 +6,13 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 13:44:15 by sanferna          #+#    #+#             */
-/*   Updated: 2023/04/04 16:56:29 by sanferna         ###   ########.fr       */
+/*   Updated: 2023/04/05 13:18:07 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_isspace(int c);
+static int	ft_isspace(int c);
 
 int	ft_atoi(const char *str)
 {
@@ -40,7 +40,7 @@ int	ft_atoi(const char *str)
 	return (nb);
 }
 
-int	ft_isspace(int c)
+static int	ft_isspace(int c)
 {
 	int				ret;
 	unsigned char	car;
