@@ -1,32 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strmapi.c                                       :+:      :+:    :+:   */
+/*   ft_lstlast.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/05 19:52:37 by sanferna          #+#    #+#             */
-/*   Updated: 2023/04/06 16:46:52 by sanferna         ###   ########.fr       */
+/*   Created: 2023/04/06 17:27:37 by sanferna          #+#    #+#             */
+/*   Updated: 2023/04/06 17:36:23 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
+t_list	*ft_lstlast(t_list *lst)
 {
-	char	*ret;
-	size_t	i;
-	size_t	len;
+	t_list	*node;
 
-	ret = ft_strdup(s);
-	if (ret == NULL)
+	if (lst == NULL)
 		return (NULL);
-	len = ft_strlen(s);
-	i = 0;
-	while (i < len)
-	{
-		ret[i] = f(i, s[i]);
-		i++;
-	}
-	return (ret);
+	node = lst;
+	while (node->next != NULL)
+		node = node->next;
+	return (node);
 }

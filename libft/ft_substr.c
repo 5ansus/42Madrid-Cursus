@@ -6,7 +6,7 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 16:56:56 by sanferna          #+#    #+#             */
-/*   Updated: 2023/04/05 18:44:19 by sanferna         ###   ########.fr       */
+/*   Updated: 2023/04/06 16:51:49 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		res_len = len;
 	else
 		res_len = (str_len - start);
-	ret = malloc((res_len + 1) * sizeof(char));
+	ret = malloc((res_len + 1) * sizeof (char));
 	if (ret == NULL)
 		return (NULL);
 	while (i < res_len)

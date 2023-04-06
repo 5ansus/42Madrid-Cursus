@@ -6,7 +6,7 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 14:26:10 by sanferna          #+#    #+#             */
-/*   Updated: 2023/04/06 14:59:48 by sanferna         ###   ########.fr       */
+/*   Updated: 2023/04/06 16:52:58 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	*ft_itoa(int n)
 	index = 0;
 	ft_itoa_rec(n, str, &index);
 	ret = ft_strdup(str);
-	return ret;
+	return (ret);
 }
 
 void	ft_itoa_rec(int n, char *dest, int *index)
@@ -34,14 +34,14 @@ void	ft_itoa_rec(int n, char *dest, int *index)
 	{
 		dest[*index] = '-';
 		(*index)++;
-		if((n / 10) != 0)
+		if ((n / 10) != 0)
 			ft_itoa_rec(-(n / 10), dest, index);
 		dest[*index] = - (n % 10) + '0';
 		dest[(*index) + 1] = '\0';
 	}
 	else
 	{
-		if((n / 10) != 0)
+		if ((n / 10) != 0)
 			ft_itoa_rec((n / 10), dest, index);
 		dest[*index] = (n % 10) + '0';
 		dest[(*index) + 1] = '\0';

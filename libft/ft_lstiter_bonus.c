@@ -1,32 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strmapi.c                                       :+:      :+:    :+:   */
+/*   ft_lstiter_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/05 19:52:37 by sanferna          #+#    #+#             */
-/*   Updated: 2023/04/06 16:46:52 by sanferna         ###   ########.fr       */
+/*   Created: 2023/04/06 18:05:40 by sanferna          #+#    #+#             */
+/*   Updated: 2023/04/06 18:23:52 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
+void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
-	char	*ret;
-	size_t	i;
-	size_t	len;
+	t_list	*node;
 
-	ret = ft_strdup(s);
-	if (ret == NULL)
-		return (NULL);
-	len = ft_strlen(s);
-	i = 0;
-	while (i < len)
+	node = lst;
+	while (node != NULL)
 	{
-		ret[i] = f(i, s[i]);
-		i++;
+		f(node->content);
+		node = node->next;
 	}
-	return (ret);
 }

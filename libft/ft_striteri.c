@@ -6,7 +6,7 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 14:23:31 by sanferna          #+#    #+#             */
-/*   Updated: 2023/04/06 14:25:26 by sanferna         ###   ########.fr       */
+/*   Updated: 2023/04/06 16:47:05 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_striteri(char *s, void (*f)(unsigned int, char*))
 
 	i = 0;
 	len = ft_strlen(s);
-	while(i < len)
+	while (i < len)
 	{
 		f(i, &s[i]);
 		i++;

@@ -1,32 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strmapi.c                                       :+:      :+:    :+:   */
+/*   ft_lstclear_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/05 19:52:37 by sanferna          #+#    #+#             */
-/*   Updated: 2023/04/06 16:46:52 by sanferna         ###   ########.fr       */
+/*   Created: 2023/04/06 17:59:28 by sanferna          #+#    #+#             */
+/*   Updated: 2023/04/06 18:05:22 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
+void	ft_lstclear(t_list **lst, void (*del)(void*))
 {
-	char	*ret;
-	size_t	i;
-	size_t	len;
+	t_list	*node;
+	t_list	*node_next;
 
-	ret = ft_strdup(s);
-	if (ret == NULL)
-		return (NULL);
-	len = ft_strlen(s);
-	i = 0;
-	while (i < len)
+	node = *lst;
+	while (node != NULL)
 	{
-		ret[i] = f(i, s[i]);
-		i++;
+		node_next = node->next;
+		del(node->content);
+		free(node);
+		node = node_next;
 	}
-	return (ret);
+	*lst = NULL;
 }
