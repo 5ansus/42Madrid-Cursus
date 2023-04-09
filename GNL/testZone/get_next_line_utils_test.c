@@ -1,29 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   get_next_line_utils_test.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/09 15:14:27 by sanferna          #+#    #+#             */
-/*   Updated: 2023/04/09 16:19:01 by sanferna         ###   ########.fr       */
+/*   Created: 2023/04/09 15:31:59 by sanferna          #+#    #+#             */
+/*   Updated: 2023/04/09 16:01:31 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "get_next_line_test.h"
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 50
-# endif
+char	*ft_strdup(const char *s1)
+{
+	char	*ret;
+	size_t	i;
+	size_t	len;
 
-# include <unistd.h>
-# include <fcntl.h>
-# include <stdlib.h>
+	i = 0;
+	len = ft_strlen(s1);
+	ret = malloc ((len + 1) * sizeof (char));
+	if (ret == NULL)
+		return (NULL);
+	while (i < len)
+	{
+		ret[i] = s1[i];
+		i++;
+	}
+	ret[i] = '\0';
+	return (ret);
+}
+size_t	ft_strlen(const char *s)
+{
+	size_t	len;
 
-char	*get_next_line(int fd);
-
-size_t	ft_strlen(const char *s);
-char	*ft_strchr(const char *s, int c);
-char	*ft_substr(char const *s, unsigned int start, size_t len);
-#endif
+	len = 0;
+	while (s[len] != '\0')
+		len++;
+	return (len);
+}
