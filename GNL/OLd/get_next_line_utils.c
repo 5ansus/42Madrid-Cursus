@@ -1,31 +1,14 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/29 14:13:06 by sanferna          #+#    #+#             */
-/*   Updated: 2023/06/29 15:05:33 by sanferna         ###   ########.fr       */
+/*   Created: 2023/04/09 15:31:59 by sanferna          #+#    #+#             */
+/*   Updated: 2023/04/14 11:38:04 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "get_next_line.h"
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 50
-# endif
-
-# include <unistd.h>
-# include <fcntl.h>
-# include <stdlib.h>
-
-# define END_OF_FILE 1
-# define READ_CHASH -1
-# define NORMAL_BUFFER 0
-# define BUFFER_WITH_BREAK 2
-//char	*get_next_line(int fd);
-char	*ft_strchr(const char *s, int c);
-size_t	ft_strlen(const char *s);
-#endif
