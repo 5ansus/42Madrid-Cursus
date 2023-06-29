@@ -6,7 +6,7 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 14:13:06 by sanferna          #+#    #+#             */
-/*   Updated: 2023/06/29 15:05:33 by sanferna         ###   ########.fr       */
+/*   Updated: 2023/06/29 16:17:11 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@
 # define READ_CHASH -1
 # define NORMAL_BUFFER 0
 # define BUFFER_WITH_BREAK 2
-//char	*get_next_line(int fd);
+char	*get_next_line(int fd);
 char	*ft_strchr(const char *s, int c);
 size_t	ft_strlen(const char *s);
+ssize_t identifyBuffer(char *buffer);
 #endif
