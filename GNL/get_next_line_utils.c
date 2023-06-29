@@ -6,7 +6,7 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 14:12:54 by sanferna          #+#    #+#             */
-/*   Updated: 2023/06/29 16:37:13 by sanferna         ###   ########.fr       */
+/*   Updated: 2023/06/29 17:34:32 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	do_things_buffer(char **dest, char *buff, int fd)
 	i = chars_taken;
 	if (chars_taken >= 0)
 	{
-		ft_alloc_plus(*dest, chars_taken);
+		ft_alloc_plus(dest, chars_taken, buff);
 		for(int i = chars_taken; i < BUFFER_SIZE + 1; i++)
 			buff[i - chars_taken] = buff[i];
 		/*while (i <= BUFFER_SIZE + 1)
@@ -72,9 +72,47 @@ void	do_things_buffer(char **dest, char *buff, int fd)
 	}
 	else
 	{
-		ft_alloc_plus(*dest, BUFFER_SIZE);
+		ft_alloc_plus(dest, BUFFER_SIZE, buff);
 		if (read(fd, buff, BUFFER_SIZE) < 0)
 			return (free(*dest));
 		return (do_things_buffer(dest, buff, fd));
 	}
+}
+
+void	ft_alloc_plus(char **dest, ssize_t chars_taken, char *buffer)
+{
+	char	*new;
+	ssize_t	old_size;
+	ssize_t	i;
+
+	if(*dest != NULL){
+		old_size = 0;
+		i = 0;
+		while(dest[old_size] != '\0')
+			old_size++;
+		new = malloc((old_size + chars_taken + 1) * sizeof(char));
+
+		while(i < old_size)
+		{
+			new[i] = *dest[i];
+			i++;
+		}
+		while(i < (old_size + chars_taken + 1))
+		{
+			new[i] = buffer[i - old_size];
+			i++;
+		}
+		free(*dest);
+		*dest = new;
+	} else {
+		i = 0;
+		new = malloc(chars_taken);
+		while(i < chars_taken + 1)
+		{
+			new[i] = buffer[i];
+			i++;
+		}
+		*dest = new;
+	}
+	new[i] = '\0';
 }
