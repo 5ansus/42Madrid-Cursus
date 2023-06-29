@@ -6,7 +6,7 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 14:13:10 by sanferna          #+#    #+#             */
-/*   Updated: 2023/06/29 15:22:46 by sanferna         ###   ########.fr       */
+/*   Updated: 2023/06/29 15:30:29 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,22 +21,23 @@ char	*get_next_line(int fd){
 	ssize_t	chars_read;
 	char *ret;
 
-	if(identifyBuffer(buffer) == NORMAL_BUFFER){
-
-	}
-	/*if(buffer[0] == '\0')
+	ret = NULL;
+	if(buffer[0] != '\0')
 	{
-		chars_read = read(fd, buffer, BUFFER_SIZE);
-		if (chars_read < 0) return READ_CHASH;
-		buffer[chars_read] = '\0';
-	}*/
+		doThingsBuffer(ret, );
+	}
 
 }
 
+void doThingsBuffer(char **dest, char *buff){
+	if (identifyBuffer(buff) == BUFFER_WITH_BREAK){
 
+	}
+}
 
 int identifyBuffer(char *buffer)
 {
+	//Estos son el mismo caso
 	if (ft_strchr(buffer, '\n') != NULL) return BUFFER_WITH_BREAK;
 	if (ft_strchr(buffer, 0x0A) != NULL) return END_OF_FILE;
 	return NORMAL_BUFFER;
