@@ -6,12 +6,12 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 14:12:54 by sanferna          #+#    #+#             */
-/*   Updated: 2023/06/29 17:34:32 by sanferna         ###   ########.fr       */
+/*   Updated: 2023/07/06 12:59:16 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
+#include <stdio.h>
 char	*ft_strchr(const char *s, int c)
 {
 	size_t			i;
@@ -42,11 +42,11 @@ ssize_t	identify_buffer(char *buffer)
 
 	dir = ft_strchr(buffer, '\n');
 	if (dir != NULL)
-		return (dir - buffer + 1);
+		return ((void) printf("El buffer:%s\n tiene salto de linea\n", buffer), dir - buffer + 1);
 	dir = ft_strchr(buffer, 0x0A);
 	if (dir != NULL)
-		return (dir - buffer);
-	return (-1);
+		return ((void) printf("El buffer:%s\n tiene final de archivo\n", buffer), dir - buffer);
+	return ((void) printf("Buffer:%s\nsin nada\n", buffer), -1);
 }
 
 void	do_things_buffer(char **dest, char *buff, int fd)
@@ -88,7 +88,7 @@ void	ft_alloc_plus(char **dest, ssize_t chars_taken, char *buffer)
 	if(*dest != NULL){
 		old_size = 0;
 		i = 0;
-		while(dest[old_size] != '\0')
+		while(*dest[old_size] != '\0')
 			old_size++;
 		new = malloc((old_size + chars_taken + 1) * sizeof(char));
 

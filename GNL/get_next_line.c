@@ -6,7 +6,7 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 14:13:10 by sanferna          #+#    #+#             */
-/*   Updated: 2023/06/29 17:31:58 by sanferna         ###   ########.fr       */
+/*   Updated: 2023/07/06 12:57:13 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ char	*get_next_line(int fd)
 	char		*ret;
 
 	ret = NULL;
+	printf("Buffer antes de hacer cosas:%s\n", buffer);
 	do_things_buffer(&ret, buffer, fd);
 	return (ret);
 }
