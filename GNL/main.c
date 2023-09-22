@@ -13,7 +13,17 @@ void	staticFunt(char *punt){
 
 int main(){
 	int fd = open("vacio.txt", O_RDONLY);
-	printf("He leido:\n%sFIN\n", get_next_line(fd));
-	printf("He leido:\n%sFIN\n", get_next_line(fd));
+	char *pointer;
+	for(int i = 0; i < 2; i++){
+		pointer = get_next_line(fd);
+		if(pointer != NULL){
+			printf("He leido:\n%s\n", pointer);
+			printf("Free desde el main\n");
+			free(pointer);
+		}
+		else{
+			printf("Error");
+		}
+	}
 	close(fd);
 }
