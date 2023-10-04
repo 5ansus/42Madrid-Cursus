@@ -6,7 +6,7 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 14:04:48 by sanferna          #+#    #+#             */
-/*   Updated: 2023/10/04 18:14:34 by sanferna         ###   ########.fr       */
+/*   Updated: 2023/10/04 18:32:32 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,4 +94,28 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 
 char realloc_plus(char **dst, char *src, ssize_t chars)
 {
+	ssize_t	i;
+	ssize_t	dst_len;
+	char	*new_dst;
+
+	if (*dst != NULL)
+	{
+		while ((*dst)[dst_len] != '\0')
+			dst_len++;
+		new_dst = malloc(dst_len + chars + 1);
+		if (new_dst == NULL)
+			return (free(*dst), GNL_ERR);
+		ft_memmove(new_dst, *dst, dst_len);
+		ft_memmove(new_dst + dst_len, src, chars);
+		new_dst[dst_len + chars] = '\0';
+	}
+	else{
+		new_dst = malloc(chars + 1);
+		if (new_dst == NULL)
+			return (GNL_ERR);
+		ft_memmove(new_dst, src, chars);
+		new_dst[chars] = '\0';
+	}
+	*dst = new_dst;
+	return GNL_OK;
 }
