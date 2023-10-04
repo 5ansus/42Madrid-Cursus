@@ -6,7 +6,7 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 14:04:48 by sanferna          #+#    #+#             */
-/*   Updated: 2023/09/29 14:28:13 by sanferna         ###   ########.fr       */
+/*   Updated: 2023/10/04 18:14:34 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char	*ft_strchr(const char *s, int c)
 
 char	analyse_buffer(char *dir)
 {
-	char return_value;
+	char *return_value;
 
 	return_value = ft_strchr(dir, '\n');
 	if(return_value == dir)
@@ -47,6 +47,25 @@ char	analyse_buffer(char *dir)
 	if(return_value == NULL)
 		return NO_BR_BUFFER;
 	return BR_BUFFER;
+}
+
+void	*ft_memcpy(void *dst, const void *src, size_t n)
+{
+	char	*source;
+	char	*dest;
+	size_t	i;
+
+	if (src == NULL && dst == NULL)
+		return (NULL);
+	dest = (char *) dst;
+	source = (char *) src;
+	i = 0;
+	while (i < n)
+	{
+		dest[i] = source[i];
+		i++;
+	}
+	return (dst);
 }
 
 void	*ft_memmove(void *dst, const void *src, size_t len)
@@ -69,4 +88,10 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 		}
 	}
 	return (dst);
+}
+
+
+
+char realloc_plus(char **dst, char *src, ssize_t chars)
+{
 }
