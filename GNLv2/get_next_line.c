@@ -6,7 +6,7 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 14:03:47 by sanferna          #+#    #+#             */
-/*   Updated: 2023/10/11 16:46:44 by sanferna         ###   ########.fr       */
+/*   Updated: 2023/10/11 16:48:25 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,8 @@ char	*get_next_line(int fd)
 	ret = NULL;
 	if (gnl_rec(&ret, buffer, fd) == GNL_OK)
 	{
-		//Resuelve muchos problemas uwu
 		if (ft_strchr(ret, '\0') == ret)
-		{
-			free(ret);
-			return (NULL);
-		}
+			return (free(ret), NULL);
 		return (ret);
 	}
 	return (NULL);
@@ -42,7 +38,6 @@ ssize_t	read_upgraded(char *buffer, int fd, char *read_complete)
 	*read_complete = (chars_read == BUFFER_SIZE);
 	if (chars_read >= 0)
 		buffer[chars_read] = 0;
-
 	return (chars_read);
 }
 
@@ -70,8 +65,8 @@ char	gnl_rec(char **ret, char *buffer, int fd)
 	}
 	br_dir = ft_strchr(buffer, '\n');
 	if (realloc_plus(ret, buffer, br_dir - buffer + 1) == GNL_ERR)
-		return (GNL_ERR); // +1 porque tiene que contar el /n. REALLOC PLUS TIENE QUE METER EL /0
-	ft_memmove(buffer, br_dir + 1, BUFFER_SIZE - (br_dir - buffer + 1) + 1); //Quito los caracteres leidos y copio el /0.  Update buffer
+		return (GNL_ERR);
+	ft_memmove(buffer, br_dir + 1, BUFFER_SIZE - (br_dir - buffer + 1) + 1);
 	return (GNL_OK);
 }
 
