@@ -6,7 +6,7 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 14:03:47 by sanferna          #+#    #+#             */
-/*   Updated: 2023/10/11 16:37:46 by sanferna         ###   ########.fr       */
+/*   Updated: 2023/10/11 16:46:44 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,12 @@ char	*get_next_line(int fd)
 	return (NULL);
 }
 
-ssize_t	read_upgraded(char *buffer, int fd)
+ssize_t	read_upgraded(char *buffer, int fd, char *read_complete)
 {
 	ssize_t	chars_read;
 
 	chars_read = read(fd, buffer, BUFFER_SIZE);
+	*read_complete = (chars_read == BUFFER_SIZE);
 	if (chars_read >= 0)
 		buffer[chars_read] = 0;
 
@@ -49,23 +50,23 @@ char	gnl_rec(char **ret, char *buffer, int fd)
 {
 	ssize_t	chars_read;
 	char	*br_dir;
+	char	read_complete;
 
+	read_complete = 1;
 	chars_read = ft_strlen(buffer);
 	if (buffer[0] == 0)
-		chars_read = read_upgraded(buffer, fd);
+		chars_read = read_upgraded(buffer, fd, &read_complete);
 	if (chars_read < 0)
 		return (free(*ret), GNL_ERR);
-	if (chars_read < BUFFER_SIZE && analyse_buffer(buffer) == NO_BR_BUFFER)
+	if (read_complete == 0 && analyse_buffer(buffer) == NO_BR_BUFFER)
 	{
 		realloc_plus(ret, buffer, chars_read);
-		buffer[0] = 0;
-		return (GNL_OK);
+		return (buffer[0] = 0, GNL_OK);
 	}
 	else if (analyse_buffer(buffer) == NO_BR_BUFFER)
 	{
 		realloc_plus(ret, buffer, chars_read);
-		buffer[0] = 0;
-		return (gnl_rec(ret, buffer, fd));
+		return (buffer[0] = 0, gnl_rec(ret, buffer, fd));
 	}
 	br_dir = ft_strchr(buffer, '\n');
 	if (realloc_plus(ret, buffer, br_dir - buffer + 1) == GNL_ERR)
