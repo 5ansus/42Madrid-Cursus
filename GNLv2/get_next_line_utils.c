@@ -6,7 +6,7 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 14:04:48 by sanferna          #+#    #+#             */
-/*   Updated: 2023/10/04 19:46:03 by sanferna         ###   ########.fr       */
+/*   Updated: 2023/10/11 16:18:39 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,14 @@ char	*ft_strchr(const char *s, int c)
 
 char	analyse_buffer(char *dir)
 {
-	char *return_value;
+	char	*return_value;
 
 	return_value = ft_strchr(dir, '\n');
-	if(return_value == dir)
-		return EMPTY_BUFFER;
-	if(return_value == NULL)
-		return NO_BR_BUFFER;
-	return BR_BUFFER;
+	if (return_value == dir)
+		return (EMPTY_BUFFER);
+	if (return_value == NULL)
+		return (NO_BR_BUFFER);
+	return (BR_BUFFER);
 }
 
 void	*ft_memcpy(void *dst, const void *src, size_t n)
@@ -90,14 +90,12 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 	return (dst);
 }
 
-
-
-char realloc_plus(char **dst, char *src, ssize_t chars)
+char	realloc_plus(char **dst, char *src, ssize_t chars)
 {
-	ssize_t	i;
 	ssize_t	dst_len;
 	char	*new_dst;
 
+	dst_len = 0;
 	if (*dst != NULL)
 	{
 		while ((*dst)[dst_len] != '\0')
@@ -110,13 +108,13 @@ char realloc_plus(char **dst, char *src, ssize_t chars)
 		new_dst[dst_len + chars] = '\0';
 		free(*dst);
 	}
-	else{
+	else
+	{
 		new_dst = malloc(chars + 1);
 		if (new_dst == NULL)
 			return (GNL_ERR);
 		ft_memmove(new_dst, src, chars);
 		new_dst[chars] = '\0';
 	}
-	*dst = new_dst;
-	return GNL_OK;
+	return (*dst = new_dst, GNL_OK);
 }
