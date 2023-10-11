@@ -6,7 +6,7 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 14:03:47 by sanferna          #+#    #+#             */
-/*   Updated: 2023/10/04 18:13:55 by sanferna         ###   ########.fr       */
+/*   Updated: 2023/10/04 19:44:43 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,19 @@ char	*get_next_line(int fd)
 	char	*ret;
 
 	ret = NULL;
-	if ((buffer[0] == 0) && (read(fd, buffer, BUFFER_SIZE) <= 0))
-		return NULL;
 	if (gnl_rec(&ret, buffer, fd) == GNL_OK)
 		return ret;
 	return NULL;
+}
+
+ssize_t read_upgraded(char *buffer, int fd)
+{
+	ssize_t	chars_read;
+
+	chars_read = read(fd, buffer, BUFFER_SIZE);
+	if (chars_read >= 0)
+		buffer[chars_read] = 0;
+	return chars_read;
 }
 
 char	gnl_rec(char **ret, char *buffer, int fd)
@@ -33,29 +41,72 @@ char	gnl_rec(char **ret, char *buffer, int fd)
 	ssize_t	chars_read;
 	char *break_dir;
 
-
+	chars_read = ft_strlen(buffer);
 	if (buffer[0] == 0)
-	{
-		chars_read == read(fd, buffer, BUFFER_SIZE);
-		buffer[chars_read] = 0;
-	}
+		chars_read = read_upgraded(buffer, fd);
 	if (chars_read < 0)
 		return (free(*ret), GNL_ERR);
-	if (chars_read < BUFFER_SIZE || analyse_buffer(buffer) == NO_BR_BUFFER)
+	if (chars_read < BUFFER_SIZE && analyse_buffer(buffer) == NO_BR_BUFFER)
 	{
+		realloc_plus(ret, buffer, chars_read);
 		buffer[0] = 0;
-		return (realloc_plus(ret, buffer, chars_read));
+		return (GNL_OK);
+	}
+	else if(analyse_buffer(buffer) == NO_BR_BUFFER)
+	{
+		realloc_plus(ret, buffer, chars_read);
+		buffer[0] = 0;
+		return (gnl_rec(ret, buffer, fd));
 	}
 	break_dir = ft_strchr(buffer, '\n');
 	if (realloc_plus(ret, buffer, break_dir - buffer + 1) == GNL_ERR)
 		return GNL_ERR; // +1 porque tiene que contar el /n. REALLOC PLUS TIENE QUE METER EL /0
-	ft_memmove(buffer, break_dir + 1, BUFFER_SIZE - (break_dir - buffer + 1) + 1); //Quito los caracteres leidos y copio el /0
+	ft_memmove(buffer, break_dir + 1, BUFFER_SIZE - (break_dir - buffer + 1) + 1); //Quito los caracteres leidos y copio el /0.  Update buffer
 	return GNL_OK;
-	/*
-	Hacer Caso de que encuentra /n o caso de que no encuentra /n, es decir, llamar otra vez a la funci'on
-	*/
 }
 
+size_t	ft_strlen(const char *s)
+{
+	size_t	len;
+
+	len = 0;
+	while (s[len] != '\0')
+		len++;
+	return (len);
+}
+
+
 int main(){
-	(void) get_next_line(0);
+	int fd = open("texto.txt", O_RDONLY);
+	char *ret = get_next_line(fd);
+	printf("%s%d", ret, fd);
+	free(ret);
+	ret = get_next_line(fd);
+	printf("%s", ret);
+	free(ret);
+
+	ret = get_next_line(fd);
+	printf("%s", ret);
+	free(ret);
+
+	ret = get_next_line(fd);
+	printf("%s", ret);
+	free(ret);
+
+	ret = get_next_line(fd);
+	printf("%s", ret);
+	free(ret);
+
+	ret = get_next_line(fd);
+	printf("%s", ret);
+	free(ret);
+
+	ret = get_next_line(fd);
+	printf("%s", ret);
+	free(ret);
+
+	ret = get_next_line(fd);
+	printf("%s", ret);
+	free(ret);
+	close(fd);
 }

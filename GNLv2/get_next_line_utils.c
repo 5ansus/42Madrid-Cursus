@@ -6,7 +6,7 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 14:04:48 by sanferna          #+#    #+#             */
-/*   Updated: 2023/10/04 18:32:32 by sanferna         ###   ########.fr       */
+/*   Updated: 2023/10/04 19:46:03 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,7 @@ char realloc_plus(char **dst, char *src, ssize_t chars)
 		ft_memmove(new_dst, *dst, dst_len);
 		ft_memmove(new_dst + dst_len, src, chars);
 		new_dst[dst_len + chars] = '\0';
+		free(*dst);
 	}
 	else{
 		new_dst = malloc(chars + 1);

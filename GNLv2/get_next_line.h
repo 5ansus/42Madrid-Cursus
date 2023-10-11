@@ -6,7 +6,7 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 14:13:06 by sanferna          #+#    #+#             */
-/*   Updated: 2023/10/04 18:14:26 by sanferna         ###   ########.fr       */
+/*   Updated: 2023/10/04 19:44:54 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,6 @@ void	*ft_memcpy(void *dst, const void *src, size_t n);
 void	*ft_memmove(void *dst, const void *src, size_t len);
 char	gnl_rec(char **ret, char *buffer, int fd);
 char	realloc_plus(char **dst, char *src, ssize_t chars);
+char	analyse_buffer(char *dir);
+size_t	ft_strlen(const char *s);
 #endif
