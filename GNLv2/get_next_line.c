@@ -6,14 +6,11 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 14:03:47 by sanferna          #+#    #+#             */
-/*   Updated: 2023/10/11 16:48:25 by sanferna         ###   ########.fr       */
+/*   Updated: 2023/10/11 16:55:49 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <stdlib.h>
-#include <stdio.h>
-#include <strings.h>
 
 char	*get_next_line(int fd)
 {
@@ -30,6 +27,18 @@ char	*get_next_line(int fd)
 	return (NULL);
 }
 
+char	analyse_buffer(char *dir)
+{
+	char	*return_value;
+
+	return_value = ft_strchr(dir, '\n');
+	if (return_value == dir)
+		return (EMPTY_BUFFER);
+	if (return_value == NULL)
+		return (NO_BR_BUFFER);
+	return (BR_BUFFER);
+}
+
 ssize_t	read_upgraded(char *buffer, int fd, char *read_complete)
 {
 	ssize_t	chars_read;
@@ -39,6 +48,35 @@ ssize_t	read_upgraded(char *buffer, int fd, char *read_complete)
 	if (chars_read >= 0)
 		buffer[chars_read] = 0;
 	return (chars_read);
+}
+
+char	realloc_plus(char **dst, char *src, ssize_t chars)
+{
+	ssize_t	dst_len;
+	char	*new_dst;
+
+	dst_len = 0;
+	if (*dst != NULL)
+	{
+		while ((*dst)[dst_len] != '\0')
+			dst_len++;
+		new_dst = malloc(dst_len + chars + 1);
+		if (new_dst == NULL)
+			return (free(*dst), GNL_ERR);
+		ft_memmove(new_dst, *dst, dst_len);
+		ft_memmove(new_dst + dst_len, src, chars);
+		new_dst[dst_len + chars] = '\0';
+		free(*dst);
+	}
+	else
+	{
+		new_dst = malloc(chars + 1);
+		if (new_dst == NULL)
+			return (GNL_ERR);
+		ft_memmove(new_dst, src, chars);
+		new_dst[chars] = '\0';
+	}
+	return (*dst = new_dst, GNL_OK);
 }
 
 char	gnl_rec(char **ret, char *buffer, int fd)
@@ -69,50 +107,3 @@ char	gnl_rec(char **ret, char *buffer, int fd)
 	ft_memmove(buffer, br_dir + 1, BUFFER_SIZE - (br_dir - buffer + 1) + 1);
 	return (GNL_OK);
 }
-
-size_t	ft_strlen(const char *s)
-{
-	size_t	len;
-
-	len = 0;
-	while (s[len] != '\0')
-		len++;
-	return (len);
-}
-
-/*
-int main(){
-	int fd = open("texto.txt", O_RDONLY);
-	char *ret = get_next_line(fd);
-	printf("%s%d", ret, fd);
-	free(ret);
-	ret = get_next_line(fd);
-	printf("%s", ret);
-	free(ret);
-
-	ret = get_next_line(fd);
-	printf("%s", ret);
-	free(ret);
-
-	ret = get_next_line(fd);
-	printf("%s", ret);
-	free(ret);
-
-	ret = get_next_line(fd);
-	printf("%s", ret);
-	free(ret);
-
-	ret = get_next_line(fd);
-	printf("%s", ret);
-	free(ret);
-
-	ret = get_next_line(fd);
-	printf("%s", ret);
-	free(ret);
-
-	ret = get_next_line(fd);
-	printf("%s", ret);
-	free(ret);
-	close(fd);
-}
-*/
