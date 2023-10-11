@@ -6,7 +6,7 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 14:03:47 by sanferna          #+#    #+#             */
-/*   Updated: 2023/10/11 16:16:59 by sanferna         ###   ########.fr       */
+/*   Updated: 2023/10/11 16:37:46 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,15 @@ char	*get_next_line(int fd)
 
 	ret = NULL;
 	if (gnl_rec(&ret, buffer, fd) == GNL_OK)
+	{
+		//Resuelve muchos problemas uwu
+		if (ft_strchr(ret, '\0') == ret)
+		{
+			free(ret);
+			return (NULL);
+		}
 		return (ret);
+	}
 	return (NULL);
 }
 
@@ -33,6 +41,7 @@ ssize_t	read_upgraded(char *buffer, int fd)
 	chars_read = read(fd, buffer, BUFFER_SIZE);
 	if (chars_read >= 0)
 		buffer[chars_read] = 0;
+
 	return (chars_read);
 }
 
