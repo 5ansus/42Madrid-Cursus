@@ -6,7 +6,7 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 14:03:47 by sanferna          #+#    #+#             */
-/*   Updated: 2023/10/26 19:39:50 by sanferna         ###   ########.fr       */
+/*   Updated: 2023/10/26 19:54:18 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ ssize_t	read_upgraded(char *buffer, int fd, char *read_complete);
 char	realloc_plus(char **dst, char *src, ssize_t chars);
 char	gnl_rec(char **ret, char *buffer, int fd);
 
-char	*get_next_line(int fd)
+char	*ft_get_next_line(int fd)
 {
 	static char	buffer[BUFFER_SIZE + 1];
 	char		*ret;
