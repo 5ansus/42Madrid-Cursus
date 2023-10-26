@@ -6,7 +6,7 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 23:17:38 by sanferna          #+#    #+#             */
-/*   Updated: 2023/04/06 18:16:18 by sanferna         ###   ########.fr       */
+/*   Updated: 2023/10/26 19:39:45 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,18 @@
 # include <stddef.h>
 # include <unistd.h>
 # include <stdlib.h>
+
+# ifndef GET_NEXT_LINE_H
+#  define GET_NEXT_LINE_H
+#  ifndef BUFFER_SIZE
+#   define BUFFER_SIZE 1
+#  endif
+#  define EMPTY_BUFFER 0
+#  define NO_BR_BUFFER 1
+#  define BR_BUFFER 2
+#  define GNL_OK 1
+#  define GNL_ERR 0
+# endif
 
 typedef struct s_list
 {
@@ -66,4 +78,5 @@ void	ft_lstdelone(t_list *lst, void (*del)(void*));
 void	ft_lstclear(t_list **lst, void (*del)(void*));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
+char	*get_next_line(int fd);
 #endif
