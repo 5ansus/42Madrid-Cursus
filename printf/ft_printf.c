@@ -1,9 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/24 16:58:44 by sanferna          #+#    #+#             */
+/*   Updated: 2024/01/24 16:59:48 by sanferna         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
-#include <stdio.h>
 #include "libft/libft.h"
-int	ft_printf(void)
+
+int	ft_printf(char const *str, ...)
 {
-	printf("Hola");
-	printf("\n%d\n", ft_atoi("-581"));
 	return 0;
 }
