@@ -17,7 +17,7 @@ $(NAME): $(OBJ) $(LIB)
 	cp $(LIB) $(NAME)
 	ar -rc $(NAME) $(OBJ)
 
-.PHONY: all fclean clean re rebonus
+.PHONY: all fclean clean re
 
 clean:
 	rm -rfd $(OBJ)
@@ -28,5 +28,3 @@ fclean: clean
 	make -C ./libft/ fclean
 
 re: fclean $(NAME)
-
-rebonus: fclean $(NAME)
