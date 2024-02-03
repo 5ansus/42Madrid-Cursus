@@ -6,29 +6,78 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 14:52:03 by sanferna          #+#    #+#             */
-/*   Updated: 2024/01/30 20:39:29 by sanferna         ###   ########.fr       */
+/*   Updated: 2024/02/03 22:14:19 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
-#define MAX_LEN_UNSIGNED_INT 10+1
-#define MAX_LEN_INT	10+1+1
-#include <stdio.h>
+#include "ft_printf.h"
 
+void	cnv_rec(int num, char *dest, int *index, char *base);
+void	cnv_rec_un(unsigned long long num, char *dest, int *index, char *base);
 
-char	*conversion(int n, char *base);
-char	*conversion_unsigned(unsigned int n, char *base);
-char	*conversion_unsigned_hex(void *n, char *base);
-void	conversion_unsigned_rec_hex(void *p, char *dest, int *index, char *base);
-void	conversion_unsigned_rec(unsigned int n, char *dest, int *index, char *base);
-void	conversion_rec(int n, char *dest, int *index, char *base);
+void cnv(t_arg_types num, char mode, char **ret)
+{
+	char	str[15];
+	int		index;
+
+	str[0] = '\0';
+	index = 0;
+	if (mode == TO_INT)
+		cnv_rec(num.i, str, &index, "0123456789");
+	else if (mode == TO_UNS)
+		cnv_rec_un(num.u, str, &index, "0123456789");
+	else if (mode == TO_HEX_MIN)
+		cnv_rec(num.i, str, &index, "0123456789abcdef");
+	else if (mode == TO_HEX_CAPS)
+		cnv_rec(num.i, str, &index, "0123456789ABCDEF");
+	else if (mode == TO_POINTER)
+	{
+		ft_memmove(str, "0x", 2);
+		index = 0;
+		cnv_rec_un(num.p, str, &index, "0123456789abcdef");
+	}
+	(void) realloc_plus(ret, str, ft_strlen(str));
+}
+
+void	cnv_rec(int num, char *dest, int *index, char *base)
+{
+	if (num < 0)
+	{
+		dest[*index] = '-';
+		(*index)++;
+		if ((num / ft_strlen(base)) != 0)
+			cnv_rec(-(num / (int) ft_strlen(base)), dest, index, base);
+		dest[*index] = base[-(num % (int) ft_strlen(base))];
+		dest[(*index) + 1] = '\0';
+	}
+	else
+	{
+		if ((num / ft_strlen(base)) != 0)
+			cnv_rec((num / ft_strlen(base)), dest, index, base);
+		dest[*index] = base[num % ft_strlen(base)];
+		dest[(*index) + 1] = '\0';
+		(*index)++;
+	}
+}
+
+void	cnv_rec_un(unsigned long long num, char *dest, int *index, char *base)
+{
+	if ((num / ft_strlen(base)) != 0)
+		cnv_rec_un((num / ft_strlen(base)), dest, index, base);
+	dest[*index] = base[num % ft_strlen(base)];
+	dest[(*index) + 1] = '\0';
+	(*index)++;
+}
 
 ssize_t	print_decimal(int num)
 {
 	ssize_t	ret;
-	char	*str;
+	char	*str = NULL;
 
-	str = conversion(num, "0123456789");
+	t_arg_types a;
+	a.i = num;
+	cnv(a, TO_INT, &str);
 	ret = write(1, str, ft_strlen(str));
 	ft_putchar_fd('\n', 1);
 	free(str);
@@ -40,9 +89,11 @@ ssize_t	print_decimal(int num)
 ssize_t	print_unsigned(unsigned int num)
 {
 	ssize_t	ret;
-	char	*str;
+	char	*str = NULL;
 
-	str = conversion_unsigned(num, "0123456789");
+	t_arg_types a;
+	a.u = num;
+	cnv(a, TO_UNS, &str);
 	ret = write(1, str, ft_strlen(str));
 	ft_putchar_fd('\n', 1);
 	free(str);
@@ -54,9 +105,11 @@ ssize_t	print_unsigned(unsigned int num)
 ssize_t	print_unsigned_hex(void *num)
 {
 	ssize_t	ret;
-	char	*str;
+	char	*str = NULL;
 
-	str = conversion_unsigned_hex(num, "0123456789abcdef");
+	t_arg_types a;
+	a.p = (unsigned long long) num;
+	cnv(a, TO_POINTER, &str);
 	ft_putstr_fd("0x", 1);
 	ret = write(1, str, ft_strlen(str));
 	ft_putchar_fd('\n', 1);
@@ -69,9 +122,11 @@ ssize_t	print_unsigned_hex(void *num)
 ssize_t	print_hex(int num)
 {
 	ssize_t	ret;
-	char	*str;
+	char	*str = NULL;
 
-	str = conversion(num, "0123456789ABCDEF");
+	t_arg_types a;
+	a.i = num;
+	cnv(a, TO_HEX_CAPS, &str);
 	ret = write(1, str, ft_strlen(str));
 	ft_putchar_fd('\n', 1);
 	free(str);
@@ -83,97 +138,15 @@ ssize_t	print_hex(int num)
 ssize_t	print_hex_minus(int num)
 {
 	ssize_t	ret;
-	char	*str;
+	char	*str = NULL;
 
-	str = conversion(num, "0123456789abcdef");
+	t_arg_types a;
+	a.i = num;
+	cnv(a, TO_HEX_MIN, &str);
 	ret = write(1, str, ft_strlen(str));
 	ft_putchar_fd('\n', 1);
 	free(str);
 	if (ret < 0)
 		return (-1);
 	return (ret);
-}
-
-char	*conversion(int n, char *base)
-{
-	char	str[MAX_LEN_INT];
-	int		index;
-	char	*ret;
-
-	str[0] = '\0';
-	index = 0;
-	conversion_rec(n, str, &index, base);
-	ret = ft_strdup(str);
-	return (ret);
-}
-
-char	*conversion_unsigned(unsigned int n, char *base)
-{
-	char	str[MAX_LEN_UNSIGNED_INT];
-	int		index;
-	char	*ret;
-
-	str[0] = '\0';
-	index = 0;
-	conversion_unsigned_rec(n, str, &index, base);
-	ret = ft_strdup(str);
-	return (ret);
-}
-
-
-char	*conversion_unsigned_hex(void *n, char *base)
-{
-	char	str[14];
-	int		index;
-	char	*ret;
-
-	str[0] = '\0';
-	index = 0;
-	conversion_unsigned_rec_hex(n, str, &index, base);
-	ret = ft_strdup(str);
-	return (ret);
-}
-
-void	conversion_rec(int n, char *dest, int *index, char *base)
-{
-	if (n < 0)
-	{
-		dest[*index] = '-';
-		(*index)++;
-		//printf("%s\n", dest);
-		if ((n / ft_strlen(base)) != 0)
-			conversion_rec(-(n / (int) ft_strlen(base)), dest, index, base);
-		dest[*index] = base[-(n % (int) ft_strlen(base))];
-		dest[(*index) + 1] = '\0';
-		//printf("%s\n", dest);
-	}
-	else
-	{
-		//printf("%s\n", dest);
-		if ((n / ft_strlen(base)) != 0)
-			conversion_rec((n / ft_strlen(base)), dest, index, base);
-		dest[*index] = base[n % ft_strlen(base)];
-		dest[(*index) + 1] = '\0';
-		(*index)++;
-	}
-}
-
-void	conversion_unsigned_rec(unsigned int n, char *dest, int *index, char *base)
-{
-	//printf("%s\n", dest);
-	if ((n / ft_strlen(base)) != 0)
-		conversion_unsigned_rec((n / ft_strlen(base)), dest, index, base);
-	dest[*index] = base[n % ft_strlen(base)];
-	dest[(*index) + 1] = '\0';
-	(*index)++;
-}
-
-void	conversion_unsigned_rec_hex(void *p, char *dest, int *index, char *base)
-{
-	//printf("%s\n", dest);
-	if (((unsigned long long) p / ft_strlen(base)) != 0)
-		conversion_unsigned_rec_hex((void *)( (unsigned long long) p / ft_strlen(base)), dest, index, base);
-	dest[*index] = base[(unsigned long long) p % ft_strlen(base)];
-	dest[(*index) + 1] = '\0';
-	(*index)++;
 }

@@ -5,8 +5,12 @@ ssize_t	print_hex(int num);
 ssize_t	print_hex_minus(int num);
 ssize_t	print_unsigned(unsigned int num);
 ssize_t	print_unsigned_hex(void *p);
+void funcion(){
+	system("leaks a.out");
+}
 
 int main(){
+	atexit(funcion);
 	print_decimal(-2147483648);
 	print_decimal(2147483647);
 	print_hex(-2147483648);

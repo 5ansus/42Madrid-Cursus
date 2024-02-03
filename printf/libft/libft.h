@@ -6,7 +6,7 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 23:17:38 by sanferna          #+#    #+#             */
-/*   Updated: 2023/10/26 19:53:34 by sanferna         ###   ########.fr       */
+/*   Updated: 2024/02/03 21:46:01 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,4 +79,5 @@ void	ft_lstclear(t_list **lst, void (*del)(void*));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 char	*ft_get_next_line(int fd);
+char	realloc_plus(char **dst, char *src, ssize_t chars);
 #endif
