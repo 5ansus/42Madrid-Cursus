@@ -6,7 +6,7 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 16:58:54 by sanferna          #+#    #+#             */
-/*   Updated: 2024/02/03 22:05:46 by sanferna         ###   ########.fr       */
+/*   Updated: 2024/02/17 17:59:43 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ typedef union u_arg_types
 {
 	int					i;
 	unsigned int		u;
-	unsigned long long	p;
+	unsigned long long	ul;
 	char				c;
 }			t_arg_types;
 
