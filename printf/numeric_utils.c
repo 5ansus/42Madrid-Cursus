@@ -16,7 +16,7 @@
 void	cnv_rec(int num, char *dest, int *index, char *base);
 void	cnv_rec_un(unsigned long long num, char *dest, int *index, char *base);
 void	cnv_rec_uint(unsigned int num, char *dest, int *index, char *base);
-void cnv(t_arg_types num, char mode, char **ret)
+void	cnv(t_arg_types num, char mode, char **ret, int *count_zeros)
 {
 	char	str[15];
 	int		index;
@@ -39,7 +39,7 @@ void cnv(t_arg_types num, char mode, char **ret)
 		p = &(str[2]);
 		cnv_rec_un(num.ul, p,&index, "0123456789abcdef");
 	}
-	if (realloc_plus(ret, str, ft_strlen(str)) == GNL_ERR)
+	if (realloc_plus_printf(ret, str, ft_strlen(str), count_zeros) == GNL_ERR)
 		*ret = NULL;
 }
 

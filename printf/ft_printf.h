@@ -29,5 +29,6 @@ typedef union u_arg_types
 #define TO_POINTER 4
 
 int	ft_printf(char const *str, ...);
-void	cnv(t_arg_types num, char mode, char **ret);
+void	cnv(t_arg_types num, char mode, char **ret, int *count_zeros);
+char	realloc_plus_printf(char **dst, char *src, ssize_t chars, int *count_zeros);
 #endif

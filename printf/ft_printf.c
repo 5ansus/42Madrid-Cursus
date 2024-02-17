@@ -15,9 +15,11 @@
 #include <stdarg.h>
 
 #include <stdio.h>
-char	*analyze_args(char *p_str, va_list lst);
-void save_arg_chars(char mod, va_list lst, char **ret);
-void save_arg_numeric(char mod, va_list lst, char **ret);
+char	*analyze_args(char *p_str, va_list lst, int *count_zeros);
+void save_arg_chars(char mod, va_list lst, char **ret, int *count_zeros);
+void save_arg_numeric(char mod, va_list lst, char **ret, int *count_zeros);
+ssize_t printf_strlen(char **dst, int *count_zeros);
+
 
 int ft_printf(char const *str, ...)
 {
@@ -25,10 +27,12 @@ int ft_printf(char const *str, ...)
 	char	*ret_str;
 	ssize_t	ret;
 	char	*str_cpy;
+	int count_zeros;
 
 	str_cpy = (char *)str;
 	ret_str = NULL;
 	ret = 0;
+	count_zeros = 0;
 	if (ft_strlen(str_cpy) == 0)
 		return (0);
 	if (ft_strchr(str_cpy, '%') == NULL)
@@ -36,7 +40,7 @@ int ft_printf(char const *str, ...)
 	else
 	{
 		va_start(lista, str);
-		ret_str = analyze_args(str_cpy, lista);
+		ret_str = analyze_args(str_cpy, lista, &count_zeros);
 		va_end(lista);
 		if (ret_str != NULL)
 		{
@@ -47,7 +51,7 @@ int ft_printf(char const *str, ...)
 	return (ret);
 }
 
-char	*analyze_args(char *p_str, va_list lst)
+char	*analyze_args(char *p_str, va_list lst, int *count_zeros)
 {
 	char *new_str;
 	char *next_pct;
@@ -58,25 +62,25 @@ char	*analyze_args(char *p_str, va_list lst)
 	next_pct = ft_strchr(p_str, '%');
 	while (next_pct != NULL)
 	{
-		realloc_plus(&new_str, p_str, next_pct - p_str);
+		realloc_plus_printf(&new_str, p_str, next_pct - p_str, count_zeros);
 		p_str = next_pct + 2;
 		mod = *(next_pct + 1);
 		temp_str = NULL;
-		save_arg_chars(mod, lst, &temp_str);
-		save_arg_numeric(mod, lst, &temp_str);
+		save_arg_chars(mod, lst, &temp_str, count_zeros);
+		save_arg_numeric(mod, lst, &temp_str, count_zeros);
 		if (temp_str == NULL)
 			return (free(new_str), NULL);
-		if(realloc_plus(&new_str, temp_str, ft_strlen(temp_str)) == GNL_ERR)
+		if(realloc_plus_printf(&new_str, temp_str, ft_strlen(temp_str), count_zeros) == GNL_ERR)
 			return(free(temp_str), free(new_str), NULL);
 		free(temp_str);
 		next_pct = ft_strchr(p_str, '%');
 		if (next_pct == NULL)
-			realloc_plus(&new_str, p_str, ft_strlen(p_str));
+			realloc_plus_printf(&new_str, p_str, ft_strlen(p_str), count_zeros);
 	}
 	return new_str;
 }
 
-void save_arg_numeric(char mod, va_list lst, char **ret)
+void save_arg_numeric(char mod, va_list lst, char **ret, int *count_zeros)
 {
 	t_arg_types arg;
 	int	conv_mod;
@@ -99,38 +103,86 @@ void save_arg_numeric(char mod, va_list lst, char **ret)
 	if (mod == 'X')
 		conv_mod = TO_HEX_CAPS;
 	if (conv_mod >= 0)
-		cnv(arg, conv_mod, ret);
+		cnv(arg, conv_mod, ret, count_zeros);
 }
 
-void save_arg_chars(char mod, va_list lst, char **ret)
+void save_arg_chars(char mod, va_list lst, char **ret, int *count_zeros)
 {
 	char *p;
 
 	p = NULL;
-	if (mod == '%')
+	if (mod == '%' || mod == 'c')
 	{
 		*ret = malloc(2);
 		if (*ret == NULL)
 			return;
+
 		(*ret)[0] = '%';
-		(*ret)[1] = '\0';
-	}
-	if (mod == 'c')
-	{
-		*ret = malloc(2);
-		if (*ret == NULL)
-			return;
-		(*ret)[0] = va_arg(lst, int);
+		if (mod != '%')
+			(*ret)[0] = va_arg(lst, int);
+		if ((*ret)[0] == '\0')
+		{
+			*count_zeros = *count_zeros + 1;
+			realloc_plus_printf(ret, "\0", 1, count_zeros);
+		}
 		(*ret)[1] = '\0';
 	}
 	if (mod == 's')
 	{
 		p = va_arg(lst, char *);
 		if (p == NULL)
-			realloc_plus(ret, "(null)", ft_strlen("(null)"));
-		if (p != NULL && *p != '\0')
-			realloc_plus(ret, p, ft_strlen(p));
-		if (p != NULL && *p == '\0')
-			realloc_plus(ret, p, 0);
+			realloc_plus_printf(ret, "(null)", ft_strlen("(null)"), count_zeros);
+		if (p != NULL)
+			realloc_plus_printf(ret, p, ft_strlen(p), count_zeros);
+		// if (p != NULL && *p != '\0')
+		// 	realloc_plus_printf(ret, p, ft_strlen(p));
+		// if (p != NULL && *p == '\0')
+		// 	realloc_plus_printf(ret, p, 0);
 	}
+}
+
+char	realloc_plus_printf(char **dst, char *src, ssize_t chars, int *count_zeros)
+{
+	ssize_t	dst_len;
+	char	*new_dst;
+
+	dst_len = 0;
+	if (*dst != NULL)
+	{
+		dst_len = printf_strlen(dst, count_zeros);
+		new_dst = malloc(dst_len + chars + 1);
+		if (new_dst == NULL)
+			return (free(*dst), GNL_ERR);
+		ft_memmove(new_dst, *dst, dst_len);
+		ft_memmove(new_dst + dst_len, src, chars);
+		new_dst[dst_len + chars] = '\0';
+		free(*dst);
+	}
+	else
+	{
+		new_dst = malloc(chars + 1);
+		if (new_dst == NULL)
+			return (GNL_ERR);
+		ft_memmove(new_dst, src, chars);
+		new_dst[chars] = '\0';
+	}
+	return (*dst = new_dst, GNL_OK);
+}
+
+ssize_t printf_strlen(char **dst, int *count_zeros)
+{
+	int i;
+	ssize_t len;
+
+	i = 0;
+	len = 0;
+	while (i <= *count_zeros)
+	{
+		while ((*dst)[len] != '\0')
+			len++;
+		i++;
+		if (i <= *count_zeros)
+			len++;
+	}
+	return (len);
 }

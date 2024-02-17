@@ -54,7 +54,7 @@ ssize_t	read_upgraded(char *buffer, int fd, char *read_complete)
 	return (chars_read);
 }
 
-char	realloc_plus(char **dst, char *src, ssize_t chars)
+char	realloc_plus_printf(char **dst, char *src, ssize_t chars)
 {
 	ssize_t	dst_len;
 	char	*new_dst;
@@ -97,16 +97,16 @@ char	gnl_rec(char **ret, char *buffer, int fd)
 		return (free(*ret), GNL_ERR);
 	if (read_complete == 0 && analyse_buffer(buffer) == NO_BR_BUFFER)
 	{
-		realloc_plus(ret, buffer, chars_read);
+		realloc_plus_printf(ret, buffer, chars_read);
 		return (buffer[0] = 0, GNL_OK);
 	}
 	else if (analyse_buffer(buffer) == NO_BR_BUFFER)
 	{
-		realloc_plus(ret, buffer, chars_read);
+		realloc_plus_printf(ret, buffer, chars_read);
 		return (buffer[0] = 0, gnl_rec(ret, buffer, fd));
 	}
 	br_dir = ft_strchr(buffer, '\n');
-	if (realloc_plus(ret, buffer, br_dir - buffer + 1) == GNL_ERR)
+	if (realloc_plus_printf(ret, buffer, br_dir - buffer + 1) == GNL_ERR)
 		return (GNL_ERR);
 	ft_memmove(buffer, br_dir + 1, BUFFER_SIZE - (br_dir - buffer + 1) + 1);
 	return (GNL_OK);
