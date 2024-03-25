@@ -6,7 +6,7 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 15:18:36 by sanferna          #+#    #+#             */
-/*   Updated: 2024/03/25 21:56:33 by sanferna         ###   ########.fr       */
+/*   Updated: 2024/03/25 22:12:37 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,7 @@
 void	signal_capture(int signum);
 int		set_signal_capture(void);
 void	process_len(int signum);
-t_server	g_srv;
-void funcion()
-{
-	system("leaks server");
-	exit(0);
-}
+static t_server	g_srv;
 
 int	main(void)
 {
@@ -55,12 +50,6 @@ int	set_signal_capture(void)
 		return (1);
 	if (sigaction(SIGUSR2, &signal_struct, NULL) == -1)
 		return (1);
-	struct sigaction	signal_struct2;
-	signal_struct2.sa_handler = funcion;
-	sigemptyset(&signal_struct2.sa_mask);
-	signal_struct2.sa_flags = SA_RESTART;
-	if (sigaction(SIGINT, &signal_struct2, NULL) == -1)
-		return (1);
 	return (0);
 }
 
@@ -81,7 +70,6 @@ void	signal_capture(int signum)
 			if (g_srv.char_value == 0)
 			{
 				ft_printf("%s\n", g_srv.str);
-				sleep(1);
 				free(g_srv.str);
 				g_srv.str = NULL;
 			}
