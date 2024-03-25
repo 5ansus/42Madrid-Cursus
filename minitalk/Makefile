@@ -14,8 +14,12 @@ $(LIB):
 	make -C ./libft/
 
 $(NAME): $(OBJ) $(LIB)
-	cp $(LIB) $(NAME)
-	ar -rc $(NAME) $(OBJ)
+
+server: $(OBJ:server.o= ) $(LIB)
+	$(CC) $(CFLAGS) -o $@ $@.o $(LIB)
+
+client: $(OBJ:client.o= ) $(LIB)
+	$(CC) $(CFLAGS) -o $@ $@.o $(LIB)
 
 .PHONY: all fclean clean re
 
