@@ -13,8 +13,6 @@ all: $(NAME)
 $(LIB):
 	make -C ./libft/
 
-$(NAME): $(LIB)
-
 server: $(OBJ:client.o= ) $(LIB)
 	$(CC) $(CFLAGS) -o $@ $@.o $(LIB)
 

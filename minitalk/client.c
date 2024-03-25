@@ -6,7 +6,7 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 15:18:43 by sanferna          #+#    #+#             */
-/*   Updated: 2024/03/25 18:44:27 by sanferna         ###   ########.fr       */
+/*   Updated: 2024/03/25 19:25:04 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	main(int argc, char **argv)
 {
 	ssize_t	len_msg;
 	ssize_t	i;
-	int	pid;
+	int		pid;
 
 	if (argc < 2)
 	{
@@ -31,7 +31,7 @@ int	main(int argc, char **argv)
 	len_msg = ft_strlen(argv[2]);
 	i = 0;
 	pid = ft_atoi(argv[1]);
-	while(i < len_msg)
+	while (i < len_msg)
 	{
 		transmit_char(argv[2][i], pid);
 		i++;
@@ -41,15 +41,17 @@ int	main(int argc, char **argv)
 
 void	transmit_char(int letter, int pid)
 {
-	int offset;
-	int tmp;
+	int	offset;
+	int	tmp;
 
 	offset = 24;
-	while(offset < 32)
+	while (offset < 32)
 	{
 		tmp = (letter << offset);
-		if (tmp < 0) kill(pid, SIGUSR1);
-		if (tmp >= 0) kill(pid, SIGUSR2);
+		if (tmp < 0)
+			kill(pid, SIGUSR1);
+		if (tmp >= 0)
+			kill(pid, SIGUSR2);
 		offset++;
 		usleep(1000);
 	}
