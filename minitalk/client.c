@@ -6,7 +6,7 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 15:18:43 by sanferna          #+#    #+#             */
-/*   Updated: 2024/03/25 19:36:59 by sanferna         ###   ########.fr       */
+/*   Updated: 2024/03/25 21:41:27 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "minitalk.h"
 
 void	transmit_char(int letter, int pid);
+void	send_len(ssize_t len, int pid);
 
 int	main(int argc, char **argv)
 {
@@ -31,6 +32,7 @@ int	main(int argc, char **argv)
 	len_msg = ft_strlen(argv[2]);
 	i = 0;
 	pid = ft_atoi(argv[1]);
+	send_len(len_msg, pid);
 	while (i < len_msg)
 	{
 		transmit_char(argv[2][i], pid);
@@ -54,6 +56,24 @@ void	transmit_char(int letter, int pid)
 		if (tmp >= 0)
 			kill(pid, SIGUSR2);
 		offset++;
-		usleep(100);
+		usleep(50);
+	}
+}
+
+void	send_len(ssize_t len, int pid)
+{
+	unsigned long	offset;
+	ssize_t			tmp;
+
+	offset = 0;
+	while (offset < sizeof(ssize_t))
+	{
+		tmp = (len << offset);
+		if (tmp < 0)
+			kill(pid, SIGUSR1);
+		if (tmp >= 0)
+			kill(pid, SIGUSR2);
+		offset++;
+		usleep(50);
 	}
 }
