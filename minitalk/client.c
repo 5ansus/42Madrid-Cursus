@@ -6,7 +6,7 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 15:18:43 by sanferna          #+#    #+#             */
-/*   Updated: 2024/03/25 19:25:04 by sanferna         ###   ########.fr       */
+/*   Updated: 2024/03/25 19:36:59 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int	main(int argc, char **argv)
 		i++;
 	}
 	transmit_char(0, pid);
+	return (0);
 }
 
 void	transmit_char(int letter, int pid)
@@ -53,6 +54,6 @@ void	transmit_char(int letter, int pid)
 		if (tmp >= 0)
 			kill(pid, SIGUSR2);
 		offset++;
-		usleep(1000);
+		usleep(100);
 	}
 }
