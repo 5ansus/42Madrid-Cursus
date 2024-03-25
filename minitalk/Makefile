@@ -13,12 +13,12 @@ all: $(NAME)
 $(LIB):
 	make -C ./libft/
 
-$(NAME): $(OBJ) $(LIB)
+$(NAME): $(LIB)
 
-server: $(OBJ:server.o= ) $(LIB)
+server: $(OBJ:client.o= ) $(LIB)
 	$(CC) $(CFLAGS) -o $@ $@.o $(LIB)
 
-client: $(OBJ:client.o= ) $(LIB)
+client: $(OBJ:server.o= ) $(LIB)
 	$(CC) $(CFLAGS) -o $@ $@.o $(LIB)
 
 .PHONY: all fclean clean re

@@ -2,8 +2,11 @@
 # define MINITALK_H
 
 # include <signal.h>
-# define HIGH_BIT SIGUSR1
-# define LOW_BIT SIGUSR2
 
+typedef struct s_handler_buffer
+{
+	int	count;
+	int	value;
+}			t_handler_buffer;
 
 #endif

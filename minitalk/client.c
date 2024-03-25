@@ -6,7 +6,7 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 15:18:43 by sanferna          #+#    #+#             */
-/*   Updated: 2024/03/25 17:32:24 by sanferna         ###   ########.fr       */
+/*   Updated: 2024/03/25 18:44:27 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ void	transmit_char(int letter, int pid)
 	while(offset < 32)
 	{
 		tmp = (letter << offset);
-		if (tmp < 0) kill(pid, HIGH_BIT);
-		if (tmp >= 0) kill(pid, LOW_BIT);
+		if (tmp < 0) kill(pid, SIGUSR1);
+		if (tmp >= 0) kill(pid, SIGUSR2);
 		offset++;
 		usleep(1000);
 	}
