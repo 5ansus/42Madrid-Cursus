@@ -6,7 +6,7 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 17:08:04 by sanferna          #+#    #+#             */
-/*   Updated: 2024/03/28 20:59:55 by sanferna         ###   ########.fr       */
+/*   Updated: 2024/03/28 22:19:02 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,28 +17,28 @@ int		compare(void *n1, void *n2);
 void	replace_spaces(unsigned int c, char *str);
 int	validate_args(int argc, char **argv, t_bst **tree, t_list **list);
 int *validate_number(char *str);
-int	clear(t_bst **tree, t_list **list, t_bst **extra_tree);
+int	clear(t_bst **tree, t_list **list, t_bst **extra_tree, char **numbers);
+char **parse_args(int argc, char **argv, int *n_numbers);
+void	printer(void *p);
+void	ft_clear_split(char **split);
 void	leaks(void){
 	system("leaks push_swap");
 }
 
 int	main(int argc, char **argv)
 {
-	char *p = NULL;
+	t_bst *tree;
+	t_list *lista;
 	atexit(leaks);
-	for(int i = 0; i < argc; i++){
-		p = ft_concatealloc(p, argv[i], " ");
+	if (argc < 2)
+	{
+		ft_printf("Args insuficientes\n");
+		return 1;
 	}
-	char **ret = ft_split(p, ' ');
-	int j = 0;
-	while(ret[j] != NULL){
-		ft_printf("Palabra %d: %s\n", j, ret[j]);
-		free(ret[j]);
-		j++;
-	}
-	free(ret);
-	ft_printf("%s tiene %d palabras\n", p, j);
-	free(p);
+	validate_args(argc, argv, &tree, &lista);
+	ft_bstprint(&tree, printer);
+	clear(&tree, &lista, NULL, NULL);
+	return 0;
 }
 
 void	*ft_concatealloc(void *dst, void *src, char *sep)
@@ -47,31 +47,49 @@ void	*ft_concatealloc(void *dst, void *src, char *sep)
 	char	*ret;
 
 	tmp = NULL;
+	if(src == NULL || sep == NULL)
+		return (NULL);
 	tmp = ft_strjoin(sep, src);
 	if(tmp == NULL)
 		return (NULL);
 	ft_striteri(tmp, replace_spaces);
 	ret = ft_realloc(dst, tmp);
+	if (ret == dst || ret == NULL)
+	{
+		free(tmp);
+		return (NULL);
+	}
 	free(tmp);
 	return (ret);
 }
 
 int	validate_args(int argc, char **argv, t_bst **tree, t_list **list)
 {
-	int	i;
+	int	n_numbers;
 	int	*ret;
+	char	**args_str;
 	t_bst	*new;
+	int	i;
 
-	i = 2;
-	while (i < argc)
+	i = 0;
+	args_str = parse_args(argc, argv, &n_numbers);
+	if(args_str == NULL)
+		return -1;
+	while (i < n_numbers)
 	{
-		ret = validate_number(argv[i]);
+		ret = validate_number(args_str[i]);
+		ft_printf("Numero malloqueado %d\n",  *ret);
 		if (ret == NULL)
-			return clear(tree, list, NULL);
+			return clear(tree, list, NULL, args_str);
 		new = ft_bstnew(ret);
-		if (ft_bstinsert(tree, new, compare))
-			return clear(tree, list, &new);
+		ft_bstprint(tree, printer);
+		ft_bstprint(&new, printer);
+		//ft_printf("%d\n", ft_bstinsert(tree, new, compare));
+		if (ft_bstinsert(tree, new, compare) != 0)
+			return clear(tree, list, &new, args_str);
+		i++;
 	}
+	ft_clear_split(args_str);
 	return 0;
 }
 int	compare(void *n1, void *n2)
@@ -85,23 +103,32 @@ int	compare(void *n1, void *n2)
 	return (num1 - num2);
 }
 
-int	clear(t_bst **tree, t_list **list, t_bst **extra_tree)
+int	clear(t_bst **tree, t_list **list, t_bst **extra_tree, char **numbers)
 {
+	int	i;
+
+	i = 0;
 	ft_bstclear(tree, free);
 	ft_bstclear(extra_tree, free);
 	ft_lstclear(list, free);
+	ft_clear_split(numbers);
 	return (-1);
 }
 int *validate_number(char *str)
 {
 	//long	tmp;
-	int	len;
+	ssize_t	len;
+	int	*ret;
 
 	len = ft_strlen(str);
 	if(len > 11)
 		return NULL;
-	///ft_atoi();
-	return(NULL);
+	ret = malloc(sizeof(int));
+	if(ret == NULL)
+		return (NULL);
+	*ret = ft_atoi(str);
+	ft_printf("Atoi de %s -- da %d y guardo %d\n", str, ft_atoi(str), *ret);
+	return(ret);
 }
 
 void replace_spaces(unsigned int c, char *dir)
@@ -109,4 +136,53 @@ void replace_spaces(unsigned int c, char *dir)
 	c = 0;
 	if (ft_isspace(*dir))
 		*dir = ' ';
+}
+
+char **parse_args(int argc, char **argv, int *n_numbers)
+{
+	char	*tmp;
+	char	**ret;
+	int	i;
+
+	i = 1;
+	tmp = NULL;
+	while(i < argc)
+	{
+		tmp = ft_concatealloc(tmp, argv[i], " ");
+		if (tmp == NULL)
+			return NULL;
+		i++;
+	}
+	ret = ft_split(tmp, ' ');
+	for(int j = 0; j < 4541212 && ret[j] != NULL; j++){
+		ft_printf("%s\n", ret[j]);
+	}
+	free(tmp);
+	i = 0;
+	while(ret[i] != NULL)
+		i++;
+	*n_numbers = i;
+	return (ret);
+}
+void	printer(void *p)
+{
+	int	*num;
+
+	num = (int *) p;
+	ft_printf("%d\n", *num);
+}
+
+void	ft_clear_split(char **split)
+{
+	int	i;
+
+	i = 0;
+	if(split == NULL)
+		return;
+	while(split[i] != NULL)
+	{
+		free(split[i]);
+		i++;
+	}
+	free(split);
 }
