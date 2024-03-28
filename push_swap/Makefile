@@ -1,7 +1,7 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
-NAME = main
-SRC = bst_extend.c #tester_bst.c
+NAME = tester
+SRC = bst_extend.c tester_bst.c
 LIB = ./libft/libft.a
 OBJ = $(SRC:.c=.o)
 

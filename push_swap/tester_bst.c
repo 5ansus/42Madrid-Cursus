@@ -1,7 +1,7 @@
 #include "push_swap.h"
 #include <time.h>
 void	leaks(void){
-	system("leaks main");
+	system("leaks tester");
 }
 int	compare(void *n1, void *n2)
 {
