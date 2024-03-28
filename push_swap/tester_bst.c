@@ -1,4 +1,4 @@
-#include "./libft/libft.h"
+#include "push_swap.h"
 #include <time.h>
 void	leaks(void){
 	system("leaks main");
@@ -55,6 +55,7 @@ int main(void){
 		}
 	}
 	ft_bstprint(&tree, printer);
-
+	bst_order(&tree);
+	ft_bstprint(&tree, printer);
 	ft_bstclear(&tree, delete);
 }

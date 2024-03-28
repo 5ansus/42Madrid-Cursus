@@ -1,7 +1,7 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 NAME = main
-SRC = main.c bst_extend.c
+SRC = bst_extend.c #tester_bst.c
 LIB = ./libft/libft.a
 OBJ = $(SRC:.c=.o)
 
@@ -16,7 +16,7 @@ $(LIB):
 $(NAME): $(OBJ) $(LIB)
 	$(CC) $(CFLAGS) -o $@ $^
 
-.PHONY: all fclean clean re
+.PHONY: all fclean clean re cleanlib
 
 clean:
 	rm -rfd $(OBJ)
@@ -27,3 +27,6 @@ fclean: clean
 	make -C ./libft/ fclean
 
 re: fclean $(NAME)
+
+cleanlib:
+	rm -f ./libft/libft.a
