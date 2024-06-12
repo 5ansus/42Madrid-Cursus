@@ -126,36 +126,6 @@ int *validate_number(char *str)
 	int *ret;
 
 	len = ft_strlen(str);
-	printf("Min int %d -- %ld\n", INT_MIN, (long) INT_MIN);
-	// int tmpi = -1;
-	// tmpi >>= 2;
-	// printf("Valor de tmpi %d\n", tmpi);
-	int bucle = INT_MIN;
-	bucle = bucle - 1;
-	long bucle3 = bucle;
-	char str2[33];
-	str2[32] = 0;
-	printf("Valor de bucle %d\n", bucle);
-	for (int i = 31; i >= 0; i--)
-	{
-		str2[i] = (bucle & 1) + '0';
-		bucle >>= 1;
-	}
-	printf("Valor de str2 %s\n", str2);
-	char str3[65];
-	str3[64] = 0;
-	printf("Valor de bucle3 %ld\n", bucle3);
-	for (int i = 63; i >= 0; i--)
-	{
-		str3[i] = (bucle3 & 1) + '0';
-		bucle3 >>= 1;
-	}
-	printf("Valor de str3 %s\n", str3);
-	// long tmp = (long) INT_MIN;
-	// tmp >>= 33;
-	// printf("Valor de tmp %ld\n", tmp);
-	// tmp <<= 1;
-	// printf("Valor de tmp %ld\n", tmp);
 	if (len > 11)
 		return NULL;
 	// Comprobar que si tiene 10 no sea mayor que max int 
