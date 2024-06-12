@@ -13,8 +13,7 @@
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-# define INT_MAX 2147483647
-# define INT_MIN -2147483648
+# include <limits.h>
 # include "./libft/libft.h"
 int	bst_order(t_bst **tree);
 #endif
