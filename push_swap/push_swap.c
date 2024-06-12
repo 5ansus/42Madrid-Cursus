@@ -6,7 +6,7 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 17:08:04 by sanferna          #+#    #+#             */
-/*   Updated: 2024/06/12 12:40:06 by sanferna         ###   ########.fr       */
+/*   Updated: 2024/06/12 20:42:36 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,9 @@ int main(int argc, char **argv)
 	lista = NULL;
 	validate_args(argc, argv, &tree, &lista);
 	ft_bstprint(&tree, printer);
+	bst_order(&tree);
+	ft_bstprint(&tree, printer);
+	ft_lstprint(&lista, printer);
 	clear(&tree, &lista, NULL, NULL);
 	return 0;
 }
@@ -70,23 +73,22 @@ int validate_args(int argc, char **argv, t_bst **tree, t_list **list)
 	char **args_str;
 	t_bst *new;
 	int i;
+	t_list *new_list;
 
 	i = 0;
 	args_str = parse_args(argc, argv, &n_numbers);
 	if (args_str == NULL)
-		return -1;
+		return (ft_clear_split(args_str), -1);
 	while (i < n_numbers)
 	{
 		ret = validate_number(args_str[i]);
-		// ft_printf("Numero malloqueado %d\n", *ret);
 		if (ret == NULL)
 			return clear(tree, list, NULL, args_str);
 		new = ft_bstnew((void *)ret);
-		// ft_printf("%d\n", ft_bstinsert(tree, new, compare));
 		if (ft_bstinsert(tree, new, compare) != 0)
 			return clear(tree, list, &new, args_str);
-
-		// ft_bstprint(tree, printer);
+		new_list = ft_lstnew((void *)ret);
+		ft_lstadd_back(list, new_list);
 		i++;
 	}
 	ft_clear_split(args_str); // podría ir en el main o no. Mirar si hay que tocar la función clear.
@@ -113,7 +115,7 @@ int clear(t_bst **tree, t_list **list, t_bst **extra_tree, char **numbers)
 	if (extra_tree != NULL)
 		ft_bstclear(extra_tree, free);
 	if (list != NULL)
-		ft_lstclear(list, free);
+		ft_lstclear(list, NULL);
 	if (numbers != NULL)
 		ft_clear_split(numbers);
 	return (-1);
@@ -128,7 +130,8 @@ int *validate_number(char *str)
 	len = ft_strlen(str);
 	if (len > 11)
 		return NULL;
-	// Comprobar que si tiene 10 no sea mayor que max int 
+		
+	// Comprobar que si tiene 10 no sea mayor que max int
 	// Comprobar que si es 11 no sea menor que min int
 	ret = malloc(sizeof(int));
 	if (ret == NULL)
@@ -146,39 +149,38 @@ void replace_spaces(unsigned int c, char *dir)
 	c = c;
 }
 
-char **parse_args(int argc, char **argv, int *n_numbers)
+char	**parse_args(int argc, char **argv, int *n_numbers)
 {
-	char *tmp;
-	char **ret;
-	int i;
+	char	*tmp;
+	char	**ret;
+	int		i;
 
-	i = 1;
+	i = 0;
 	tmp = NULL;
-	while (i < argc)
+	while (++i < argc)
 	{
 		tmp = ft_concatealloc(tmp, argv[i], " ");
 		if (tmp == NULL)
-			return NULL;
-		i++;
+			return (NULL);
 	}
 	ret = ft_split(tmp, ' ');
-	// for (int j = 0; ret[j] != NULL; j++)
-	// {
-	// 	ft_printf("%s\n", ret[j]);
-	// }
 	free(tmp);
-	i = 0;
-	while (ret[i] != NULL)
-		i++;
+	i = -1;
+	while (ret[++i] != NULL)
+	{
+		if (ft_isstrnbr(ret[i]) == 0)
+			return (ft_clear_split(ret), NULL);
+	}
 	*n_numbers = i;
 	return (ret);
 }
+
 void printer(void *p)
 {
 	int *num;
 
 	num = (int *)p;
-	ft_printf("%d\n", *num);
+	ft_printf("%d", *num);
 }
 
 void ft_clear_split(char **split)
