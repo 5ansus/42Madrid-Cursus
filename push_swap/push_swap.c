@@ -6,7 +6,7 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 17:08:04 by sanferna          #+#    #+#             */
-/*   Updated: 2024/06/12 20:42:36 by sanferna         ###   ########.fr       */
+/*   Updated: 2024/06/13 11:27:07 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,18 +126,19 @@ int *validate_number(char *str)
 	// long	tmp;
 	ssize_t len;
 	int *ret;
+	long tmp;
 
 	len = ft_strlen(str);
 	if (len > 11)
 		return NULL;
-		
-	// Comprobar que si tiene 10 no sea mayor que max int
-	// Comprobar que si es 11 no sea menor que min int
+	
+	tmp = ft_atol(str);
+	if (tmp < INT_MIN || tmp > INT_MAX)
+		return (NULL);
 	ret = malloc(sizeof(int));
 	if (ret == NULL)
 		return (NULL);
 	*ret = ft_atoi(str);
-	// ft_printf("Atoi de %s -- da %d y guardo %d\n", str, ft_atoi(str), *ret);
 	return (ret);
 }
 
