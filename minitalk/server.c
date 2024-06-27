@@ -23,6 +23,7 @@ int	main(void)
 	if (set_signal_capture() != 0)
 		return (1);
 	ft_printf("PID del servidor: %d\n", getpid());
+	g_srv.len = 0;
 	g_srv.len_len = 0;
 	g_srv.sig_count = 0;
 	g_srv.str = NULL;
@@ -30,7 +31,6 @@ int	main(void)
 	g_srv.status = 0;
 	while (1)
 	{
-		usleep(1000);
 		if (g_srv.status != 0)
 			return (1);
 	}
@@ -72,6 +72,7 @@ void	signal_capture(int signum, siginfo_t *info, void *ucontext)
 				ft_printf("%s\n", g_srv.str);
 				free(g_srv.str);
 				g_srv.str = NULL;
+				g_srv.len = 0;
 			}
 			g_srv.len++;
 			g_srv.sig_count = 0;
@@ -87,7 +88,7 @@ void	process_len(int signum)
 	if (signum == SIGUSR1)
 		g_srv.len += 1;
 	g_srv.len_len++;
-	if (g_srv.len_len == sizeof(ssize_t))
+	if (g_srv.len_len == sizeof(ssize_t)*8)
 	{
 		g_srv.str = malloc(g_srv.len + 1);
 		if (g_srv.str == NULL)
