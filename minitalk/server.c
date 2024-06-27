@@ -13,7 +13,7 @@
 #include "libft/libft.h"
 #include "minitalk.h"
 
-void	signal_capture(int signum);
+void	signal_capture(int signum, siginfo_t *info, void *ucontext);
 int		set_signal_capture(void);
 void	process_len(int signum);
 static t_server	g_srv;
@@ -41,11 +41,11 @@ int	set_signal_capture(void)
 {
 	struct sigaction	signal_struct;
 
-	signal_struct.sa_handler = signal_capture;
+	signal_struct.sa_sigaction = signal_capture;
 	sigemptyset(&signal_struct.sa_mask);
 	sigaddset(&signal_struct.sa_mask, SIGUSR1);
 	sigaddset(&signal_struct.sa_mask, SIGUSR2);
-	signal_struct.sa_flags = SA_RESTART;
+	signal_struct.sa_flags = SA_RESTART | SA_SIGINFO;
 	if (sigaction(SIGUSR1, &signal_struct, NULL) == -1)
 		return (1);
 	if (sigaction(SIGUSR2, &signal_struct, NULL) == -1)
@@ -53,7 +53,7 @@ int	set_signal_capture(void)
 	return (0);
 }
 
-void	signal_capture(int signum)
+void	signal_capture(int signum, siginfo_t *info, void *ucontext)
 {
 	if (g_srv.str == NULL)
 		process_len(signum);
@@ -63,7 +63,7 @@ void	signal_capture(int signum)
 		if (signum == SIGUSR1)
 			g_srv.char_value += 1;
 		g_srv.sig_count += 1;
-		if (g_srv.sig_count == 8)
+		if (g_srv.sig_count == 8 && (ucontext == NULL || ucontext != NULL))
 		{
 			if (g_srv.char_value != 0)
 				g_srv.str[g_srv.len] = g_srv.char_value;
@@ -78,13 +78,11 @@ void	signal_capture(int signum)
 			g_srv.char_value = 0;
 		}
 	}
+	kill(info->si_pid, signum);
 }
 
 void	process_len(int signum)
 {
-	ssize_t	tmp;
-
-	tmp = 0;
 	g_srv.len = g_srv.len << 1;
 	if (signum == SIGUSR1)
 		g_srv.len += 1;
