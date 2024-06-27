@@ -70,7 +70,6 @@ void	transmit_char(int letter, int pid)
 			ft_printf("ERROR. Expected sig N10, got sig Nº%d\n", g_sig_ack);
 		if (tmp >= 0 && g_sig_ack != SIGUSR2)
 			ft_printf("ERROR. Expected sig N12, got sig Nº%d\n", g_sig_ack);
-		
 	}
 }
 
@@ -80,7 +79,7 @@ void	send_len(ssize_t len, int pid)
 	ssize_t			tmp;
 
 	offset = 0;
-	while (offset < sizeof(ssize_t)*8)
+	while (offset < sizeof(ssize_t) * 8)
 	{
 		g_sig_ack = 0;
 		tmp = (len << offset);

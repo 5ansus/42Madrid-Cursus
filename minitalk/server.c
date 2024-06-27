@@ -88,7 +88,7 @@ void	process_len(int signum)
 	if (signum == SIGUSR1)
 		g_srv.len += 1;
 	g_srv.len_len++;
-	if (g_srv.len_len == sizeof(ssize_t)*8)
+	if (g_srv.len_len == sizeof(ssize_t) * 8)
 	{
 		g_srv.str = malloc(g_srv.len + 1);
 		if (g_srv.str == NULL)
