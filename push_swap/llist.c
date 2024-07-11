@@ -6,7 +6,7 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 11:13:43 by sanferna          #+#    #+#             */
-/*   Updated: 2024/06/13 13:37:41 by sanferna         ###   ########.fr       */
+/*   Updated: 2024/07/11 16:48:31 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,29 @@ void	llst_add_front(t_llist **lst, t_llist *new)
 {
 	if (lst == NULL || new == NULL)
 		return;
-
-	*lst = new;
-	new->next = *lst;
-	(*lst)->prev = new;
+	//Cero elementos
+	if (*lst == NULL)
+	{
+		*lst = new;
+		new->next = *lst;
+		new->prev = *lst;
+		return;
+	}
+	// Solo está un elemento en la lista
+	if (((*lst)->prev == *lst))
+	{
+		(*lst)->next = new;
+		(*lst)->prev = new;
+		new->next = *lst;
+		new->prev = *lst;
+	}
+	else
+	{
+		new->next = *lst;
+		new->prev = (*lst)->prev;
+		(*lst)->prev->next = new;
+		(*lst)->prev = new;
+	}
 	*lst = new;
 	return;
 }
@@ -71,7 +90,7 @@ void	llst_print(t_llist **lst,void (*p)(void *))
 	while (node->next != *lst)
 	{
 		node = node->next;
-		ft_printf("Node: ");
+		ft_printf("Node: %p", node);
 		p(node->content);
 		ft_printf("\nPrev %p", node->prev);
 		ft_printf("\nNext %p", node->next);

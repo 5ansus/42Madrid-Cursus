@@ -6,7 +6,7 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 13:18:09 by sanferna          #+#    #+#             */
-/*   Updated: 2024/06/13 13:35:56 by sanferna         ###   ########.fr       */
+/*   Updated: 2024/07/11 16:51:12 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void printer(void *p)
 	int *num;
 
 	num = (int *)p;
-	ft_printf("%d", *num);
+	ft_printf(" -- %d", *num);
 }
 
 int main()
