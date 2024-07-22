@@ -6,7 +6,7 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 13:18:09 by sanferna          #+#    #+#             */
-/*   Updated: 2024/07/11 16:51:12 by sanferna         ###   ########.fr       */
+/*   Updated: 2024/07/22 13:37:43 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@ int main()
 	int d = 4;
 
 	lst = llst_new(&a);
-	llst_add_back(&lst, llst_new(&b));
-	llst_add_back(&lst, llst_new(&c));
-	llst_add_back(&lst, llst_new(&d));
+	llst_add_last_and_keep(&lst, llst_new(&b));
+	llst_add_last_and_keep(&lst, llst_new(&c));
+	llst_add_last_and_keep(&lst, llst_new(&d));
 	llst_print(&lst, printer);
-	llst_delete(&lst, NULL);
+	// llst_delete(&lst, NULL); -- da problemas
 	return (0);
 }

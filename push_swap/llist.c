@@ -6,7 +6,7 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 11:13:43 by sanferna          #+#    #+#             */
-/*   Updated: 2024/07/11 16:48:31 by sanferna         ###   ########.fr       */
+/*   Updated: 2024/07/22 13:34:53 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_llist	*llst_new(void *content)
 	return (new);
 }
 
-void	llst_add_front(t_llist **lst, t_llist *new)
+void	llst_add_next_and_advance(t_llist **lst, t_llist *new)
 {
 	if (lst == NULL || new == NULL)
 		return;
@@ -56,7 +56,7 @@ void	llst_add_front(t_llist **lst, t_llist *new)
 	return;
 }
 
-void	llst_add_back(t_llist **lst, t_llist *new)
+void	llst_add_last_and_keep(t_llist **lst, t_llist *new)
 {
 	if (lst == NULL || new == NULL)
 		return;
@@ -71,7 +71,6 @@ void	llst_add_back(t_llist **lst, t_llist *new)
 	new->prev = (*lst)->prev;
 	(*lst)->prev->next = new;
 	(*lst)->prev = new;
-	*lst = new;
 	return ;
 }
 
