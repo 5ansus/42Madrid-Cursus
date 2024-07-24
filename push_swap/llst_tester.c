@@ -6,11 +6,15 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 13:18:09 by sanferna          #+#    #+#             */
-/*   Updated: 2024/07/22 13:37:43 by sanferna         ###   ########.fr       */
+/*   Updated: 2024/07/24 16:03:37 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+// gcc -g3 llst_tester.c llist.c libft/libft.a
+// valgrind --leak-check=full ./a.out
+
 void printer(void *p)
 {
 	int *num;
@@ -28,10 +32,14 @@ int main()
 	int d = 4;
 
 	lst = llst_new(&a);
-	llst_add_last_and_keep(&lst, llst_new(&b));
-	llst_add_last_and_keep(&lst, llst_new(&c));
-	llst_add_last_and_keep(&lst, llst_new(&d));
+	// llst_add_last_and_keep(&lst, llst_new(&b));
+	// llst_add_last_and_keep(&lst, llst_new(&c));
+	// llst_add_last_and_keep(&lst, llst_new(&d));
+	
+	llst_add_next_and_advance(&lst, llst_new(&b));
+	llst_add_next_and_advance(&lst, llst_new(&c));
+	llst_add_next_and_advance(&lst, llst_new(&d));
 	llst_print(&lst, printer);
-	// llst_delete(&lst, NULL); -- da problemas
+	llst_delete(&lst, NULL);
 	return (0);
 }

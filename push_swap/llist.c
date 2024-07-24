@@ -6,7 +6,7 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 11:13:43 by sanferna          #+#    #+#             */
-/*   Updated: 2024/07/22 13:34:53 by sanferna         ###   ########.fr       */
+/*   Updated: 2024/07/24 16:04:15 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,8 @@ void	llst_print(t_llist **lst,void (*p)(void *))
 		return ;
 	node = *lst;
 	ft_printf("Node: %p", node);
-	p(node->content);
+	if (p != NULL)
+		p(node->content);
 	ft_printf("\nPrev %p", node->prev);
 	ft_printf("\nNext %p", node->next);
 	ft_printf("\n");
@@ -90,7 +91,8 @@ void	llst_print(t_llist **lst,void (*p)(void *))
 	{
 		node = node->next;
 		ft_printf("Node: %p", node);
-		p(node->content);
+		if (p != NULL)
+			p(node->content);
 		ft_printf("\nPrev %p", node->prev);
 		ft_printf("\nNext %p", node->next);
 		ft_printf("\n");
@@ -99,24 +101,27 @@ void	llst_print(t_llist **lst,void (*p)(void *))
 
 void llst_delete(t_llist **lst, void (*del)(void *))
 {
-	t_llist *node;
-	t_llist *next;
+	t_llist	*node;
+	t_llist *next_node;
+	t_llist *first_node;
 
 	if (lst == NULL || *lst == NULL)
 		return ;
+
+	first_node = *lst;
 	node = *lst;
-	if (del == NULL)
+	if (del != NULL)
 		del(node->content);
-	next = node->next;
+	next_node = node->next;
 	free(node);
-	node = next;
-	while (node != *lst)
+	node = next_node;
+	while (node != first_node)
 	{
-		if (del == NULL)
+		if (del != NULL)
 			del(node->content);
-		next = node->next;
+		next_node = node->next;
 		free(node);
-		node = next;
+		node = next_node;
 	}
 	*lst = NULL;
 }
