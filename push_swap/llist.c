@@ -6,7 +6,7 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 11:13:43 by sanferna          #+#    #+#             */
-/*   Updated: 2024/07/24 16:04:15 by sanferna         ###   ########.fr       */
+/*   Updated: 2024/07/28 17:35:25 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,4 +124,26 @@ void llst_delete(t_llist **lst, void (*del)(void *))
 		node = next_node;
 	}
 	*lst = NULL;
+}
+
+t_llist	*llst_detach_node(t_llist **lst)
+{
+	t_llist	*node;
+	t_llist	*prev;
+	t_llist	*next;
+
+	if (lst == NULL || *lst == NULL)
+		return (NULL);
+	node = *lst;
+	prev = node->prev;
+	next = node->next;
+	if (prev == node && next == node)
+	{
+		*lst = NULL;
+		return (node);
+	}
+	prev->next = next;
+	next->prev = prev;
+	*lst = next;
+	return (node);
 }

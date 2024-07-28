@@ -6,17 +6,13 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 13:23:08 by sanferna          #+#    #+#             */
-/*   Updated: 2024/07/24 15:42:33 by sanferna         ###   ########.fr       */
+/*   Updated: 2024/07/24 16:25:42 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include <time.h>
 
-void leaks(void)
-{
-	system("leaks tester");
-}
 int compare(void *n1, void *n2)
 {
 	int num1;
