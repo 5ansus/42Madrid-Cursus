@@ -6,7 +6,7 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 11:13:43 by sanferna          #+#    #+#             */
-/*   Updated: 2024/07/28 17:35:25 by sanferna         ###   ########.fr       */
+/*   Updated: 2024/07/31 08:11:34 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,5 +145,7 @@ t_llist	*llst_detach_node(t_llist **lst)
 	prev->next = next;
 	next->prev = prev;
 	*lst = next;
+	node->next = node;
+	node->prev = node;
 	return (node);
 }

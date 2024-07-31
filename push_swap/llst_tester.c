@@ -6,7 +6,7 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 13:18:09 by sanferna          #+#    #+#             */
-/*   Updated: 2024/07/28 17:36:39 by sanferna         ###   ########.fr       */
+/*   Updated: 2024/07/31 08:12:33 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,11 @@ int main()
 	llst_add_next_and_advance(&lst, llst_new(&c));
 	llst_add_next_and_advance(&lst, llst_new(&d));
 	llst_print(&lst, printer);
-	t_list *p = llst_detach_node(&lst);
+
+	ft_printf("Detach node\n");
+	t_llist *p = llst_detach_node(&lst);
 	llst_print(&lst, printer);
+	ft_printf("-----------------------------\n");
 	llst_print(&p, printer);
 	llst_delete(&lst, NULL);
 	llst_delete(&p, NULL);
