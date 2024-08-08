@@ -6,7 +6,7 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 17:08:04 by sanferna          #+#    #+#             */
-/*   Updated: 2024/06/13 11:27:07 by sanferna         ###   ########.fr       */
+/*   Updated: 2024/08/08 16:33:44 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,31 +16,27 @@
 void *ft_concatealloc(void *dst, void *src, char *sep);
 int compare(void *n1, void *n2);
 void replace_spaces(unsigned int c, char *str);
-int validate_args(int argc, char **argv, t_bst **tree, t_list **list);
+int validate_args(int argc, char **argv, t_llist **stack_a);
 int *validate_number(char *str);
-int clear(t_bst **tree, t_list **list, t_bst **extra_tree, char **numbers);
+int clear(t_bst **tree, t_llist **stack_a, t_llist **stack_b, char **split);
 char **parse_args(int argc, char **argv, int *n_numbers);
 void printer(void *p);
 void ft_clear_split(char **split);
 
 int main(int argc, char **argv)
 {
-	t_bst *tree;
-	t_list *lista;
+	t_llist *stack_a;
 
 	if (argc < 2)
 	{
 		ft_printf("Args insuficientes\n");
 		return 1;
 	}
-	tree = NULL;
-	lista = NULL;
-	validate_args(argc, argv, &tree, &lista);
-	ft_bstprint(&tree, printer);
-	bst_order(&tree);
-	ft_bstprint(&tree, printer);
-	ft_lstprint(&lista, printer);
-	clear(&tree, &lista, NULL, NULL);
+	stack_a = NULL;
+	validate_args(argc, argv, &stack_a);
+	ft_llst_print(&stack_a, printer);
+	ft_llst_clear(&stack_a, free);
+	// clear(&tree, &lista, NULL, NULL);
 	return 0;
 }
 
@@ -66,16 +62,18 @@ void *ft_concatealloc(void *dst, void *src, char *sep)
 	return (ret);
 }
 
-int validate_args(int argc, char **argv, t_bst **tree, t_list **list)
+int validate_args(int argc, char **argv, t_llist **stack_a)
 {
 	int n_numbers;
 	int *ret;
 	char **args_str;
-	t_bst *new;
+	t_bst *tree;
+	t_bst *child_tree;
 	int i;
-	t_list *new_list;
+	t_llist *new_node;
 
 	i = 0;
+	tree = NULL;
 	args_str = parse_args(argc, argv, &n_numbers);
 	if (args_str == NULL)
 		return (ft_clear_split(args_str), -1);
@@ -83,15 +81,23 @@ int validate_args(int argc, char **argv, t_bst **tree, t_list **list)
 	{
 		ret = validate_number(args_str[i]);
 		if (ret == NULL)
-			return clear(tree, list, NULL, args_str);
-		new = ft_bstnew((void *)ret);
-		if (ft_bstinsert(tree, new, compare) != 0)
-			return clear(tree, list, &new, args_str);
-		new_list = ft_lstnew((void *)ret);
-		ft_lstadd_back(list, new_list);
+			return clear(&tree, stack_a, NULL, args_str);
+		child_tree = ft_bstnew((void *)ret);
+		if (child_tree == NULL)
+			return clear(&tree, stack_a, NULL, args_str);
+		if (ft_bstinsert(&tree, child_tree, compare) != 0)
+			return clear(&tree, stack_a, NULL, args_str);
+		new_node = ft_llst_new((void *)ret);
+		if (new_node == NULL)
+			return clear(&tree, stack_a, NULL, args_str);
+		ft_llst_push_bot(stack_a, new_node);
 		i++;
 	}
-	ft_clear_split(args_str); // podría ir en el main o no. Mirar si hay que tocar la función clear.
+	ft_clear_split(args_str);
+	ft_bstprint(&tree, printer);
+	bst_order(&tree);
+	ft_bstprint(&tree, printer);
+	ft_bstclear(&tree, NULL);
 	return 0;
 }
 int compare(void *n1, void *n2)
@@ -105,19 +111,19 @@ int compare(void *n1, void *n2)
 	return (num1 - num2);
 }
 
-int clear(t_bst **tree, t_list **list, t_bst **extra_tree, char **numbers)
+int clear(t_bst **tree, t_llist **stack_a, t_llist **stack_b, char **split)
 {
 	// int	i;
 
 	// i = 0;
 	if (tree != NULL)
 		ft_bstclear(tree, free);
-	if (extra_tree != NULL)
-		ft_bstclear(extra_tree, free);
-	if (list != NULL)
-		ft_lstclear(list, NULL);
-	if (numbers != NULL)
-		ft_clear_split(numbers);
+	if (stack_a != NULL)
+		ft_llst_clear(stack_a, NULL);
+	if (stack_b != NULL)
+		ft_llst_clear(stack_b, NULL);
+	if (split != NULL)
+		ft_clear_split(split);
 	return (-1);
 }
 
@@ -131,7 +137,7 @@ int *validate_number(char *str)
 	len = ft_strlen(str);
 	if (len > 11)
 		return NULL;
-	
+
 	tmp = ft_atol(str);
 	if (tmp < INT_MIN || tmp > INT_MAX)
 		return (NULL);
@@ -150,11 +156,11 @@ void replace_spaces(unsigned int c, char *dir)
 	c = c;
 }
 
-char	**parse_args(int argc, char **argv, int *n_numbers)
+char **parse_args(int argc, char **argv, int *n_numbers)
 {
-	char	*tmp;
-	char	**ret;
-	int		i;
+	char *tmp;
+	char **ret;
+	int i;
 
 	i = 0;
 	tmp = NULL;

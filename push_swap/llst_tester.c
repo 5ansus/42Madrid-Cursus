@@ -6,7 +6,7 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 13:18:09 by sanferna          #+#    #+#             */
-/*   Updated: 2024/07/31 08:12:33 by sanferna         ###   ########.fr       */
+/*   Updated: 2024/08/08 16:33:44 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,22 +31,26 @@ int main()
 	int c = 3;
 	int d = 4;
 
-	lst = llst_new(&a);
-	llst_add_last_and_keep(&lst, llst_new(&b));
-	llst_add_last_and_keep(&lst, llst_new(&c));
-	llst_add_last_and_keep(&lst, llst_new(&d));
-	
-	llst_add_next_and_advance(&lst, llst_new(&b));
-	llst_add_next_and_advance(&lst, llst_new(&c));
-	llst_add_next_and_advance(&lst, llst_new(&d));
-	llst_print(&lst, printer);
-
-	ft_printf("Detach node\n");
-	t_llist *p = llst_detach_node(&lst);
-	llst_print(&lst, printer);
+	lst = ft_llst_new(&a);
+	ft_llst_push_bot(&lst, ft_llst_new(&b));
+	ft_llst_push_bot(&lst, ft_llst_new(&c));
+	ft_llst_push_bot(&lst, ft_llst_new(&d));
+	ft_llst_print(&lst, printer);
 	ft_printf("-----------------------------\n");
-	llst_print(&p, printer);
-	llst_delete(&lst, NULL);
-	llst_delete(&p, NULL);
+	ft_llst_clear(&lst, NULL);
+	ft_llst_push_top(&lst, ft_llst_new(&a));
+	ft_llst_push_top(&lst, ft_llst_new(&b));
+	ft_llst_push_top(&lst, ft_llst_new(&c));
+	ft_llst_push_top(&lst, ft_llst_new(&d));
+	ft_llst_print(&lst, printer);
+
+	ft_printf("-----------------------------\n");
+	ft_printf("Detach node\n");
+	t_llist *p = ft_llst_detach_node(&lst);
+	ft_llst_print(&lst, printer);
+	ft_printf("Detached:\n");
+	ft_llst_print(&p, printer);
+	ft_llst_clear(&lst, NULL);
+	ft_llst_clear(&p, NULL);
 	return (0);
 }
