@@ -6,12 +6,15 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 13:59:19 by sanferna          #+#    #+#             */
-/*   Updated: 2024/08/13 21:58:08 by sanferna         ###   ########.fr       */
+/*   Updated: 2024/08/13 22:07:22 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
+
+# define STACK_A 'a'
+# define STACK_B 'b'
 
 # include <limits.h>
 # include "./libft/libft.h"

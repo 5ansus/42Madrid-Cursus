@@ -6,7 +6,7 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 21:34:32 by sanferna          #+#    #+#             */
-/*   Updated: 2024/08/13 21:58:28 by sanferna         ###   ########.fr       */
+/*   Updated: 2024/08/13 22:14:19 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	push(t_llist **stack_a, t_llist **stack_b, char id_stack)
 		node = ft_llst_detach_node(stack_a);
 		ft_llst_push_top(stack_b, node);
 	}
-	ft_printf("p%c", id_stack);
+	ft_printf("p%c\n", id_stack);
 }
 
 void	swap(t_llist **stack, char id_stack)
@@ -44,12 +44,11 @@ void	swap(t_llist **stack, char id_stack)
 	new_top = ft_llst_detach_node(stack);
 	ft_llst_push_top(stack, top);
 	ft_llst_push_top(stack, new_top);
-	ft_printf("s%c", id_stack);
+	ft_printf("s%c\n", id_stack);
 }
 
 void	double_swap(t_llist **stack_a, t_llist **stack_b)
 {
-
 	t_llist	*top;
 	t_llist	*new_top;
 
@@ -61,5 +60,5 @@ void	double_swap(t_llist **stack_a, t_llist **stack_b)
 	new_top = ft_llst_detach_node(stack_b);
 	ft_llst_push_top(stack_b, top);
 	ft_llst_push_top(stack_b, new_top);
-	ft_printf("ss");
+	ft_printf("ss\n");
 }
