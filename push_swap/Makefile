@@ -6,14 +6,14 @@
 #    By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/13 13:31:12 by sanferna          #+#    #+#              #
-#    Updated: 2024/08/08 16:34:11 by sanferna         ###   ########.fr        #
+#    Updated: 2024/08/13 20:51:32 by sanferna         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 NAME = push_swap
-SRC = bst_extend.c push_swap.c #tester_bst.c
+SRC = bst_extend.c push_swap.c utils.c parse.c #tester_bst.c
 LIB = ./libft/libft.a
 OBJ = $(SRC:.c=.o)
 
@@ -28,7 +28,7 @@ $(LIB):
 $(NAME): $(OBJ) $(LIB)
 	$(CC) $(CFLAGS) -o $@ $^
 
-.PHONY: all fclean clean re cleanlib
+.PHONY: all fclean clean re
 
 clean:
 	rm -rfd $(OBJ)
@@ -39,9 +39,6 @@ fclean: clean
 	make -C ./libft/ fclean
 
 re: fclean $(NAME)
-
-cleanlib:
-	rm -f ./libft/libft.a
 
 test: $(LIB)
 	$(CC) $(CFLAGS) -c llist.c
