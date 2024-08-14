@@ -6,7 +6,7 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 13:18:09 by sanferna          #+#    #+#             */
-/*   Updated: 2024/08/13 22:15:20 by sanferna         ###   ########.fr       */
+/*   Updated: 2024/08/14 21:04:15 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,20 +43,21 @@ int main()
 	ft_llst_print(&stack_a, printer);
 	ft_printf("-----------------------------\n");
 
-	swap(&stack_a, STACK_A);
+	swap(&stack_a, &stack_b, STACK_A);
 	push(&stack_a, &stack_b, STACK_B);
 	push(&stack_a, &stack_b, STACK_B);
 	push(&stack_a, &stack_b, STACK_B);
-	rotate(&stack_a, STACK_A);
-	rotate(&stack_b, STACK_B);
+	rotate(&stack_a, &stack_b, STACK_A);
+	rotate(&stack_b, &stack_b, STACK_B);
 	double_reverse_rotate(&stack_a, &stack_b);
-	swap(&stack_a, STACK_A);
+	swap(&stack_a, &stack_b, STACK_A);
 	push(&stack_a, &stack_b, STACK_A);
 	push(&stack_a, &stack_b, STACK_A);
 	push(&stack_a, &stack_b, STACK_A);
 	ft_printf("-----------------------------\n");
-	
+
 	ft_llst_print(&stack_a, printer);
 	ft_printf("-----------------------------\n");
+	ft_llst_clear(&stack_a, NULL);
 	return (0);
 }
