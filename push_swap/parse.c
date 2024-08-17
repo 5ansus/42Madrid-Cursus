@@ -6,15 +6,15 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 20:36:43 by sanferna          #+#    #+#             */
-/*   Updated: 2024/08/13 21:14:30 by sanferna         ###   ########.fr       */
+/*   Updated: 2024/08/17 14:18:20 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int		loop(t_bst **tree, t_llist **stack_a, char **args_str, int i);
-int		*validate_number(char *str);
-char	**parse_args(int argc, char **argv, int *n_numbers);
+static int		loop(t_bst **tree, t_llist **stack_a, char **args_str, int i);
+static int		*validate_number(char *str);
+static char		**parse_args(int argc, char **argv, int *n_numbers);
 
 int	validate_args(int argc, char **argv, t_llist **stack_a)
 {
@@ -42,7 +42,7 @@ int	validate_args(int argc, char **argv, t_llist **stack_a)
 	return (0);
 }
 
-char	**parse_args(int argc, char **argv, int *n_numbers)
+static char	**parse_args(int argc, char **argv, int *n_numbers)
 {
 	char	*tmp;
 	char	**ret;
@@ -68,7 +68,7 @@ char	**parse_args(int argc, char **argv, int *n_numbers)
 	return (ret);
 }
 
-int	*validate_number(char *str)
+static int	*validate_number(char *str)
 {
 	ssize_t	len;
 	int		*ret;
@@ -95,7 +95,7 @@ void	standarize_spaces(unsigned int c, char *dir)
 	c = c;
 }
 
-int	loop(t_bst **tree, t_llist **stack_a, char **args_str, int i)
+static int	loop(t_bst **tree, t_llist **stack_a, char **args_str, int i)
 {
 	t_bst	*child_tree;
 	t_llist	*new_node;
