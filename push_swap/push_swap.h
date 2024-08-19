@@ -6,7 +6,7 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 13:59:19 by sanferna          #+#    #+#             */
-/*   Updated: 2024/08/19 18:29:19 by sanferna         ###   ########.fr       */
+/*   Updated: 2024/08/19 18:39:09 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int		bst_order(t_bst **tree);
 
 void	*ft_concatealloc(void *dst, void *src, char *sep);
 void	ft_clear_split(char **split);
-int		clear(t_bst **tree, t_llist **stack_a, t_llist **stack_b, char **split);
+int		clear(t_bst **tree, t_llist *stacks[], char **split);
 
 void	printer(void *p);
 int		compare(void *n1, void *n2);

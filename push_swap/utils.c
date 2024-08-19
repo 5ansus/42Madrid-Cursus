@@ -6,7 +6,7 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 20:34:32 by sanferna          #+#    #+#             */
-/*   Updated: 2024/08/13 21:11:17 by sanferna         ###   ########.fr       */
+/*   Updated: 2024/08/19 18:38:52 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,14 +67,14 @@ void	ft_clear_split(char **split)
 	free(split);
 }
 
-int	clear(t_bst **tree, t_llist **stack_a, t_llist **stack_b, char **split)
+int	clear(t_bst **tree, t_llist *stacks[], char **split)
 {
 	if (tree != NULL)
 		ft_bstclear(tree, free);
-	if (stack_a != NULL)
-		ft_llst_clear(stack_a, NULL);
-	if (stack_b != NULL)
-		ft_llst_clear(stack_b, NULL);
+	if (stacks[A] != NULL)
+		ft_llst_clear(&stacks[A], NULL);
+	if (stacks[B] != NULL)
+		ft_llst_clear(&stacks[B], NULL);
 	if (split != NULL)
 		ft_clear_split(split);
 	return (-1);

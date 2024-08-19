@@ -6,7 +6,7 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 20:36:43 by sanferna          #+#    #+#             */
-/*   Updated: 2024/08/19 18:28:37 by sanferna         ###   ########.fr       */
+/*   Updated: 2024/08/19 18:40:08 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,16 +103,16 @@ static int	loop(t_bst **tree, t_llist *stacks[], char **args_str, int i)
 
 	ret = validate_number(args_str[i]);
 	if (ret == NULL)
-		return (clear(tree, &stacks[A], NULL, args_str));
+		return (clear(tree, stacks, args_str));
 	child_tree = ft_bstnew((void *)ret);
 	if (child_tree == NULL)
-		return (clear(tree, &stacks[A], NULL, args_str));
+		return (clear(tree, stacks, args_str));
 	if (ft_bstinsert(tree, child_tree, compare) != 0)
 		return (ft_bstclear(&child_tree, free),
-			clear(tree, &stacks[A], NULL, args_str));
+			clear(tree, stacks, args_str));
 	new_node = ft_llst_new((void *)ret);
 	if (new_node == NULL)
-		return (clear(tree, &stacks[A], NULL, args_str));
+		return (clear(tree, stacks, args_str));
 	ft_llst_push_bot(&stacks[A], new_node);
 	return (0);
 }
