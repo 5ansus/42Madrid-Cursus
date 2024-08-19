@@ -6,7 +6,7 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 13:59:19 by sanferna          #+#    #+#             */
-/*   Updated: 2024/08/14 21:02:18 by sanferna         ###   ########.fr       */
+/*   Updated: 2024/08/19 16:46:32 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,18 @@
 # define STACK_A 0
 # define STACK_B !0
 
+# define TOP_A 0xA
+# define TOP_B 0xB
+# define BOT_A -0xA
+# define BOT_B -0xB
+
 # include <limits.h>
 # include "./libft/libft.h"
+typedef struct s_push_swap
+{
+	t_llist	*a;
+	t_llist	*b;
+} t_push_swap;
 
 int		validate_args(int argc, char **argv, t_llist **stack_a);
 int		bst_order(t_bst **tree);
