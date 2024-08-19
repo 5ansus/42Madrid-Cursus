@@ -6,17 +6,17 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 20:36:43 by sanferna          #+#    #+#             */
-/*   Updated: 2024/08/19 15:19:00 by sanferna         ###   ########.fr       */
+/*   Updated: 2024/08/19 18:28:37 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static int		loop(t_bst **tree, t_llist **stack_a, char **args_str, int i);
+static int		loop(t_bst **tree, t_llist *stacks[], char **args_str, int i);
 static int		*validate_number(char *str);
 static char		**parse_args(int argc, char **argv, int *n_numbers);
 
-int	validate_args(int argc, char **argv, t_llist **stack_a)
+int	validate_args(int argc, char **argv, t_llist *stacks[])
 {
 	int		n_numbers;
 	char	**args_str;
@@ -30,7 +30,7 @@ int	validate_args(int argc, char **argv, t_llist **stack_a)
 		return (ft_clear_split(args_str), -1);
 	while (i < n_numbers)
 	{
-		if (loop(&tree, stack_a, args_str, i) == -1)
+		if (loop(&tree, stacks, args_str, i) == -1)
 			return (-1);
 		i++;
 	}
@@ -95,7 +95,7 @@ void	standarize_spaces(unsigned int c, char *dir)
 	c = c;
 }
 
-static int	loop(t_bst **tree, t_llist **stack_a, char **args_str, int i)
+static int	loop(t_bst **tree, t_llist *stacks[], char **args_str, int i)
 {
 	t_bst	*child_tree;
 	t_llist	*new_node;
@@ -103,16 +103,16 @@ static int	loop(t_bst **tree, t_llist **stack_a, char **args_str, int i)
 
 	ret = validate_number(args_str[i]);
 	if (ret == NULL)
-		return (clear(tree, stack_a, NULL, args_str));
+		return (clear(tree, &stacks[A], NULL, args_str));
 	child_tree = ft_bstnew((void *)ret);
 	if (child_tree == NULL)
-		return (clear(tree, stack_a, NULL, args_str));
+		return (clear(tree, &stacks[A], NULL, args_str));
 	if (ft_bstinsert(tree, child_tree, compare) != 0)
 		return (ft_bstclear(&child_tree, free),
-			clear(tree, stack_a, NULL, args_str));
+			clear(tree, &stacks[A], NULL, args_str));
 	new_node = ft_llst_new((void *)ret);
 	if (new_node == NULL)
-		return (clear(tree, stack_a, NULL, args_str));
-	ft_llst_push_bot(stack_a, new_node);
+		return (clear(tree, &stacks[A], NULL, args_str));
+	ft_llst_push_bot(&stacks[A], new_node);
 	return (0);
 }
