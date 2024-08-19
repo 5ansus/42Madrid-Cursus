@@ -6,7 +6,7 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 13:59:19 by sanferna          #+#    #+#             */
-/*   Updated: 2024/08/19 18:39:09 by sanferna         ###   ########.fr       */
+/*   Updated: 2024/08/19 18:52:35 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,11 @@ void	printer(void *p);
 int		compare(void *n1, void *n2);
 void	standarize_spaces(unsigned int c, char *str);
 
-void	rotate(t_llist **stack_a, t_llist **stack_b, int id_stack);
-void	double_rotate(t_llist **stack_a, t_llist **stack_b);
-void	reverse_rotate(t_llist **stack_a, t_llist **stack_b, int id_stack);
-void	double_reverse_rotate(t_llist **stack_a, t_llist **stack_b);
-void	push(t_llist **stack_a, t_llist **stack_b, int id_stack);
-void	swap(t_llist **stack_a, t_llist **stack_b, int id_stack);
-void	double_swap(t_llist **stack_a, t_llist **stack_b);
+void	rotate(t_llist *stacks[], int id_stack);
+void	double_rotate(t_llist *stacks[]);
+void	reverse_rotate(t_llist *stacks[], int id_stack);
+void	double_reverse_rotate(t_llist *stacks[]);
+void	push(t_llist *stacks[], int id_stack);
+void	swap(t_llist *stacks[], int id_stack);
+void	double_swap(t_llist *stacks[]);
 #endif
