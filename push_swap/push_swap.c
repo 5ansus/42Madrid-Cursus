@@ -6,7 +6,7 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 17:08:04 by sanferna          #+#    #+#             */
-/*   Updated: 2024/08/22 12:00:07 by sanferna         ###   ########.fr       */
+/*   Updated: 2024/08/22 14:32:47 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,20 +72,31 @@ static void	order_stack(t_llist *stacks[], int first, int size, int pos)
 	}
 }
 
-// static void divide_stack(t_llist *stacks[], int size, int pos)
-// {
-// 	if (*stacks != NULL || size > 0 || pos > 0)
-// 		ft_printf("Hola\n");
-// 	// if (pos == TOP_A || pos == BOT_A)
-// 	// {
-// 	// 	order_stack(stacks, size - div * 2, -pos);
-// 	// 	order_stack(stacks, div, TOP_B);
-// 	// 	order_stack(stacks, div, BOT_B);
-// 	// }
-// 	// if (pos == TOP_B || pos == BOT_B)
-// 	// {
-// 	// 	order_stack(stacks, size - div * 2, TOP_A);
-// 	// 	order_stack(stacks, div, BOT_A);
-// 	// 	order_stack(stacks, div, -pos);
-// 	// }
-// }
+static void divide_stack(t_llist *stacks[], int first, int size, int pos)
+{
+	t_llist	**stack_active;
+	char	inv;
+	int		div;
+	int		i;
+
+	inv = 0;
+	i = 0;
+	div = size / 3;
+	if (pos == BOT_A || pos == BOT_B)
+		inv = 1;
+	if (pos == TOP_A || pos == BOT_A)
+	{
+		stack_active = &stacks[A];
+		while (i < div)
+		{
+			if (inv)
+				rotate(stacks, STACK_A);
+			if (*stack_active.content >)
+			i++;
+		}
+	}
+	if (pos == TOP_B || pos == BOT_B)
+	{
+		stack_active = &stacks[B];
+	}
+}
