@@ -6,7 +6,7 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 17:08:04 by sanferna          #+#    #+#             */
-/*   Updated: 2024/08/22 14:32:47 by sanferna         ###   ########.fr       */
+/*   Updated: 2024/08/22 16:44:41 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,16 @@ static void divide_stack(t_llist *stacks[], int first, int size, int pos)
 		{
 			if (inv)
 				rotate(stacks, STACK_A);
-			if (*stack_active.content >)
+			if ((*stack_active)->content < first + div)
+				pus
+			else if ((*stack_active)->content < first + 2 * div)
+				
+			else
+			{
+				if (!inv)
+					
+			}
+
 			i++;
 		}
 	}
