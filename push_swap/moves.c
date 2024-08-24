@@ -6,7 +6,7 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 21:34:32 by sanferna          #+#    #+#             */
-/*   Updated: 2024/08/19 18:55:12 by sanferna         ###   ########.fr       */
+/*   Updated: 2024/08/24 12:00:10 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	push(t_llist *stacks[], int id_stack)
 {
 	t_llist	*node;
 
-	if (id_stack == 0)
+	if (id_stack == STACK_A)
 	{
 		if (*&stacks[B] == NULL)
 			return ;
@@ -24,7 +24,7 @@ void	push(t_llist *stacks[], int id_stack)
 		ft_llst_push_top(&stacks[A], node);
 		ft_printf("pa\n");
 	}
-	else if (id_stack == !0)
+	else if (id_stack == STACK_B)
 	{
 		if (*&stacks[A] == NULL)
 			return ;

@@ -6,14 +6,16 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 17:08:04 by sanferna          #+#    #+#             */
-/*   Updated: 2024/08/22 16:44:41 by sanferna         ###   ########.fr       */
+/*   Updated: 2024/08/24 12:18:20 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 static void	order_stack(t_llist *stacks[], int first, int size, int pos);
-//static void	divide_stack(t_llist *stacks[], int size, int pos);
+static void	divide_stack(t_llist *stacks[], int first, int size, int pos);
+static void	divide_from_A(t_llist *stacks[], int first, int size, int pos);
+static void	divide_from_B(t_llist *stacks[], int first, int size, int pos);
 int	main(int argc, char **argv)
 {
 	t_llist	*stacks[2];
@@ -55,11 +57,14 @@ static void	order_stack(t_llist *stacks[], int first, int size, int pos)
 	}
 	else
 	{
-		ft_printf("Empezando, hay que dividir %d elementos, empezando por %d\n", first, size);
-		// divide_stack(stacks, size, pos); TODO: Hacer función xd
+		ft_printf("Empezando, hay que dividir %d elementos, empezando por %d\n", size, first);
+		divide_stack(stacks, first, size, pos);
 		if (pos == TOP_A || pos == BOT_A)
 		{
-			order_stack(stacks, first + div * 2, size - div * 2, -pos);
+			if (pos == TOP_A && first == 1)
+				order_stack(stacks, first + div * 2, size - div * 2, pos);
+			else
+				order_stack(stacks, first + div * 2, size - div * 2, -pos);
 			order_stack(stacks, first + div, div, TOP_B);
 			order_stack(stacks, first, div, BOT_B);
 		}
@@ -72,40 +77,60 @@ static void	order_stack(t_llist *stacks[], int first, int size, int pos)
 	}
 }
 
-static void divide_stack(t_llist *stacks[], int first, int size, int pos)
+static void	divide_stack(t_llist *stacks[], int first, int size, int pos)
 {
-	t_llist	**stack_active;
-	char	inv;
-	int		div;
-	int		i;
+	if (pos == TOP_A || pos == BOT_A)
+		divide_from_A(stacks, first, size, pos);
+	if (pos == TOP_B || pos == BOT_B)
+		divide_from_B(stacks, first, size, pos);
+}
 
-	inv = 0;
+static void	divide_from_A(t_llist *stacks[], int first, int size, int pos)
+{
+	int	i;
+	int	div;
+	int	*content;
+
 	i = 0;
 	div = size / 3;
-	if (pos == BOT_A || pos == BOT_B)
-		inv = 1;
-	if (pos == TOP_A || pos == BOT_A)
+	while (i < size)
 	{
-		stack_active = &stacks[A];
-		while (i < div)
+		content = (int *) (*stacks)[A].content;
+		if (pos == BOT_A)
+			reverse_rotate(&(stacks[A]), STACK_A);
+		if (*content < 2 * div + first)
 		{
-			if (inv)
-				rotate(stacks, STACK_A);
-			if ((*stack_active)->content < first + div)
-				pus
-			else if ((*stack_active)->content < first + 2 * div)
-				
-			else
-			{
-				if (!inv)
-					
-			}
-
-			i++;
+			push(stacks, STACK_B);
+			if (*content< div + first)
+				rotate(&(stacks[B]), STACK_B);
 		}
+		else if (pos == TOP_A)
+			rotate(&(stacks[A]), STACK_A);
+		i++;
 	}
-	if (pos == TOP_B || pos == BOT_B)
+}
+
+static void	divide_from_B(t_llist *stacks[], int first, int size, int pos)
+{
+	int	i;
+	int	div;
+	int	*content;
+
+	i = 0;
+	div = size / 3;
+	while (i < size)
 	{
-		stack_active = &stacks[B];
+		content = (int *) (*stacks)[B].content;
+		if (pos == BOT_B)
+			reverse_rotate(&(stacks[B]), STACK_B);
+		if (*content < div + first && pos == TOP_B)
+			rotate(&(stacks[B]), STACK_B);
+		else if (*content < 2 * div + first)
+		{
+			push(stacks, STACK_A);
+			if (*content < div + first)
+				rotate(&(stacks[A]), STACK_B);
+		}
+		i++;
 	}
 }
