@@ -6,7 +6,7 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 17:08:04 by sanferna          #+#    #+#             */
-/*   Updated: 2024/08/30 12:01:19 by sanferna         ###   ########.fr       */
+/*   Updated: 2024/08/30 12:13:48 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,12 @@ int	main(int argc, char **argv)
 		return (1);
 	if (n_numbers != 0)
 	{
-		ft_llst_print(&stacks[A], printer);
+		//ft_llst_print(&stacks[A], printer);
 		order_stack(&stacks, 1, n_numbers, TOP_A);
-		ft_llst_print(&stacks[A], printer);
-		ft_llst_print(&stacks[B], printer);
+		// ft_llst_print(&stacks[A], printer);
+		// ft_llst_print(&stacks[B], printer);
 		ft_llst_clear(&stacks[A], free);
-		ft_llst_clear(&stacks[B], free);
+		ft_llst_clear(&stacks[B], free); //En la versión final no es necesario
 		free(stacks);
 	}
 	return (0);
@@ -63,8 +63,8 @@ static void order_stack(t_llist ***stacks, int first, int size, int pos)
 		if (pos == BOT_B)
 			ft_printf("Ubicación: BOT_B\n");
 		ft_printf("Fin de la recursión. Rango: %d -- %d\n", first, first + size - 1);
-		ft_llst_print(&(*stacks)[A], printer);
-		ft_llst_print(&(*stacks)[B], printer);
+		// ft_llst_print(&(*stacks)[A], printer);
+		// ft_llst_print(&(*stacks)[B], printer);
 		}
 	else
 	{
@@ -103,19 +103,20 @@ static void	divide_from_A(t_llist ***stacks, int first, int size, int pos)
 	div = size / 3;
 	while (i < size)
 	{
-		content = (int *) (*stacks)[A]->content;
 		if (pos == BOT_A)
 			reverse_rotate(*stacks, STACK_A);
+		content = (int *) (*stacks)[A]->content;
+		//ft_printf("%c -- %d -- %d -- %d\n", (pos == BOT_A) ? 'a' : 'A',*content, first, size);
 		if (*content < 2 * div + first)
 		{
 			push(*stacks, STACK_B);
-			if (*content< div + first)
+			if (*content < div + first)
 				rotate(*stacks, STACK_B);
 		}
 		else if (pos == TOP_A)
 			rotate(*stacks, STACK_A);
 		i++;
-		ft_printf(">>%d\n", i);
+		ft_printf(">>%d -- %X\n", i, pos);
 	}
 }
 
@@ -127,13 +128,10 @@ static void	divide_from_B(t_llist ***stacks, int first, int size, int pos)
 
 	i = 0;
 	div = size / 3;
-	ft_printf("syhkguyhdvkgkhfdkhfdshhhsfdhdj\n");
-	ft_llst_print(&(*stacks)[A], printer);
-	ft_printf("-----------P%p\n", stacks);
 	while (i < size)
 	{
 		content = (int *) (*stacks)[B]->content;
-		ft_printf("-----------P%d\n", *content);
+		ft_printf("%d\n", *content);
 		if (pos == BOT_B)
 			reverse_rotate(*stacks, STACK_B);
 		if (*content < div + first && pos == TOP_B)
@@ -145,6 +143,7 @@ static void	divide_from_B(t_llist ***stacks, int first, int size, int pos)
 				rotate(*stacks, STACK_B);
 		}
 		i++;
+		ft_printf(">>%d -- %X\n", i, pos);
 	}
 }
 
