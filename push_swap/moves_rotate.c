@@ -6,13 +6,13 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 21:26:42 by sanferna          #+#    #+#             */
-/*   Updated: 2024/08/19 18:57:15 by sanferna         ###   ########.fr       */
+/*   Updated: 2024/08/29 17:06:42 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	rotate(t_llist *stacks[], int id_stack)
+void	rotate(t_llist **stacks, int id_stack)
 {
 	t_llist	**stack;
 
@@ -29,7 +29,7 @@ void	rotate(t_llist *stacks[], int id_stack)
 		ft_printf("rb\n");
 }
 
-void	double_rotate(t_llist *stacks[])
+void	double_rotate(t_llist **stacks)
 {
 	if (stacks[A] != NULL)
 		stacks[A] = stacks[A]->next;
@@ -38,7 +38,7 @@ void	double_rotate(t_llist *stacks[])
 	ft_printf("rr\n");
 }
 
-void	reverse_rotate(t_llist *stacks[], int id_stack)
+void	reverse_rotate(t_llist **stacks, int id_stack)
 {
 	t_llist	**stack;
 
@@ -53,7 +53,7 @@ void	reverse_rotate(t_llist *stacks[], int id_stack)
 		ft_printf("rrb\n");
 }
 
-void	double_reverse_rotate(t_llist *stacks[])
+void	double_reverse_rotate(t_llist **stacks)
 {
 	if (stacks[A] != NULL)
 		stacks[A] = stacks[A]->prev;

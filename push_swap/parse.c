@@ -6,7 +6,7 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 20:36:43 by sanferna          #+#    #+#             */
-/*   Updated: 2024/08/19 18:40:08 by sanferna         ###   ########.fr       */
+/*   Updated: 2024/08/29 17:02:32 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static int		loop(t_bst **tree, t_llist *stacks[], char **args_str, int i);
 static int		*validate_number(char *str);
 static char		**parse_args(int argc, char **argv, int *n_numbers);
 
-int	validate_args(int argc, char **argv, t_llist *stacks[])
+int	validate_args(int argc, char **argv, t_llist **stacks)
 {
 	int		n_numbers;
 	char	**args_str;
@@ -95,7 +95,7 @@ void	standarize_spaces(unsigned int c, char *dir)
 	c = c;
 }
 
-static int	loop(t_bst **tree, t_llist *stacks[], char **args_str, int i)
+static int	loop(t_bst **tree, t_llist **stacks, char **args_str, int i)
 {
 	t_bst	*child_tree;
 	t_llist	*new_node;
@@ -113,6 +113,6 @@ static int	loop(t_bst **tree, t_llist *stacks[], char **args_str, int i)
 	new_node = ft_llst_new((void *)ret);
 	if (new_node == NULL)
 		return (clear(tree, stacks, args_str));
-	ft_llst_push_bot(&stacks[A], new_node);
+	ft_llst_push_bot(&(stacks[A]), new_node);
 	return (0);
 }
