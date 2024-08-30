@@ -6,7 +6,7 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 21:26:42 by sanferna          #+#    #+#             */
-/*   Updated: 2024/08/29 17:06:42 by sanferna         ###   ########.fr       */
+/*   Updated: 2024/08/30 16:16:04 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,16 @@ void	rotate(t_llist **stacks, int id_stack)
 {
 	t_llist	**stack;
 
-	if (id_stack == 0)
+	if (id_stack == STACK_A)
 		stack = &stacks[A];
-	if (id_stack == !0)
+	if (id_stack == STACK_B)
 		stack = &stacks[B];
 	if (*stack == NULL || *stack == (*stack)->next)
 		return ;
 	*stack = (*stack)->next;
-	if (id_stack == 0)
+	if (id_stack == STACK_A)
 		ft_printf("ra\n");
-	if (id_stack == !0)
+	if (id_stack == STACK_B)
 		ft_printf("rb\n");
 }
 
@@ -42,14 +42,14 @@ void	reverse_rotate(t_llist **stacks, int id_stack)
 {
 	t_llist	**stack;
 
-	if (id_stack == 0)
+	if (id_stack == STACK_A)
 		stack = &stacks[A];
-	if (id_stack == !0)
+	if (id_stack == STACK_B)
 		stack = &stacks[B];
 	*stack = (*stack)->prev;
-	if (id_stack == 0)
+	if (id_stack == STACK_A)
 		ft_printf("rra\n");
-	if (id_stack == !0)
+	if (id_stack == STACK_B)
 		ft_printf("rrb\n");
 }
 
