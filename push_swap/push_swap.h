@@ -6,15 +6,15 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 13:59:19 by sanferna          #+#    #+#             */
-/*   Updated: 2024/08/29 17:15:24 by sanferna         ###   ########.fr       */
+/*   Updated: 2024/08/30 12:53:53 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-# define STACK_A 0
-# define STACK_B !0
+# define STACK_A 'A'
+# define STACK_B 'B'
 
 # define TOP_A 0xA
 # define TOP_B 0xB

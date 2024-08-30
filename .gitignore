@@ -56,5 +56,5 @@ dkms.conf
 server
 client
 **/libft/
-**/minilib*/
+**/MLX42/
 **/push_swap/push_swap
