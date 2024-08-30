@@ -6,7 +6,7 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 17:08:04 by sanferna          #+#    #+#             */
-/*   Updated: 2024/08/30 12:13:48 by sanferna         ###   ########.fr       */
+/*   Updated: 2024/08/30 12:15:09 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,10 +130,10 @@ static void	divide_from_B(t_llist ***stacks, int first, int size, int pos)
 	div = size / 3;
 	while (i < size)
 	{
-		content = (int *) (*stacks)[B]->content;
-		ft_printf("%d\n", *content);
 		if (pos == BOT_B)
 			reverse_rotate(*stacks, STACK_B);
+		content = (int *) (*stacks)[B]->content;
+		ft_printf("%d\n", *content);
 		if (*content < div + first && pos == TOP_B)
 			rotate(*stacks, STACK_B);
 		else if (*content < 2 * div + first)
