@@ -6,7 +6,7 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 13:59:19 by sanferna          #+#    #+#             */
-/*   Updated: 2024/09/02 14:16:18 by sanferna         ###   ########.fr       */
+/*   Updated: 2024/09/02 14:39:18 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ void	double_swap(t_llist **stacks);
 
 void	order_stack(t_llist ***stacks, int size);
 int		is_ordered_numeric_stop(t_llist *stack, int size);
-int		locate_number(t_llist *stack, int size, int number);
 void	hardcoded_cases(t_llist ***stacks, int size);
 void	clear_stack_b_to_bot_a(t_llist ***stacks);
 #endif

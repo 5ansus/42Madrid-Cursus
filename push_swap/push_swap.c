@@ -6,7 +6,7 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 17:08:04 by sanferna          #+#    #+#             */
-/*   Updated: 2024/09/02 14:16:36 by sanferna         ###   ########.fr       */
+/*   Updated: 2024/09/02 15:04:17 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,19 +25,16 @@ int	main(int argc, char **argv)
 	stacks[A] = NULL;
 	stacks[B] = NULL;
 	n_numbers = validate_args(argc, argv, stacks);
-	ft_printf("n_numbers: %d\n", n_numbers);
+	//ft_printf("n_numbers: %d\n", n_numbers);
 	if (n_numbers == -1)
 		return (1);
 	if (n_numbers != 0)
 	{
 		//ft_llst_print(&stacks[A], printer); 
 		if (is_ordered_numeric_stop(stacks[A], n_numbers) == 1)
-		{
-			ft_printf("Ordenado\n");
 			return (ft_llst_clear(&stacks[A], free), free(stacks), 0);
-		}
 		order_stack(&stacks, n_numbers);
-		ft_llst_print(&stacks[A], printer);
+		//ft_llst_print(&stacks[A], printer);
 		// ft_llst_print(&stacks[B], printer);
 		// if (is_ordered_numeric_stop(stacks[A], n_numbers) == 1)
 		// {
@@ -45,7 +42,6 @@ int	main(int argc, char **argv)
 		// 	return (ft_llst_clear(&stacks[A], free), free(stacks), 0);
 		// }
 		ft_llst_clear(&stacks[A], free);
-		ft_llst_clear(&stacks[B], free); //En la versión final no es necesario
 		free(stacks);
 	}
 	return (0);
@@ -83,7 +79,6 @@ int	is_ordered_numeric_stop(t_llist *stack, int size)
 	while(i < size)
 	{
 		content = (int *) node->content;
-		ft_printf("%d -- %d -- %d || %d %d\n", *prev_content, *content, *prev_content > *content, i, size);
 		if (*prev_content > *content)
 			return (0);
 		prev_content = content;
@@ -91,22 +86,4 @@ int	is_ordered_numeric_stop(t_llist *stack, int size)
 		i++;
 	}
 	return (1);
-}
-
-int	locate_number(t_llist *stack, int size, int number)
-{
-	int		i = 0;
-	int		*content;
-	t_llist	*node;
-
-	node = stack;
-	while (node != NULL && i < size)
-	{
-		content = (int *) node->content;
-		if (*content == number)
-			return (i);
-		i++;
-		node = node->next;
-	}
-	return (-1);
 }
