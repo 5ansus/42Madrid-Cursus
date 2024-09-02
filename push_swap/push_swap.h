@@ -6,7 +6,7 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 13:59:19 by sanferna          #+#    #+#             */
-/*   Updated: 2024/09/02 14:39:18 by sanferna         ###   ########.fr       */
+/*   Updated: 2024/09/02 15:44:07 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@
 
 # include <limits.h>
 # include "./libft/libft.h"
+
+typedef void	(*t_func_type)(t_llist ***);
 
 int		validate_args(int argc, char **argv, t_llist **stacks);
 int		bst_order(t_bst **tree);

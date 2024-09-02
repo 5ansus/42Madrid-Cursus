@@ -6,7 +6,7 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 21:34:32 by sanferna          #+#    #+#             */
-/*   Updated: 2024/09/02 13:54:31 by sanferna         ###   ########.fr       */
+/*   Updated: 2024/09/02 15:41:16 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	swap(t_llist **stacks, int id_stack)
 {
 	t_llist	*top;
 	t_llist	*new_top;
-	t_llist **stack;
+	t_llist	**stack;
 
 	if (id_stack == STACK_A)
 		stack = &(stacks[A]);

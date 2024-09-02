@@ -6,7 +6,7 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 20:36:43 by sanferna          #+#    #+#             */
-/*   Updated: 2024/09/02 11:24:02 by sanferna         ###   ########.fr       */
+/*   Updated: 2024/09/02 15:38:09 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,7 @@ int	validate_args(int argc, char **argv, t_llist **stacks)
 		i++;
 	}
 	ft_clear_split(args_str);
-	//ft_bstprint(&tree, printer);
 	bst_order(&tree);
-	//ft_bstprint(&tree, printer);
 	ft_bstclear(&tree, NULL);
 	return (n_numbers);
 }

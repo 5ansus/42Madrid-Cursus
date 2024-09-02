@@ -6,7 +6,7 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 11:39:47 by sanferna          #+#    #+#             */
-/*   Updated: 2024/09/02 15:22:13 by sanferna         ###   ########.fr       */
+/*   Updated: 2024/09/02 15:37:19 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	order_stack(t_llist ***stacks, int size)
 	}
 	iteration = 0;
 	max_digit = ceiling_logarithm(size, 2);
-	while(iteration < max_digit)
+	while (iteration < max_digit)
 	{
 		send_to_b(stacks, size, iteration);
 		while ((*stacks)[B] != NULL)
@@ -38,7 +38,7 @@ void	order_stack(t_llist ***stacks, int size)
 
 int	ceiling_logarithm(int argument, int base)
 {
-	int					exponent;
+	int				exponent;
 	unsigned int	argument_conv;
 	unsigned int	current_value;
 
@@ -66,10 +66,8 @@ static void	send_to_b(t_llist ***stacks, int size, int iteration)
 	i = 0;
 	while (i < size)
 	{
-		content = (int *) ((*stacks)[A])->content;
+		content = (int *)((*stacks)[A])->content;
 		number = (*content) << (31 - iteration);
-		// ft_printf("%d\n", number);
-		// ft_printf("%d\n", *content);
 		if (number < 0)
 			rotate(*stacks, STACK_A);
 		else

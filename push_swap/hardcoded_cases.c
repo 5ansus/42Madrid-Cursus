@@ -6,12 +6,11 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 13:04:37 by sanferna          #+#    #+#             */
-/*   Updated: 2024/09/02 14:47:20 by sanferna         ###   ########.fr       */
+/*   Updated: 2024/09/02 15:43:43 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-typedef void (*t_func_type)(t_llist ***);
 
 static void	order_five_numbers(t_llist ***stacks);
 static void	order_four_numbers(t_llist ***stacks);
@@ -20,8 +19,8 @@ static int	locate_number(t_llist *stack, int size, int number);
 
 void	hardcoded_cases(t_llist ***stacks, int size)
 {
-	t_func_type order_case[3] = {order_three_numbers,
-									order_four_numbers, order_five_numbers};
+	static t_func_type	order_case[3] = {order_three_numbers,
+		order_four_numbers, order_five_numbers};
 
 	if (size == 2)
 	{
@@ -55,6 +54,7 @@ static void	order_five_numbers(t_llist ***stacks)
 	}
 	order_four_numbers(stacks);
 }
+
 static void	order_four_numbers(t_llist ***stacks)
 {
 	int	big_number_pos;
@@ -83,18 +83,18 @@ static void	order_three_numbers(t_llist ***stacks)
 {
 	int	big_number_pos;
 	int	*content;
-	
+
 	if (is_ordered_numeric_stop((*stacks)[A], 3) == 1)
 		return (clear_stack_b_to_bot_a(stacks));
 	big_number_pos = locate_number((*stacks)[A], 3, 3);
-	content = (int *) (*stacks)[A]->content;
+	content = (int *)(*stacks)[A]->content;
 	if (big_number_pos == 0)
 	{
 		rotate(*stacks, STACK_A);
 		if (is_ordered_numeric_stop((*stacks)[A], 2) != 1)
 			swap(*stacks, STACK_A);
 		clear_stack_b_to_bot_a(stacks);
-		return;
+		return ;
 	}
 	if (big_number_pos == 1 && *content == 1)
 	{
@@ -110,10 +110,11 @@ static void	order_three_numbers(t_llist ***stacks)
 
 int	locate_number(t_llist *stack, int size, int number)
 {
-	int		i = 0;
+	int		i;
 	int		*content;
 	t_llist	*node;
 
+	i = 0;
 	node = stack;
 	while (node != NULL && i < size)
 	{
