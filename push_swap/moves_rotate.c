@@ -6,7 +6,7 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 21:26:42 by sanferna          #+#    #+#             */
-/*   Updated: 2024/08/30 16:16:04 by sanferna         ###   ########.fr       */
+/*   Updated: 2024/09/02 14:16:40 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,13 @@ void	double_reverse_rotate(t_llist **stacks)
 	if (stacks[B] != NULL)
 		stacks[B] = stacks[B]->prev;
 	ft_printf("rrr\n");
+}
+
+void	clear_stack_b_to_bot_a(t_llist ***stacks)
+{
+	while ((*stacks)[B] != NULL)
+	{
+		push(*stacks, STACK_A);
+		rotate(*stacks, STACK_A);
+	}
 }
