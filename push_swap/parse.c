@@ -6,13 +6,13 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 20:36:43 by sanferna          #+#    #+#             */
-/*   Updated: 2024/08/29 17:02:32 by sanferna         ###   ########.fr       */
+/*   Updated: 2024/09/02 11:24:02 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static int		loop(t_bst **tree, t_llist *stacks[], char **args_str, int i);
+static int		loop(t_bst **tree, t_llist **stacks, char **args_str, int i);
 static int		*validate_number(char *str);
 static char		**parse_args(int argc, char **argv, int *n_numbers);
 

@@ -6,7 +6,7 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 13:59:19 by sanferna          #+#    #+#             */
-/*   Updated: 2024/08/30 16:16:34 by sanferna         ###   ########.fr       */
+/*   Updated: 2024/09/02 11:33:45 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,6 @@ void	double_reverse_rotate(t_llist **stacks);
 void	push(t_llist **stacks, int id_stack);
 void	swap(t_llist **stacks, int id_stack);
 void	double_swap(t_llist **stacks);
+
+void	order_stack(t_llist ***stacks, int first, int size, int pos);
 #endif

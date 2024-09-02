@@ -6,14 +6,14 @@
 #    By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/13 13:31:12 by sanferna          #+#    #+#              #
-#    Updated: 2024/08/13 22:02:18 by sanferna         ###   ########.fr        #
+#    Updated: 2024/09/02 11:34:54 by sanferna         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 NAME = push_swap
-SRC = bst_extend.c push_swap.c utils.c parse.c moves.c moves_rotate.c #tester_bst.c
+SRC = bst_extend.c push_swap.c utils.c parse.c moves.c moves_rotate.c merge_algorithm.c #tester_bst.c
 LIB = ./libft/libft.a
 OBJ = $(SRC:.c=.o)
 
