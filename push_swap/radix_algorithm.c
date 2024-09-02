@@ -6,7 +6,7 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 11:39:47 by sanferna          #+#    #+#             */
-/*   Updated: 2024/09/02 13:49:14 by sanferna         ###   ########.fr       */
+/*   Updated: 2024/09/02 15:22:13 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,12 +66,14 @@ static void	send_to_b(t_llist ***stacks, int size, int iteration)
 	i = 0;
 	while (i < size)
 	{
-		content = (int *) (*stacks)[A]->content;
-		number = *content << (31 - iteration);
-		if (number == 0)
-			push(*stacks, STACK_B);
-		else
+		content = (int *) ((*stacks)[A])->content;
+		number = (*content) << (31 - iteration);
+		// ft_printf("%d\n", number);
+		// ft_printf("%d\n", *content);
+		if (number < 0)
 			rotate(*stacks, STACK_A);
+		else
+			push(*stacks, STACK_B);
 		i++;
 	}
 }
