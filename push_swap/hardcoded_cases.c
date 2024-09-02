@@ -19,7 +19,7 @@ static int	locate_number(t_llist *stack, int size, int number);
 
 void	hardcoded_cases(t_llist ***stacks, int size)
 {
-	static t_func_type	order_case[3] = {order_three_numbers,
+	const t_func_type	order_case[] = {order_three_numbers,
 		order_four_numbers, order_five_numbers};
 
 	if (size == 2)
