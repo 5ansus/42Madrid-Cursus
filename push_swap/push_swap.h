@@ -6,12 +6,14 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 13:59:19 by sanferna          #+#    #+#             */
-/*   Updated: 2024/09/02 15:44:07 by sanferna         ###   ########.fr       */
+/*   Updated: 2024/09/09 17:21:28 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
+
+# define FIRST_NUMBER 1
 
 # define STACK_A 'A'
 # define STACK_B 'B'
@@ -48,7 +50,7 @@ void	push(t_llist **stacks, int id_stack);
 void	swap(t_llist **stacks, int id_stack);
 void	double_swap(t_llist **stacks);
 
-void	order_stack(t_llist ***stacks, int size);
+void	order_stack(t_llist ***stacks, int first, int size, int pos);
 int		is_ordered_numeric_stop(t_llist *stack, int size);
 void	hardcoded_cases(t_llist ***stacks, int size);
 void	clear_stack_b_to_bot_a(t_llist ***stacks);

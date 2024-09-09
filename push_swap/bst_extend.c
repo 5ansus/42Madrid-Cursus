@@ -6,7 +6,7 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 13:44:26 by sanferna          #+#    #+#             */
-/*   Updated: 2024/08/14 20:33:48 by sanferna         ###   ########.fr       */
+/*   Updated: 2024/09/09 17:21:05 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	bst_order(t_bst **tree)
 
 static void	scan_rec(t_bst *node)
 {
-	static unsigned int	i = 1;
+	static unsigned int	i = FIRST_NUMBER;
 	int					*dir;
 
 	if (node == NULL)
