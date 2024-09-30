@@ -27,7 +27,7 @@ int	validate_args(int argc, char **argv, t_llist **stacks)
 	tree = NULL;
 	args_str = parse_args(argc, argv, &n_numbers);
 	if (args_str == NULL)
-		return (ft_clear_split(args_str), -1);
+		return (free(stacks), -1);
 	while (i < n_numbers)
 	{
 		if (loop(&tree, stacks, args_str, i) == -1)
