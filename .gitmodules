@@ -1,0 +1,9 @@
+[submodule "printf/libft"]
+	path = printf/libft
+	url = git@github.com:5ansus/libft.git
+[submodule "minitalk/libft"]
+	path = minitalk/libft
+	url = git@github.com:5ansus/libft.git
+[submodule "push_swap/libft"]
+	path = push_swap/libft
+	url = git@github.com:5ansus/libft.git
