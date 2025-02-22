@@ -55,5 +55,5 @@ dkms.conf
 
 server
 client
-**/MLX42/
+**/minilibx-linux/
 **/push_swap/push_swap
