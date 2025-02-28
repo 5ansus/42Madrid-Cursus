@@ -61,10 +61,10 @@ t_bool _read_file(int fd, t_map *m, t_list **lines, t_error *s) {
 	while (line != NULL) {
 		if (m->height == 0) {
 			m->height = 1;
-			m->width = ft_get_next_line(line);
+			m->width = ft_strlen(line);
 		} else {
 			m->height += 1;
-			if (m->width != ft_get_next_line(line))
+			if (m->width != ft_strlen(line))
 				return (free(line), *s = ER_WIDTH, FALSE);
 			new = ft_lstnew(line);
 			if (new == NULL) return (free(line), *s = ER_MALLOC, FALSE);
