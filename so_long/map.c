@@ -6,7 +6,7 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 22:28:02 by sanferna          #+#    #+#             */
-/*   Updated: 2025/03/02 19:15:30 by sanferna         ###   ########.fr       */
+/*   Updated: 2025/03/03 16:15:51 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ t_map *new_map(char *filename) {
 
 	status = NO_ERROR;
 	map = _new_map(filename, &status);
+	//TODO: Optimizar
 	if (status != NO_ERROR){
 		if (status == ER_MALLOC)
 			ft_printf("Error de malloc\n");
@@ -44,6 +45,24 @@ t_map *new_map(char *filename) {
 			ft_printf("Hay caracteres inválidos en el mapa.\n");
 		else
 			ft_printf("Unknown error (%d)\n", status);
+	}
+	// TODO: Esto no va aquí
+	if (map->exit_set == FALSE)
+	{
+		ft_printf("ERROR: No se ha establecido una salida\n");
+		destroy_map(map);
+		return (NULL);
+	}
+	if (map->player_set == FALSE){
+		ft_printf("ERROR: No se ha establecido una posición de inicio\n");
+		destroy_map(map);
+		return (NULL);
+	}
+	if (map->n_collectibles == 0){
+
+		ft_printf("ERROR: Debe haber al menos un item a recolectar\n");
+		destroy_map(map);
+		return (NULL);
 	}
 	return (map);
 }
