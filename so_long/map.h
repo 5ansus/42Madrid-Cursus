@@ -6,7 +6,7 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 22:28:10 by sanferna          #+#    #+#             */
-/*   Updated: 2025/03/02 19:13:00 by sanferna         ###   ########.fr       */
+/*   Updated: 2025/03/04 23:55:40 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,18 @@ typedef enum e_error {
 	ER_INVALID_CHAR
 } t_error;
 
+typedef struct s_point {
+	t_bool set;
+	int x;
+	int y;
+} t_point;
+
 typedef struct s_map {
 	int width;
 	int height;
 	int n_collectibles;
-	t_bool player_set;
-	t_bool exit_set;
+	t_point player;
+	t_point door;
 	t_tile **matrix;
 } t_map;
 

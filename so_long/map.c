@@ -6,7 +6,7 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 22:28:02 by sanferna          #+#    #+#             */
-/*   Updated: 2025/03/03 16:15:51 by sanferna         ###   ########.fr       */
+/*   Updated: 2025/03/04 23:57:08 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,13 @@ t_map *new_map(char *filename) {
 			ft_printf("Unknown error (%d)\n", status);
 	}
 	// TODO: Esto no va aquí
-	if (map->exit_set == FALSE)
+	if (map->door.set == FALSE)
 	{
 		ft_printf("ERROR: No se ha establecido una salida\n");
 		destroy_map(map);
 		return (NULL);
 	}
-	if (map->player_set == FALSE){
+	if (map->player.set == FALSE){
 		ft_printf("ERROR: No se ha establecido una posición de inicio\n");
 		destroy_map(map);
 		return (NULL);
@@ -81,8 +81,8 @@ static t_map *_new_map(char *filename, t_error *status) {
 	map->width = 0;
 	map->height = 0;
 	map->n_collectibles = 0;
-	map->exit_set = FALSE;
-	map->player_set = FALSE;
+	map->player.set = FALSE;
+	map->door.set = FALSE;
 	if (_read_file(fd, map, &lines, status) == FALSE)
 		return (close(fd), free(map), ft_lstclear(&lines, free), NULL);
 	close(fd);
@@ -172,20 +172,24 @@ static t_tile *_parse_line(char *line, t_map *m, t_error *s, t_bool border) {
 			m->n_collectibles += 1;
 		} else if (line[i] == 'E') {
 			new_line[i] = EXIT;
-			if (m->exit_set == TRUE) {
+			if (m->door.set == TRUE) {
 				free(new_line);
 				*s = ER_EXIT;
 				return (NULL);
 			}
-			m->exit_set = TRUE;
+			m->door.set = TRUE;
+			m->door.x = i;
+			m->door.y = m->height;
 		} else if (line[i] == 'P') {
 			new_line[i] = PLAYER;
-			if (m->player_set == TRUE) {
+			if (m->player.set == TRUE) {
 				free(new_line);
 				*s = ER_PLAYER;
 				return (NULL);
 			}
-			m->player_set = TRUE;
+			m->player.set = TRUE;
+			m->player.x = i;
+			m->player.y = m->height;
 		}
 		else {
 			free(new_line);
