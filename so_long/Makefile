@@ -6,7 +6,7 @@
 #    By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/22 17:30:19 by sanferna          #+#    #+#              #
-#    Updated: 2025/03/02 15:25:15 by sanferna         ###   ########.fr        #
+#    Updated: 2025/03/05 00:45:18 by sanferna         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,3 +40,6 @@ fclean: clean
 	make -C ./libft/ fclean
 
 re: fclean $(NAME)
+
+test: main_prueba.o map.o
+	gcc main_prueba.c map.c libft/libft.a -o test -Lminilibx-linux -lmlx -lX11 -lXext

@@ -6,7 +6,7 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 17:10:32 by sanferna          #+#    #+#             */
-/*   Updated: 2025/03/05 00:11:45 by sanferna         ###   ########.fr       */
+/*   Updated: 2025/03/05 00:44:47 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "map.h"
 #include <stdlib.h>
 #include <stdio.h>
+
 
 int finish_win(void *mlx)
 {
@@ -31,12 +32,13 @@ typedef struct s_image
 
 typedef struct s_assets
 {
-
-	t_image *coin;
-	t_image *player;
-	t_image *wall;
-	t_image *door;
-	t_image *fill;
+	void *player;
+	void *coin;
+	void *wall;
+	void *door;
+	void *fill;
+	int height;
+	int witdth;
 } t_assets;
 
 typedef enum e_event
@@ -48,11 +50,9 @@ typedef enum e_event
 
 typedef struct s_args
 {
-	t_map *map;
-	int *x;
-	int *y;
 	void *mlx;
 	void *win;
+	t_map *map;
 	t_assets *assets;
 } t_args;
 
@@ -60,31 +60,21 @@ int move_player(int keycode, void *param)
 {
 	t_args *p = (t_args *)param;
 	t_map *map = p->map;
-	int x = *p->x;
-	int y = *p->y;
-
-	int player_x = map->player.x;
-	int player_y = map->player.y;
-
-	void *mlx = p->mlx;
-	void *win = p->win;
-	t_assets *assets = p->assets;
-
-	mlx_put_image_to_window(mlx, win, (*assets).fill.p, player_x * (*assets).fill.witdth, player_y * (*assets).fill.height);
-	mlx_put_image_to_window(mlx, win, (*assets).player.p,(player_x+1) * (*assets).player.witdth, player_y * (*assets).player.height);
-
-	map->matrix[player_y][player_x] = EMPTY;
-	map->matrix[player_y][player_x + 1] = PLAYER;
-	map->player.x = player_x + 1;
 	print_map(map);
+	ft_printf("Keycode: %d\n", keycode);
 	return 0;
 }
+
+t_assets *load_assets(void *mlx);
+t_bool validate_assets(t_assets *assets, int *widths, int *heights);
+void destroy_assets(void *mlx, t_assets *imgs);
+void put_map(void *mlx, void *win, t_map *map, t_assets *imgs);
 
 int main(void)
 {
 	void *mlx;
 	void *win;
-	t_assets assets;
+	t_assets *assets;
 	t_map *map;
 
 	map = new_map("maps/simple.ber");
@@ -94,44 +84,19 @@ int main(void)
 	mlx = mlx_init();
 	if (mlx == NULL)
 		return (destroy_map(map), 0);
-	assets.coin.p = mlx_xpm_file_to_image(mlx, "sprites/coin.xpm", &assets.coin.witdth, &assets.coin.height);
-	assets.player.p = mlx_xpm_file_to_image(mlx, "sprites/player.xpm", &assets.player.witdth, &assets.player.height);
-	assets.wall.p = mlx_xpm_file_to_image(mlx, "sprites/wall.xpm", &assets.wall.witdth, &assets.wall.height);
-	assets.door.p = mlx_xpm_file_to_image(mlx, "sprites/door_closed.xpm", &assets.door.witdth, &assets.door.height);
-	assets.fill.p = mlx_xpm_file_to_image(mlx, "sprites/fill.xpm", &assets.fill.witdth, &assets.fill.height);
-	win = mlx_new_window(mlx, map->width * assets.wall.witdth, map->height * assets.wall.height, "Prueba");
-	// mlx_put_image_to_window(mlx, win, assets.coin.p, 0, 0);
-	// mlx_put_image_to_window(mlx, win, assets.coin.p, 64, 64);
+	assets = load_assets(mlx);
 	print_map(map);
-	for (int y = 0; y < map->height; y++)
-	{
-		for (int x = 0; x < map->width; x++)
-		{
-			if (map->matrix[y][x] == WALL)
-				mlx_put_image_to_window(mlx, win, assets.wall.p, x * assets.wall.witdth, y * assets.wall.height);
-			else if (map->matrix[y][x] == COLLECTIBLE)
-				mlx_put_image_to_window(mlx, win, assets.coin.p, x * assets.coin.witdth, y * assets.coin.height);
-			else if (map->matrix[y][x] == PLAYER)
-				mlx_put_image_to_window(mlx, win, assets.player.p, x * assets.player.witdth, y * assets.player.height);
-			else if (map->matrix[y][x] == EXIT)
-				mlx_put_image_to_window(mlx, win, assets.door.p, x * assets.door.witdth, y * assets.door.height);
-			else if (map->matrix[y][x] == EMPTY)
-				mlx_put_image_to_window(mlx, win, assets.fill.p, x * assets.fill.witdth, y * assets.fill.height);
-		}
-	}
+	win = mlx_new_window(mlx, map->width * assets->witdth, map->height * assets->height, "Prueba");
+
+	put_map(mlx, win, map, assets);
 
 	mlx_hook(win, 17, 1 << 17, finish_win, mlx);
-	int a = 64;
-	int b = 64;
 
-	t_args args = {map, &a, &b, mlx, win, &assets};
+	t_args args = {mlx, win, map, assets};
 	
 	mlx_hook(win, 2, 1L<<0, move_player, &args);
 	mlx_loop(mlx);
-	mlx_destroy_image(mlx, assets.coin.p);
-	mlx_destroy_image(mlx, assets.player.p);
-	mlx_destroy_image(mlx, assets.wall.p);
-	mlx_destroy_image(mlx, assets.door.p);
+	destroy_assets(mlx, assets);
 	mlx_destroy_window(mlx, win);
 	mlx_destroy_display(mlx);
 	free(mlx);
@@ -143,18 +108,99 @@ int main(void)
 t_assets *load_assets(void *mlx)
 {
 	t_assets *imgs;
+	int w[5];
+	int h[5];
+	char *files[5] = {
+		"sprites/coin.xpm",
+		"sprites/wall.xpm",
+		"sprites/door_closed.xpm",
+		"sprites/fill.xpm",
+		"sprites/player.xpm"
+	};
+
 	imgs = malloc(sizeof(t_assets));
 	if (imgs == NULL)
 		return (NULL);
-	imgs->coin->p = mlx_xpm_file_to_image(mlx, "sprites/coin.xpm", &imgs->coin->witdth, &imgs->coin->height);
-	imgs->player->p = mlx_xpm_file_to_image(mlx, "sprites/player.xpm", &imgs->player->witdth, &imgs->player->height);
-	imgs->wall->p = mlx_xpm_file_to_image(mlx, "sprites/wall.xpm", &imgs->wall->witdth, &imgs->wall->height);
-	imgs->door->p = mlx_xpm_file_to_image(mlx, "sprites/door_closed.xpm", &imgs->door->witdth, &imgs->door->height);
-	imgs->fill->p = mlx_xpm_file_to_image(mlx, "sprites/fill.xpm", &imgs->fill->witdth, &imgs->fill->height);
-	if (imgs->coin->p == NULL || imgs->player->p == NULL || imgs->wall->p == NULL || imgs->door->p == NULL || imgs->fill->p == NULL)
-	{
-		free(imgs);
-		return (NULL);
-	}
+
+	imgs->coin = mlx_xpm_file_to_image(mlx, files[0], &w[0], &h[0]);
+	imgs->wall = mlx_xpm_file_to_image(mlx, files[1], &w[1], &h[1]);
+	imgs->door = mlx_xpm_file_to_image(mlx, files[2], &w[2], &h[2]);
+	imgs->fill = mlx_xpm_file_to_image(mlx, files[3], &w[3], &h[3]);
+	imgs->player = mlx_xpm_file_to_image(mlx, files[4], &w[4], &h[4]);
+	if (imgs->coin == NULL || imgs->wall == NULL || imgs->door == NULL ||
+			imgs->fill == NULL || imgs->player == NULL)
+		return (destroy_assets(mlx, imgs), NULL);
+	if (validate_assets(imgs, w, h) == FALSE)
+		return (destroy_assets(mlx, imgs), NULL);
 	return (imgs);
+}
+
+
+t_bool validate_assets(t_assets *assets, int *widths, int *heights)
+{
+	int i;
+	int w;
+	int h;
+
+	h = heights[0];
+	w = widths[0];
+	i = 1;
+	while (i < 5)
+	{
+		if (heights[i] != h || widths[i] != w)
+		{
+			free(assets);
+			return (FALSE);
+		}
+		i++;
+	}
+	assets->height = h;
+	assets->witdth = w;
+	return (TRUE);
+}
+
+void destroy_assets(void *mlx, t_assets *imgs)
+{
+	if (imgs == NULL)
+		return ;
+	if (imgs->coin != NULL)
+		mlx_destroy_image(mlx, imgs->coin);
+	if (imgs->wall != NULL)
+		mlx_destroy_image(mlx, imgs->wall);
+	if (imgs->door != NULL)
+		mlx_destroy_image(mlx, imgs->door);
+	if (imgs->fill != NULL)
+		mlx_destroy_image(mlx, imgs->fill);
+	if (imgs->player != NULL)
+		mlx_destroy_image(mlx, imgs->player);
+	free(imgs);
+}
+
+void put_map(void *mlx, void *win, t_map *map, t_assets *imgs)
+{
+	int x;
+	int y;
+	t_tile **m;
+
+	y = 0;
+	m = map->matrix;
+	while (y < map->height)
+	{
+		x = 0;
+		while (x < map->width)
+		{
+			if (m[y][x] == WALL)
+				mlx_put_image_to_window(mlx, win, imgs->wall, x * imgs->witdth, y * imgs->height);
+			else if (m[y][x] == COLLECTIBLE)
+				mlx_put_image_to_window(mlx, win, imgs->coin, x * imgs->witdth, y * imgs->height);
+			else if (m[y][x] == PLAYER)
+				mlx_put_image_to_window(mlx, win, imgs->player, x * imgs->witdth, y * imgs->height);
+			else if (m[y][x] == EXIT)
+				mlx_put_image_to_window(mlx, win, imgs->door, x * imgs->witdth, y * imgs->height);
+			else if (m[y][x] == EMPTY)
+				mlx_put_image_to_window(mlx, win, imgs->fill, x * imgs->witdth, y * imgs->height);
+			x++;
+		}
+		y++;
+	}
 }
