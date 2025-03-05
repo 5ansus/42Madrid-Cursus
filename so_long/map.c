@@ -17,7 +17,7 @@
 static t_map *_new_map(char *filename, t_error *status);
 static t_bool _read_file(int fd, t_map *m, t_list **lines, t_error *s);
 static t_bool _parse_matrix(t_map *m, t_list *l, t_error *s);
-static t_tile *_parse_line(char *line, t_map *m, t_error *s, t_bool border);
+static t_tile *_parse_line(char *line, t_map *m, t_error *s, t_bool border, int y);
 
 t_map *new_map(char *filename) {
 	t_error status;
@@ -130,9 +130,9 @@ static t_bool _parse_matrix(t_map *m, t_list *l, t_error *s) {
 	while (i < m->height) {
 
 		if (i == 0 || i == (m->height - 1))
-			l_parsed = _parse_line(l->content, m, s, TRUE);
+			l_parsed = _parse_line(l->content, m, s, TRUE, i);
 		else
-			l_parsed = _parse_line(l->content, m, s, FALSE);
+			l_parsed = _parse_line(l->content, m, s, FALSE, i);
 		if (l_parsed == NULL) {
 			while (i--) free(matrix[i]);
 			free(matrix);
@@ -146,50 +146,50 @@ static t_bool _parse_matrix(t_map *m, t_list *l, t_error *s) {
 	return (TRUE);
 }
 
-static t_tile *_parse_line(char *line, t_map *m, t_error *s, t_bool border) {
-	int i;
+static t_tile *_parse_line(char *line, t_map *m, t_error *s, t_bool border, int y) {
+	int x;
 	t_tile *new_line;
 
-	i = 0;
+	x = 0;
 	new_line = malloc(m->width * sizeof(t_tile));
 	if (new_line == NULL) return (NULL);
-	while (i < m->width) {
-		if (border == TRUE && (line[i] != '1')) {
+	while (x < m->width) {
+		if (border == TRUE && (line[x] != '1')) {
 			free(new_line);
 			*s = ER_BORDER;
 			return (NULL);
-		} else if (border == FALSE && (i == 0 || i == (m->width - 1)) && (line[i] != '1')) {
+		} else if (border == FALSE && (x == 0 || x == (m->width - 1)) && (line[x] != '1')) {
 			free(new_line);
 			*s = ER_BORDER;
 			return (NULL);
 		}
-		else if (line[i] == '0')
-			new_line[i] = EMPTY;
-		else if (line[i] == '1')
-			new_line[i] = WALL;
-		else if (line[i] == 'C') {
-			new_line[i] = COLLECTIBLE;
+		else if (line[x] == '0')
+			new_line[x] = EMPTY;
+		else if (line[x] == '1')
+			new_line[x] = WALL;
+		else if (line[x] == 'C') {
+			new_line[x] = COLLECTIBLE;
 			m->n_collectibles += 1;
-		} else if (line[i] == 'E') {
-			new_line[i] = EXIT;
+		} else if (line[x] == 'E') {
+			new_line[x] = EXIT;
 			if (m->door.set == TRUE) {
 				free(new_line);
 				*s = ER_EXIT;
 				return (NULL);
 			}
 			m->door.set = TRUE;
-			m->door.x = i;
-			m->door.y = m->height;
-		} else if (line[i] == 'P') {
-			new_line[i] = PLAYER;
+			m->door.x = x;
+			m->door.y = y;
+		} else if (line[x] == 'P') {
+			new_line[x] = PLAYER;
 			if (m->player.set == TRUE) {
 				free(new_line);
 				*s = ER_PLAYER;
 				return (NULL);
 			}
 			m->player.set = TRUE;
-			m->player.x = i;
-			m->player.y = m->height;
+			m->player.x = x;
+			m->player.y = y;
 		}
 		else {
 			free(new_line);
@@ -197,7 +197,7 @@ static t_tile *_parse_line(char *line, t_map *m, t_error *s, t_bool border) {
 			return (NULL);
 		}
 
-		i++;
+		x++;
 	}
 	return (new_line);
 }
@@ -210,7 +210,6 @@ void destroy_map(t_map *map) {
 		i++;
 	}
 	free(map->matrix);
-
 	free(map);
 }
 

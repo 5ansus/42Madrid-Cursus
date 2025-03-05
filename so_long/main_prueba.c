@@ -60,8 +60,26 @@ int move_player(int keycode, void *param)
 {
 	t_args *p = (t_args *)param;
 	t_map *map = p->map;
-	print_map(map);
+	void *mlx = p->mlx;
+	void *win = p->win;
+	t_assets *imgs = p->assets;
+	t_tile **matrix = map->matrix;
+
+	int *x = &(map->player.x);
+	int *y = &(map->player.y);
+
+
 	ft_printf("Keycode: %d\n", keycode);
+
+	mlx_put_image_to_window(mlx, win, imgs->player, (*x + 1) * imgs->witdth, *y * imgs->height);
+
+	ft_printf("%d -- %d\n", *x, *y);
+
+	matrix[*y][*x] = EMPTY;
+	matrix[*y][*x + 1] = PLAYER;
+	*x += 1; 
+	print_map(map);
+
 	return 0;
 }
 

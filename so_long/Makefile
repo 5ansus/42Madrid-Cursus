@@ -11,7 +11,7 @@
 # **************************************************************************** #
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -g3 -fsanitize=address -Wall -Wextra -Werror
 NAME = so_long
 SRC = map.c main.c
 LIB = ./libft/libft.a #./minilibx_opengl_20191021/libmlx.a
@@ -42,4 +42,4 @@ fclean: clean
 re: fclean $(NAME)
 
 test: main_prueba.o map.o
-	gcc main_prueba.c map.c libft/libft.a -o test -Lminilibx-linux -lmlx -lX11 -lXext
+	gcc $(CFLAGS) main_prueba.c map.c libft/libft.a -o test -Lminilibx-linux -lmlx -lX11 -lXext
