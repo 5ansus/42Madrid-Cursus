@@ -11,7 +11,8 @@
 # **************************************************************************** #
 
 CC = gcc
-CFLAGS = -g3 -fsanitize=address -Wall -Wextra -Werror
+# CFLAGS = -g3 -fsanitize=address -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror
 NAME = so_long
 SRC = map.c main.c
 LIB = ./libft/libft.a #./minilibx_opengl_20191021/libmlx.a
