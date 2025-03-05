@@ -16,6 +16,19 @@
 #include <stdio.h>
 
 
+typedef enum e_keys
+{
+	UNKNOWN = 0,
+	W = 119,
+	A = 97,
+	S = 115,
+	D = 100,
+	UP = 65362,
+	DOWN = 65364, 
+	LEFT = 65361,
+	RIGHT = 65363
+} t_keys;
+
 int finish_win(void *mlx)
 {
 	mlx_loop_end(mlx);
