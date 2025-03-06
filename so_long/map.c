@@ -6,24 +6,24 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 22:28:02 by sanferna          #+#    #+#             */
-/*   Updated: 2025/03/06 17:57:56 by sanferna         ###   ########.fr       */
+/*   Updated: 2025/03/06 21:55:08 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-static t_map *_new_map(char *filename, t_error *status);
-static t_bool _read_file(int fd, t_map *m, t_list **lines, t_error *s);
-static t_bool _parse_matrix(t_map *m, t_list *l, t_error *s);
-static t_tile *_parse_line(char *line, t_map *m, t_error *s, t_bool border, int y);
+static	t_map *_new_map(char *filename, t_error *status);
+static	t_bool _read_file(int fd, t_map *m, t_list **lines, t_error *s);
+static	t_bool _parse_matrix(t_map *m, t_list *l, t_error *s);
+static	t_tile *_parse_line(char *ln, t_map *m, t_error *s, t_bool bord, int y);
 
-t_map *new_map(char *filename) {
-	t_error status;
-	t_map *map;
+t_map *new_map(char *filename)
+{
+	t_error	status;
+	t_map	*map;
 
 	status = NO_ERROR;
 	map = _new_map(filename, &status);
-	//TODO: Optimizar
 	if (status != NO_ERROR){
 		if (status == ER_MALLOC)
 			ft_printf("Error de malloc\n");
@@ -45,7 +45,6 @@ t_map *new_map(char *filename) {
 			ft_printf("Unknown error (%d)\n", status);
 		return 0;
 	}
-	// TODO: Esto no va aquí
 	if (map->door.set == FALSE)
 	{
 		ft_printf("ERROR: No se ha establecido una salida\n");
@@ -66,8 +65,8 @@ t_map *new_map(char *filename) {
 	return (map);
 }
 
-// void printer(void *content) { ft_printf("%s\n", (char *)content); }
-static t_map *_new_map(char *filename, t_error *status) {
+static t_map *_new_map(char *filename, t_error *status)
+{
 	t_map *map;
 	t_list *lines;
 	int fd;
@@ -93,7 +92,8 @@ static t_map *_new_map(char *filename, t_error *status) {
 	return (map);
 }
 
-static t_bool _read_file(int fd, t_map *m, t_list **lines, t_error *s) {
+static t_bool _read_file(int fd, t_map *m, t_list **lines, t_error *s)
+{
 	char *line;
 	t_list *new;
 
@@ -119,7 +119,8 @@ static t_bool _read_file(int fd, t_map *m, t_list **lines, t_error *s) {
 	return (TRUE);
 }
 
-static t_bool _parse_matrix(t_map *m, t_list *l, t_error *s) {
+static t_bool _parse_matrix(t_map *m, t_list *l, t_error *s)
+{
 	int i;
 	t_tile **matrix;
 	t_tile *l_parsed;
@@ -145,7 +146,8 @@ static t_bool _parse_matrix(t_map *m, t_list *l, t_error *s) {
 	return (TRUE);
 }
 
-static t_tile *_parse_line(char *line, t_map *m, t_error *s, t_bool border, int y) {
+static	t_tile *_parse_line(char *ln, t_map *m, t_error *s, t_bool bord, int y)
+{
 	int x;
 	t_tile *new_line;
 
@@ -153,23 +155,23 @@ static t_tile *_parse_line(char *line, t_map *m, t_error *s, t_bool border, int 
 	new_line = malloc(m->width * sizeof(t_tile));
 	if (new_line == NULL) return (NULL);
 	while (x < m->width) {
-		if (border == TRUE && (line[x] != '1')) {
+		if (bord == TRUE && (ln[x] != '1')) {
 			free(new_line);
 			*s = ER_BORDER;
 			return (NULL);
-		} else if (border == FALSE && (x == 0 || x == (m->width - 1)) && (line[x] != '1')) {
+		} else if (bord == FALSE && (x == 0 || x == (m->width - 1)) && (ln[x] != '1')) {
 			free(new_line);
 			*s = ER_BORDER;
 			return (NULL);
 		}
-		else if (line[x] == '0')
+		else if (ln[x] == '0')
 			new_line[x] = EMPTY;
-		else if (line[x] == '1')
+		else if (ln[x] == '1')
 			new_line[x] = WALL;
-		else if (line[x] == 'C') {
+		else if (ln[x] == 'C') {
 			new_line[x] = COLLECTIBLE;
 			m->n_collectibles += 1;
-		} else if (line[x] == 'E') {
+		} else if (ln[x] == 'E') {
 			new_line[x] = EXIT;
 			if (m->door.set == TRUE) {
 				free(new_line);
@@ -179,7 +181,7 @@ static t_tile *_parse_line(char *line, t_map *m, t_error *s, t_bool border, int 
 			m->door.set = TRUE;
 			m->door.x = x;
 			m->door.y = y;
-		} else if (line[x] == 'P') {
+		} else if (ln[x] == 'P') {
 			new_line[x] = PLAYER;
 			if (m->player.set == TRUE) {
 				free(new_line);
@@ -201,7 +203,8 @@ static t_tile *_parse_line(char *line, t_map *m, t_error *s, t_bool border, int 
 	return (new_line);
 }
 
-void destroy_map(t_map *map) {
+void destroy_map(t_map *map)
+{
 	int i;
 	i = 0;
 	while (i < map->height) {
@@ -212,7 +215,8 @@ void destroy_map(t_map *map) {
 	free(map);
 }
 
-void print_map(t_map *map) {
+void print_map(t_map *map)
+{
 	int i;
 	int j;
 
@@ -245,3 +249,4 @@ void print_map(t_map *map) {
 		i++;
 	}
 }
+

@@ -6,7 +6,7 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 17:10:32 by sanferna          #+#    #+#             */
-/*   Updated: 2025/03/06 21:03:58 by sanferna         ###   ########.fr       */
+/*   Updated: 2025/03/06 21:33:55 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int main(int argc, char *argv[])
 	void *mlx;
 	void *win;
 	t_assets *assets;
+	t_args args;
 	t_map *map;
 
 	if (validate_args(argc, argv) == FALSE)
@@ -36,13 +37,15 @@ int main(int argc, char *argv[])
 	if (mlx == NULL)
 		return (destroy_map(map), 0);
 	assets = load_assets(mlx);
-	win = mlx_new_window(mlx, map->width * assets->witdth, map->height * assets->height, "Prueba");
-
-	initial_map_print(mlx, win, map, assets);
+	win = mlx_new_window(mlx, map->width * assets->witdth, map->height * assets->height, "So_Long");
+	args.mlx = mlx;
+	args.win = win;
+	args.map = map;
+	args.assets = assets;
+	initial_map_print(&args);
 
 	mlx_hook(win, 17, 1 << 17, finish_win, mlx);
 
-	t_args args = {mlx, win, map, assets};
 
 	mlx_hook(win, 2, 1L << 0, key_pressed, &args);
 	mlx_loop(mlx);

@@ -6,7 +6,7 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 17:50:17 by sanferna          #+#    #+#             */
-/*   Updated: 2025/03/06 21:14:05 by sanferna         ###   ########.fr       */
+/*   Updated: 2025/03/06 21:29:26 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,12 +123,10 @@ void print_map(t_map *map);
 t_assets *load_assets(void *mlx);
 t_bool validate_assets(t_assets *assets, int *widths, int *heights);
 void destroy_assets(void *mlx, t_assets *imgs);
-void initial_map_print(void *mlx, void *win, t_map *map, t_assets *imgs);
+void	initial_map_print(t_args *args);
 
 int finish_win(void *mlx);
 int key_pressed(int keycode, void *param);
 
 t_bool flood(t_map *map);
-void put_image(void *mlx, void *win, void *img, int x, int y);
-
 #endif
