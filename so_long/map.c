@@ -45,6 +45,7 @@ t_map *new_map(char *filename) {
 			ft_printf("Hay caracteres inválidos en el mapa.\n");
 		else
 			ft_printf("Unknown error (%d)\n", status);
+		return 0;
 	}
 	// TODO: Esto no va aquí
 	if (map->door.set == FALSE)

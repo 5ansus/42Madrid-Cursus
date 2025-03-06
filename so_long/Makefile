@@ -43,4 +43,5 @@ fclean: clean
 re: fclean $(NAME)
 
 test: main_prueba.o map.o
+	rm -f main_prueba.o map.o
 	gcc $(CFLAGS) main_prueba.c map.c libft/libft.a -o test -Lminilibx-linux -lmlx -lX11 -lXext

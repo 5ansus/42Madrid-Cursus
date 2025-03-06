@@ -84,7 +84,11 @@ int move_player(int keycode, void *param)
 
 	ft_printf("Keycode: %d\n", keycode);
 
+	if (matrix[*y][*x + 1] == WALL)
+		return 0;
 	mlx_put_image_to_window(mlx, win, imgs->player, (*x + 1) * imgs->witdth, *y * imgs->height);
+	mlx_put_image_to_window(mlx, win, imgs->fill, *x * imgs->witdth, *y * imgs->height);
+
 
 	ft_printf("%d -- %d\n", *x, *y);
 
