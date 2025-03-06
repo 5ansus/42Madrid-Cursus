@@ -6,13 +6,11 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 22:28:02 by sanferna          #+#    #+#             */
-/*   Updated: 2025/03/04 23:57:08 by sanferna         ###   ########.fr       */
+/*   Updated: 2025/03/06 17:57:56 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "map.h"
-
-#include <fcntl.h>
+#include "so_long.h"
 
 static t_map *_new_map(char *filename, t_error *status);
 static t_bool _read_file(int fd, t_map *m, t_list **lines, t_error *s);
