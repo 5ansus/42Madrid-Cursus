@@ -6,7 +6,7 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 17:10:32 by sanferna          #+#    #+#             */
-/*   Updated: 2025/03/06 22:47:51 by sanferna         ###   ########.fr       */
+/*   Updated: 2025/03/06 23:29:23 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,38 +14,50 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-t_bool validate_args(int argc, char **argv);
+static t_bool	validate_name(int argc, char **argv);
+static int		part_2(t_args args);
 
-int main(int argc, char *argv[])
+int	main(int argc, char *argv[])
 {
-	void *mlx;
-	void *win;
-	t_assets *assets;
-	t_args args;
-	t_map *map;
+	void		*mlx;
+	void		*win;
+	t_assets	*assets;
+	t_args		args;
+	t_map		*map;
 
-	if (validate_args(argc, argv) == FALSE)
+	if (validate_name(argc, argv) == FALSE)
 		return (1);
 	map = new_map(argv[1]);
 	if (map == NULL)
 		return (1);
-
 	if (flood(map) == FALSE)
 		return (destroy_map(map), 1);
 	mlx = mlx_init();
 	if (mlx == NULL)
 		return (destroy_map(map), 0);
 	assets = load_assets(mlx);
-	win = mlx_new_window(mlx, map->width * assets->witdth, map->height * assets->height, "So_Long");
+	win = mlx_new_window(mlx, map->width * assets->witdth,
+			map->height * assets->height, "So_Long");
 	args.mlx = mlx;
 	args.win = win;
 	args.map = map;
 	args.assets = assets;
+	return (part_2(args));
+}
+
+static int	part_2(t_args args)
+{
+	void		*mlx;
+	void		*win;
+	t_assets	*assets;
+	t_map		*map;
+
+	mlx = args.mlx;
+	win = args.win;
+	assets = args.assets;
+	map = args.map;
 	initial_map_print(&args);
-
 	mlx_hook(win, 17, 1 << 17, finish_win, mlx);
-
-
 	mlx_hook(win, 2, 1L << 0, key_pressed, &args);
 	mlx_loop(mlx);
 	destroy_assets(mlx, assets);
@@ -56,7 +68,7 @@ int main(int argc, char *argv[])
 	return (0);
 }
 
-t_bool validate_args(int argc, char **argv)
+static t_bool	validate_name(int argc, char **argv)
 {
 	if (argc != 2)
 	{
@@ -91,4 +103,10 @@ const char	*get_error_str(t_error status)
 		return ("Hay caracteres inválidos en el mapa.");
 	else
 		return ("Unknown error\n");
+}
+
+int	finish_win(void *mlx)
+{
+	mlx_loop_end(mlx);
+	return (0);
 }
