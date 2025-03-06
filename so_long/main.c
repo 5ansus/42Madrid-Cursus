@@ -6,7 +6,7 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 17:10:32 by sanferna          #+#    #+#             */
-/*   Updated: 2025/03/06 23:29:23 by sanferna         ###   ########.fr       */
+/*   Updated: 2025/03/06 23:43:22 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	main(int argc, char *argv[])
 		return (destroy_map(map), 1);
 	mlx = mlx_init();
 	if (mlx == NULL)
-		return (destroy_map(map), 0);
+		return (destroy_map(map), 1);
 	assets = load_assets(mlx);
 	win = mlx_new_window(mlx, map->width * assets->witdth,
 			map->height * assets->height, "So_Long");
