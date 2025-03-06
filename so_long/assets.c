@@ -6,7 +6,7 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 18:00:30 by sanferna          #+#    #+#             */
-/*   Updated: 2025/03/06 21:48:49 by sanferna         ###   ########.fr       */
+/*   Updated: 2025/03/06 23:45:32 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ t_assets	*load_assets(void *mlx)
 	t_assets	*imgs;
 	int			w[N_ASSETS];
 	int			h[N_ASSETS];
-	const char	*file[N_ASSETS] = {"sprites/coin.xpm", "sprites/wall.xpm",
-		"sprites/door_closed.xpm", "sprites/fill.xpm", "sprites/player.xpm",
-		"sprites/door_open.xpm"};
+	const char	*file[N_ASSETS] = {"textures/coin.xpm", "textures/wall.xpm",
+		"textures/door_closed.xpm", "textures/fill.xpm", "textures/player.xpm",
+		"textures/door_open.xpm"};
 
 	imgs = malloc(sizeof(t_assets));
 	if (imgs == NULL)

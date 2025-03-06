@@ -6,7 +6,7 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 22:28:02 by sanferna          #+#    #+#             */
-/*   Updated: 2025/03/06 22:48:12 by sanferna         ###   ########.fr       */
+/*   Updated: 2025/03/06 23:48:45 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,20 +25,20 @@ t_map	*new_map(char *filename)
 	status = NO_ERROR;
 	map = _new_map(filename, &status);
 	if (status != NO_ERROR)
-		return (ft_printf("ERROR: %s\n", get_error_str(status)), NULL);
+		return (ft_printf("Error: %s\n", get_error_str(status)), NULL);
 	if (map->door.set == FALSE)
 	{
-		ft_printf("ERROR: No se ha establecido una salida\n");
+		ft_printf("Error: No se ha establecido una salida\n");
 		return (destroy_map(map), NULL);
 	}
 	if (map->player.set == FALSE)
 	{
-		ft_printf("ERROR: No se ha establecido una posición de inicio\n");
+		ft_printf("Error: No se ha establecido una posición de inicio\n");
 		return (destroy_map(map), NULL);
 	}
 	if (map->n_collectibles == 0)
 	{
-		ft_printf("ERROR: Debe haber al menos un item a recolectar\n");
+		ft_printf("Error: Debe haber al menos un item a recolectar\n");
 		return (destroy_map(map), NULL);
 	}
 	return (map);
