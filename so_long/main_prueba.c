@@ -26,7 +26,8 @@ typedef enum e_keys
 	UP = 65362,
 	DOWN = 65364, 
 	LEFT = 65361,
-	RIGHT = 65363
+	RIGHT = 65363,
+	ESC = 65307
 } t_keys;
 
 int finish_win(void *mlx)
@@ -57,7 +58,7 @@ typedef struct s_assets
 typedef enum e_event
 {
 	ON_KEYDOWN = 2,
-	ON_KEYUP = 3,
+	// ON_KEYUP = 3,
 	ON_CLOSE = 17,
 } t_event;
 
@@ -151,6 +152,7 @@ t_assets *load_assets(void *mlx)
 		"sprites/door_closed.xpm",
 		"sprites/fill.xpm",
 		"sprites/player.xpm"
+		"sprites/door_open.xpm"
 	};
 
 	imgs = malloc(sizeof(t_assets));
@@ -161,6 +163,7 @@ t_assets *load_assets(void *mlx)
 	imgs->wall = mlx_xpm_file_to_image(mlx, files[1], &w[1], &h[1]);
 	imgs->door = mlx_xpm_file_to_image(mlx, files[2], &w[2], &h[2]);
 	imgs->fill = mlx_xpm_file_to_image(mlx, files[3], &w[3], &h[3]);
+	imgs->player = mlx_xpm_file_to_image(mlx, files[4], &w[4], &h[4]);
 	imgs->player = mlx_xpm_file_to_image(mlx, files[4], &w[4], &h[4]);
 	if (imgs->coin == NULL || imgs->wall == NULL || imgs->door == NULL ||
 			imgs->fill == NULL || imgs->player == NULL)
