@@ -6,7 +6,7 @@
 #    By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/22 17:30:19 by sanferna          #+#    #+#              #
-#    Updated: 2025/03/06 18:23:27 by sanferna         ###   ########.fr        #
+#    Updated: 2025/03/06 20:11:37 by sanferna         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ CC = gcc
 # CFLAGS = -g3 -fsanitize=address -Wall -Wextra -Werror
 CFLAGS = -Wall -Wextra -Werror
 NAME = so_long
-SRC = map.c assets.c main.c move.c
+SRC = map.c assets.c main.c move.c flood.c
 LIB = ./libft/libft.a ./minilibx-linux/libmlx.a
 LIBS = -Lminilibx-linux -Llibft -lmlx -lX11 -lXext
 OBJ = $(SRC:.c=.o)

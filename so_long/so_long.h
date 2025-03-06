@@ -6,7 +6,7 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 17:50:17 by sanferna          #+#    #+#             */
-/*   Updated: 2025/03/06 18:37:35 by sanferna         ###   ########.fr       */
+/*   Updated: 2025/03/06 21:14:05 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ typedef enum e_tide {
 	WALL = 1,
 	COLLECTIBLE = 2,
 	EXIT = 3,
-	PLAYER = 4
+	PLAYER = 4,
+	FILLED = 5
 } t_tile;
 
 typedef enum e_keys
@@ -126,5 +127,8 @@ void initial_map_print(void *mlx, void *win, t_map *map, t_assets *imgs);
 
 int finish_win(void *mlx);
 int key_pressed(int keycode, void *param);
+
+t_bool flood(t_map *map);
+void put_image(void *mlx, void *win, void *img, int x, int y);
 
 #endif
