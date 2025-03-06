@@ -6,7 +6,7 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 17:50:17 by sanferna          #+#    #+#             */
-/*   Updated: 2025/03/06 21:29:26 by sanferna         ###   ########.fr       */
+/*   Updated: 2025/03/06 22:48:06 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ typedef struct s_map {
 	t_point player;
 	t_point door;
 	t_tile **matrix;
+	t_error *status;
 } t_map;
 
 typedef struct s_assets
@@ -129,4 +130,7 @@ int finish_win(void *mlx);
 int key_pressed(int keycode, void *param);
 
 t_bool flood(t_map *map);
+t_tile *_parse_line(char *ln, t_map *m, t_bool bord, int y);
+const char	*get_error_str(t_error status);
+
 #endif

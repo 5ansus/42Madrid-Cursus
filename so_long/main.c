@@ -6,7 +6,7 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 17:10:32 by sanferna          #+#    #+#             */
-/*   Updated: 2025/03/06 21:33:55 by sanferna         ###   ########.fr       */
+/*   Updated: 2025/03/06 22:47:51 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ int main(int argc, char *argv[])
 
 	if (flood(map) == FALSE)
 		return (destroy_map(map), 1);
-	ft_printf("Mapa válido\n");
 	mlx = mlx_init();
 	if (mlx == NULL)
 		return (destroy_map(map), 0);
@@ -70,4 +69,26 @@ t_bool validate_args(int argc, char **argv)
 		return (FALSE);
 	}
 	return (TRUE);
+}
+
+const char	*get_error_str(t_error status)
+{
+	if (status == ER_MALLOC)
+		return ("Error de malloc");
+	else if (status == ER_WIDTH)
+		return ("El ancho del mapa no es consistente.");
+	else if (status == ER_ONE_LINE)
+		return ("El mapa debe tener al menos dos líneas");
+	else if (status == ER_OPENFILE)
+		return ("Error al abrir el archivo");
+	else if (status == ER_BORDER)
+		return ("El contorno del mapa no se ha cerrado correctamente");
+	else if (status == ER_PLAYER)
+		return ("Se han introducido dos posiciones de inicio");
+	else if (status == ER_EXIT)
+		return ("Se han establecido dos salidas");
+	else if (status == ER_INVALID_CHAR)
+		return ("Hay caracteres inválidos en el mapa.");
+	else
+		return ("Unknown error\n");
 }
