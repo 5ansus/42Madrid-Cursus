@@ -16,19 +16,19 @@ Contact::Contact() {}
 
 Contact::~Contact() {}
 
-void Contact::setFirstName(const std::string& firstName) {
+void Contact::setFirstName(const std::string &firstName) {
 	_firstName = firstName;
 }
 
-void Contact::setLastName(const std::string& lastName) { _lastName = lastName; }
+void Contact::setLastName(const std::string &lastName) { _lastName = lastName; }
 
-void Contact::setNickname(const std::string& nickname) { _nickname = nickname; }
+void Contact::setNickname(const std::string &nickname) { _nickname = nickname; }
 
-void Contact::setPhoneNumber(const std::string& phoneNumber) {
+void Contact::setPhoneNumber(const std::string &phoneNumber) {
 	_phoneNumber = phoneNumber;
 }
 
-void Contact::setDarkestSecret(const std::string& darkestSecret) {
+void Contact::setDarkestSecret(const std::string &darkestSecret) {
 	_darkestSecret = darkestSecret;
 }
 

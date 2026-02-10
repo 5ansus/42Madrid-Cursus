@@ -12,24 +12,20 @@
 
 #include "PhoneBook.hpp"
 
-#include <iomanip>
-#include <iostream>
-#include <sstream>
-
 PhoneBook::PhoneBook() : _contactCount(0), _oldestIndex(0) {}
 
 PhoneBook::~PhoneBook() {}
 
-std::string PhoneBook::_truncate(const std::string& str) const {
-	if (str.length() > 10) return str.substr(0, 9) + ".";
-	return str;
-}
+std::string PhoneBook::_formatColumn(const std::string &str) const {
+	std::string out = str;
 
-std::string PhoneBook::_formatColumn(const std::string& str) const {
-	std::string truncated = _truncate(str);
-	std::stringstream ss;
-	ss << std::setw(10) << truncated;
-	return ss.str();
+	if (out.length() > 10)
+		out = out.substr(0, 9) + ".";
+
+	if (out.length() < 10)
+		out = std::string(10 - out.length(), ' ') + out;
+
+	return out;
 }
 
 void PhoneBook::_displayContactList() const {
@@ -51,16 +47,16 @@ void PhoneBook::_displayContactList() const {
 
 void PhoneBook::_displayContact(int index) const {
 	if (index < 0 || index >= 8 || _contacts[index].isEmpty()) {
-		std::cout << "Error: Invalid index!" << std::endl;
+		std::cout << "Error: Invalid index" << std::endl;
 		return;
 	}
 
-	std::cout << "First Name: " << _contacts[index].getFirstName() << std::endl;
-	std::cout << "Last Name: " << _contacts[index].getLastName() << std::endl;
-	std::cout << "Nickname: " << _contacts[index].getNickname() << std::endl;
-	std::cout << "Phone Number: " << _contacts[index].getPhoneNumber()
+	std::cout << "\tFirst Name: " << _contacts[index].getFirstName() << std::endl;
+	std::cout << "\tLast Name: " << _contacts[index].getLastName() << std::endl;
+	std::cout << "\tNickname: " << _contacts[index].getNickname() << std::endl;
+	std::cout << "\tPhone Number: " << _contacts[index].getPhoneNumber()
 			  << std::endl;
-	std::cout << "Darkest Secret: " << _contacts[index].getDarkestSecret()
+	std::cout << "\tDarkest Secret: " << _contacts[index].getDarkestSecret()
 			  << std::endl;
 }
 
@@ -68,42 +64,42 @@ void PhoneBook::addContact() {
 	std::string input;
 	Contact newContact;
 
-	std::cout << "Enter first name: ";
+	std::cout << "\tEnter first name: ";
 	std::getline(std::cin, input);
 	if (input.empty()) {
-		std::cout << "Error: First name cannot be empty!" << std::endl;
+		std::cout << "\tError: First name cannot be empty" << std::endl;
 		return;
 	}
 	newContact.setFirstName(input);
 
-	std::cout << "Enter last name: ";
+	std::cout << "\tEnter last name: ";
 	std::getline(std::cin, input);
 	if (input.empty()) {
-		std::cout << "Error: Last name cannot be empty!" << std::endl;
+		std::cout << "\tError: Last name cannot be empty" << std::endl;
 		return;
 	}
 	newContact.setLastName(input);
 
-	std::cout << "Enter nickname: ";
+	std::cout << "\tEnter nickname: ";
 	std::getline(std::cin, input);
 	if (input.empty()) {
-		std::cout << "Error: Nickname cannot be empty!" << std::endl;
+		std::cout << "\tError: Nickname cannot be empty" << std::endl;
 		return;
 	}
 	newContact.setNickname(input);
 
-	std::cout << "Enter phone number: ";
+	std::cout << "\tEnter phone number: ";
 	std::getline(std::cin, input);
 	if (input.empty()) {
-		std::cout << "Error: Phone number cannot be empty!" << std::endl;
+		std::cout << "\tError: Phone number cannot be empty" << std::endl;
 		return;
 	}
 	newContact.setPhoneNumber(input);
 
-	std::cout << "Enter darkest secret: ";
+	std::cout << "\tEnter darkest secret: ";
 	std::getline(std::cin, input);
 	if (input.empty()) {
-		std::cout << "Error: Darkest secret cannot be empty!" << std::endl;
+		std::cout << "\tError: Darkest secret cannot be empty" << std::endl;
 		return;
 	}
 	newContact.setDarkestSecret(input);
@@ -112,12 +108,12 @@ void PhoneBook::addContact() {
 	_oldestIndex = (_oldestIndex + 1) % 8;
 	if (_contactCount < 8) _contactCount++;
 
-	std::cout << "Contact added successfully!" << std::endl;
+	std::cout << "\tContact added successfully" << std::endl;
 }
 
 void PhoneBook::searchContact() {
 	if (_contactCount == 0) {
-		std::cout << "PhoneBook is empty!" << std::endl;
+		std::cout << "\tPhoneBook is empty" << std::endl;
 		return;
 	}
 
@@ -128,7 +124,7 @@ void PhoneBook::searchContact() {
 	std::getline(std::cin, input);
 
 	if (input.length() != 1 || !isdigit(input[0])) {
-		std::cout << "Error: Invalid input!" << std::endl;
+		std::cout << "\tError: Invalid input" << std::endl;
 		return;
 	}
 

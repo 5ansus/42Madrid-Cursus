@@ -10,32 +10,32 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
-#include <string>
-
 #include "PhoneBook.hpp"
 
 int main() {
 	PhoneBook phoneBook;
 	std::string command;
 
-	std::cout << "Welcome to My Awesome PhoneBook!" << std::endl;
 	std::cout << "Available commands: ADD, SEARCH, EXIT" << std::endl;
 
 	while (true) {
-		std::cout << "\nEnter command: ";
+		std::cout << "Enter command: ";
 		if (!std::getline(std::cin, command)) break;
 
+		for (size_t i = 0; i < command.length(); i++) {
+			command[i] = std::toupper(command[i]);
+		}
 		if (command == "ADD")
 			phoneBook.addContact();
 		else if (command == "SEARCH")
 			phoneBook.searchContact();
 		else if (command == "EXIT") {
-			std::cout << "Goodbye!" << std::endl;
+			std::cout << "\tExiting..." << std::endl;
 			break;
-		} else if (!command.empty())
-			std::cout << "Invalid command! Use: ADD, SEARCH, or EXIT"
-					  << std::endl;
+		} else if (command.empty())
+			std::cout << "\tError: Please, type a command" << std::endl;
+		else
+			std::cout << "\tError: Invalid command" << std::endl;
 	}
 
 	return 0;
