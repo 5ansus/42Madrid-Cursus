@@ -22,7 +22,6 @@ class PhoneBook {
 		int _contactCount;
 		int _oldestIndex;
 
-		std::string _truncate(const std::string &str) const;
 		std::string _formatColumn(const std::string &str) const;
 		void _displayContactList() const;
 		void _displayContact(int index) const;
