@@ -12,12 +12,12 @@
 
 #include "Zombie.hpp"
 
-Zombie* zombieHorde(int N, std::string name) {
-	if (N <= 0) return NULL;
+Zombie* zombieHorde(int n_zombies, std::string name) {
+	if (n_zombies <= 0) return NULL;
 
-	Zombie* horde = new Zombie[N];
+	Zombie* horde = new Zombie[n_zombies];
 
-	for (int i = 0; i < N; i++) {
+	for (int i = 0; i < n_zombies; i++) {
 		horde[i].setName(name);
 	}
 

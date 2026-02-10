@@ -17,13 +17,13 @@
 #include <string>
 
 class Zombie {
-   private:
-	std::string name;
+	private:
+		std::string name;
 
-   public:
-	Zombie(std::string name);
-	~Zombie();
-	void announce(void);
+	public:
+		Zombie(std::string name);
+		~Zombie();
+		void announce(void);
 };
 
 Zombie* newZombie(std::string name);
