@@ -12,8 +12,6 @@
 
 #include "Fixed.hpp"
 
-#include <cmath>
-
 Fixed::Fixed() : _fixedPointValue(0) {}
 
 Fixed::Fixed(const int n) : _fixedPointValue(n << _fractionalBits) {}

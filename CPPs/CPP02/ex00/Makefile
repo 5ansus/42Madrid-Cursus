@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME = fixed
+NAME = a.out
 SRC = main.cpp Fixed.cpp
 CC = c++
 FLAGS = -Wall -Wextra -Werror -std=c++98
