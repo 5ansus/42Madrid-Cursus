@@ -12,7 +12,7 @@
 
 #include "Animal.hpp"
 
-Animal::Animal() : type("Animal") {
+Animal::Animal() : type("GenericAnimal") {
 	std::cout << "Animal default constructor called" << std::endl;
 }
 
@@ -35,3 +35,4 @@ void Animal::makeSound() const {
 }
 
 std::string Animal::getType() const { return this->type; }
+

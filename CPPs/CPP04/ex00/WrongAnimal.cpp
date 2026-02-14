@@ -33,7 +33,7 @@ WrongAnimal::~WrongAnimal() {
 }
 
 void WrongAnimal::makeSound() const {
-	std::cout << "WrongAnimal makes a wrong generic sound" << std::endl;
+	std::cout << "WrongAnimal makes a generic sound" << std::endl;
 }
 
 std::string WrongAnimal::getType() const { return this->type; }

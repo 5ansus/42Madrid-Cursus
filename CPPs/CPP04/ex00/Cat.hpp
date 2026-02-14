@@ -16,13 +16,13 @@
 #include "Animal.hpp"
 
 class Cat : public Animal {
-   public:
-	Cat();
-	Cat(const Cat& other);
-	Cat& operator=(const Cat& other);
-	~Cat();
+	public:
+		Cat();
+		Cat(const Cat& other);
+		Cat& operator=(const Cat& other);
+		~Cat();
 
-	void makeSound() const;
+		void makeSound() const;
 };
 
 #endif

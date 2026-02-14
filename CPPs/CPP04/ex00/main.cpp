@@ -17,57 +17,59 @@
 #include "WrongCat.hpp"
 
 int main() {
-	std::cout << "=== Testing Animal, Dog, and Cat ===" << std::endl;
+	std::cout << "Testing Animal, Dog, and Cat" << std::endl;
 	const Animal* meta = new Animal();
 	const Animal* j = new Dog();
 	const Animal* i = new Cat();
 
-	std::cout << "\n=== Getting Types ===" << std::endl;
-	std::cout << j->getType() << " " << std::endl;
-	std::cout << i->getType() << " " << std::endl;
+	std::cout << "\nGetting Types" << std::endl;
+	std::cout << j->getType() << "" << std::endl;
+	std::cout << i->getType() << "" << std::endl;
+	std::cout << meta->getType() << "" << std::endl;
 
-	std::cout << "\n=== Making Sounds ===" << std::endl;
-	i->makeSound();	 // will output the cat sound!
+	std::cout << "\nMaking Sounds" << std::endl;
+	i->makeSound();
 	j->makeSound();
 	meta->makeSound();
 
-	std::cout << "\n=== Deleting Animals ===" << std::endl;
+	std::cout << "\nDeleting Animals" << std::endl;
 	delete meta;
 	delete j;
 	delete i;
 
-	std::cout << "\n\n=== Testing WrongAnimal and WrongCat ===" << std::endl;
+	std::cout << "----------------------------------------" << std::endl;
+	std::cout << "\nTesting WrongAnimal and WrongCat" << std::endl;
 	const WrongAnimal* wrongMeta = new WrongAnimal();
 	const WrongAnimal* wrongCat = new WrongCat();
 
-	std::cout << "\n=== Getting Wrong Types ===" << std::endl;
-	std::cout << wrongCat->getType() << " " << std::endl;
+	std::cout << "\nGetting Wrong Types" << std::endl;
+	std::cout << wrongCat->getType() << "" << std::endl;
 
-	std::cout << "\n=== Making Wrong Sounds ===" << std::endl;
-	wrongCat->makeSound();	// will output the WrongAnimal sound (not virtual!)
+	std::cout << "\nMaking Wrong Sounds" << std::endl;
+	wrongCat->makeSound();
 	wrongMeta->makeSound();
 
-	std::cout << "\n=== Deleting Wrong Animals ===" << std::endl;
+	std::cout << "\nDeleting Wrong Animals" << std::endl;
 	delete wrongMeta;
 	delete wrongCat;
 
-	std::cout << "\n\n=== Additional Tests ===" << std::endl;
+	std::cout << "----------------------------------------" << std::endl;
+	std::cout << "\nAdditional Tests" << std::endl;
 	Dog basicDog;
 	Cat basicCat;
 
-	std::cout << "\n=== Direct makeSound calls ===" << std::endl;
+	std::cout << "\nDirect makeSound calls" << std::endl;
 	basicDog.makeSound();
 	basicCat.makeSound();
 
-	std::cout << "\n=== Copy Constructor Test ===" << std::endl;
+	std::cout << "\nCopy Constructor Test" << std::endl;
 	Dog dog2(basicDog);
 	dog2.makeSound();
 
-	std::cout << "\n=== Assignment Operator Test ===" << std::endl;
+	std::cout << "\nAssignment Operator Test" << std::endl;
 	Cat cat2;
 	cat2 = basicCat;
 	cat2.makeSound();
 
-	std::cout << "\n=== End of tests ===" << std::endl;
 	return 0;
 }
