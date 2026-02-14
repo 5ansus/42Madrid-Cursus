@@ -92,4 +92,4 @@ AI tools (GitHub Copilot) were used in the following ways:
 
 - **README structure**: Assistance with organizing and formatting this documentation file
 
-All network configurations were solved manually through understanding the concepts - AI was not used to directly solve the exercises.
+AI was not used to directly solve the exercises as all network configurations were solved manually through understanding the concepts.
