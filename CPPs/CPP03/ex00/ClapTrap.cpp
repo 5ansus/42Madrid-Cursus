@@ -13,22 +13,29 @@
 #include "ClapTrap.hpp"
 
 ClapTrap::ClapTrap()
-	: _name("Default"), _hitPoints(10), _energyPoints(10), _attackDamage(0) {
-	std::cout << "ClapTrap default constructor called" << std::endl;
+	: _name("DefaultBot"),
+	_hitPoints(_clapTrapBaseHitPoints),
+	_energyPoints(_clapTrapBaseEnergyPoints),
+	_attackDamage(_clapTrapBaseAttackDamage) {
+	std::cout << _getClassName() << " default constructor called" << std::endl;
 }
 
 ClapTrap::ClapTrap(const std::string& name)
-	: _name(name), _hitPoints(10), _energyPoints(10), _attackDamage(0) {
-	std::cout << "ClapTrap " << _name << " constructor called" << std::endl;
+	: _name(name),
+	_hitPoints(_clapTrapBaseHitPoints),
+	_energyPoints(_clapTrapBaseEnergyPoints),
+	_attackDamage(_clapTrapBaseAttackDamage) {
+	std::cout << _getClassName() << " " << _name << " constructor called"
+			<< std::endl;
 }
 
 ClapTrap::ClapTrap(const ClapTrap& other) {
-	std::cout << "ClapTrap copy constructor called" << std::endl;
+	std::cout << _getClassName() << " copy constructor called" << std::endl;
 	*this = other;
 }
 
 ClapTrap& ClapTrap::operator=(const ClapTrap& other) {
-	std::cout << "ClapTrap copy assignment operator called" << std::endl;
+	std::cout << _getClassName() << " copy assignment operator called" << std::endl;
 	if (this != &other) {
 		_name = other._name;
 		_hitPoints = other._hitPoints;
@@ -39,59 +46,79 @@ ClapTrap& ClapTrap::operator=(const ClapTrap& other) {
 }
 
 ClapTrap::~ClapTrap() {
-	std::cout << "ClapTrap " << _name << " destructor called" << std::endl;
+	std::cout << _getClassName() << " " << _name << " destructor called"
+			<< std::endl;
 }
 
 void ClapTrap::attack(const std::string& target) {
 	if (_hitPoints == 0) {
-		std::cout << "ClapTrap " << _name
-				  << " can't attack because it has no hit points left!"
-				  << std::endl;
+		std::cout << _getClassName() << " " << _name
+				<< " can't attack because it has no hit points left!"
+				<< std::endl;
 		return;
 	}
 	if (_energyPoints == 0) {
-		std::cout << "ClapTrap " << _name
-				  << " can't attack because it has no energy points left!"
-				  << std::endl;
+		std::cout << _getClassName() << " " << _name
+				<< " can't attack because it has no energy points left!"
+				<< std::endl;
 		return;
 	}
 	_energyPoints--;
-	std::cout << "ClapTrap " << _name << " attacks " << target << ", causing "
-			  << _attackDamage << " points of damage!" << std::endl;
+	std::cout << _getClassName() << " " << _name << " attacks " << target
+			<< ", causing " << _attackDamage << " points of damage!"
+			<< std::endl;
 }
 
 void ClapTrap::takeDamage(unsigned int amount) {
 	if (_hitPoints == 0) {
-		std::cout << "ClapTrap " << _name << " is already destroyed!"
-				  << std::endl;
+		std::cout << _getClassName() << " " << _name << " is already destroyed!"
+				<< std::endl;
 		return;
 	}
 	if (amount >= _hitPoints) {
 		_hitPoints = 0;
-		std::cout << "ClapTrap " << _name << " takes " << amount
-				  << " points of damage and is destroyed!" << std::endl;
+		std::cout << _getClassName() << " " << _name << " takes " << amount
+				<< " points of damage and is destroyed!" << std::endl;
 	} else {
 		_hitPoints -= amount;
-		std::cout << "ClapTrap " << _name << " takes " << amount
-				  << " points of damage! (" << _hitPoints << " HP remaining)"
-				  << std::endl;
+		std::cout << _getClassName() << " " << _name << " takes " << amount
+				<< " points of damage! (" << _hitPoints << " HP remaining)"
+				<< std::endl;
 	}
 }
 
 void ClapTrap::beRepaired(unsigned int amount) {
 	if (_hitPoints == 0) {
-		std::cout << "ClapTrap " << _name
-				  << " can't be repaired because it's destroyed!" << std::endl;
+		std::cout << _getClassName() << " " << _name
+				<< " can't be repaired because it's destroyed!" << std::endl;
 		return;
 	}
 	if (_energyPoints == 0) {
-		std::cout << "ClapTrap " << _name
-				  << " can't be repaired because it has no energy points left!"
-				  << std::endl;
+		std::cout << _getClassName() << " " << _name
+				<< " can't be repaired because it has no energy points left!"
+				<< std::endl;
+		return;
+	}
+	if (_hitPoints == _clapTrapBaseHitPoints){
+		std::cout << _getClassName() << " " << _name << " is already full HP!"
+				<< std::endl;
 		return;
 	}
 	_energyPoints--;
-	_hitPoints += amount;
-	std::cout << "ClapTrap " << _name << " is repaired for " << amount
-			  << " hit points! (" << _hitPoints << " HP total)" << std::endl;
+	if (_hitPoints + amount > _clapTrapBaseHitPoints){
+		int repaired = _clapTrapBaseHitPoints - _hitPoints;
+		_hitPoints = _clapTrapBaseHitPoints;
+		std::cout << _getClassName() << " " << _name << " is repaired for "
+				<< repaired << " hit points! (Current HP: " << _hitPoints << ") (No overheal)"
+				<< std::endl;
+	}
+	else
+	{
+		_hitPoints += amount;
+		std::cout << _getClassName() << " " << _name << " is repaired for "
+				<< amount << " hit points! (Current HP: " << _hitPoints << ")"
+				<< std::endl;
+	}
 }
+
+std::string ClapTrap::_getClassName() { return "ClapTrap"; }

@@ -17,22 +17,28 @@
 #include <string>
 
 class ClapTrap {
-   protected:
-	std::string _name;
-	unsigned int _hitPoints;
-	unsigned int _energyPoints;
-	unsigned int _attackDamage;
+	private:
+		static unsigned int const _clapTrapBaseHitPoints = 10;
+		static unsigned int const _clapTrapBaseEnergyPoints = 10;
+		static unsigned int const _clapTrapBaseAttackDamage = 0;
+		static std::string _getClassName();
 
-   public:
-	ClapTrap();
-	ClapTrap(const std::string& name);
-	ClapTrap(const ClapTrap& other);
-	ClapTrap& operator=(const ClapTrap& other);
-	~ClapTrap();
+	protected:
+		std::string _name;
+		unsigned int _hitPoints;
+		unsigned int _energyPoints;
+		unsigned int _attackDamage;
+		virtual std::string _getClassOverrided();
 
-	void attack(const std::string& target);
-	void takeDamage(unsigned int amount);
-	void beRepaired(unsigned int amount);
+	public:
+		ClapTrap();
+		ClapTrap(const std::string& name);
+		ClapTrap(const ClapTrap& other);
+		ClapTrap& operator=(const ClapTrap& other);
+		~ClapTrap();
+		void attack(const std::string& target);
+		void takeDamage(unsigned int amount);
+		void beRepaired(unsigned int amount);
 };
 
 #endif

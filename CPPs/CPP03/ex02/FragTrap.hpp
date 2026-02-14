@@ -16,6 +16,15 @@
 #include "ClapTrap.hpp"
 
 class FragTrap : public ClapTrap {
+   private:
+	static unsigned int const _fragTrapBaseHitPoints = 100;
+	static unsigned int const _fragTrapBaseEnergyPoints = 100;
+	static unsigned int const _fragTrapBaseAttackDamage = 30;
+	static std::string _getClassName();
+
+   protected:
+	std::string _getClassOverrided();
+
    public:
 	FragTrap();
 	FragTrap(const std::string& name);
@@ -24,6 +33,7 @@ class FragTrap : public ClapTrap {
 	~FragTrap();
 
 	void highFivesGuys(void);
+	void beRepaired(unsigned int amount);
 };
 
 #endif
