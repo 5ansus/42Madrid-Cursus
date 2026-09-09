@@ -1,0 +1,53 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Form.hpp                                      :+:      :+:    :+: */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sanferna <sanferna@42student.com>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/09/08 18:03:24 by sanferna          #+#    #+#             */
+/*   Updated: 2026/09/08 18:03:26 by sanferna         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef FORM_HPP
+#define FORM_HPP
+
+# include <iostream>
+# include <string>
+# include "Bureaucrat.hpp"
+
+class Form {
+	private:
+		const std::string	_name;
+		bool				_signed;
+		const int			_gradeSign;
+		const int			_gradeExecute;
+
+
+	public:
+		Form();
+		Form(std::string name, int gradeSign, int gradeExecute);
+		Form(const Form& other);
+		Form& operator=(const Form& other);
+		~Form();
+		bool getSigned() const;
+		int getGradeSign() const;
+		int getGradeExecute() const;
+		const std::string& getName() const;
+		void Form::beSigned(Bureaucrat b);
+
+	class GradeTooHighException : public std::exception {
+		public:
+			const char* what() const throw();
+	};
+
+	class GradeTooLowException : public std::exception {
+		public:
+			const char* what() const throw();
+	};
+};
+
+std::ostream& operator<<(std::ostream& os, const Form& Form);
+
+#endif
