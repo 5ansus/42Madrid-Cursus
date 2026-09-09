@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Bureucrat.hpp                                      :+:      :+:    :+:   */
+/*   Bureaucrat.hpp                                      :+:      :+:    :+: */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sanferna <sanferna@42student.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -11,28 +11,40 @@
 /* ************************************************************************** */
 
 #ifndef BUREUCRAT_HPP
-# define BUREUCRAT_HPP
+#define BUREUCRAT_HPP
 
-# include <iostream>
-# include <string>
+#include <iostream>
+#include <string>
 
-class Bureucrat {
+class Bureaucrat {
 	private:
-		const std::string	_name;
-		int					_grade;
+		const std::string _name;
+		int _grade;
 
 	public:
-		Bureucrat();
-		Bureucrat(std::string name, int grade);
-		Bureucrat(const Bureucrat& other);
-		Bureucrat& operator=(const Bureucrat& other);
-		Bureucrat& operator++();
-		Bureucrat& operator--();
-		~Bureucrat();
+		Bureaucrat();
+		Bureaucrat(std::string name, int grade);
+		Bureaucrat(const Bureaucrat& other);
+		Bureaucrat& operator=(const Bureaucrat& other);
+		Bureaucrat operator++();
+		Bureaucrat operator++(int);
+		Bureaucrat operator--(int);
+		Bureaucrat operator--();
+		~Bureaucrat();
 		const std::string& getName() const;
-		const int getGrade() const;
+		int getGrade() const;
+
+	class GradeTooHighException : public std::exception {
+		public:
+			const char* what() const throw();
+	};
+
+	class GradeTooLowException : public std::exception {
+		public:
+			const char* what() const throw();
+	};
 };
 
-std::ostream& operator<<(std::ostream& os, const Bureucrat& Bureucrat);
+std::ostream& operator<<(std::ostream& os, const Bureaucrat& Bureaucrat);
 
 #endif
