@@ -10,8 +10,8 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME = Form
-SRC = Form.cpp Bureaucrat.cpp main.cpp
+NAME = AForms
+SRC = AForm.cpp Bureaucrat.cpp main.cpp
 BUILD = ./BUILD/
 OBJ = $(addprefix $(BUILD), $(SRC:%.cpp=%.o))
 CXX = c++

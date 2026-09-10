@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Form.hpp                                      :+:      :+:    :+: */
+/*   Form.hpp                                             :+:      :+:    :+: */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sanferna <sanferna@42student.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -15,7 +15,8 @@
 
 # include <iostream>
 # include <string>
-# include "Bureaucrat.hpp"
+
+class Bureaucrat;
 
 class Form {
 	private:
@@ -35,7 +36,7 @@ class Form {
 		int getGradeSign() const;
 		int getGradeExecute() const;
 		const std::string& getName() const;
-		void Form::beSigned(Bureaucrat b);
+		void beSigned(const Bureaucrat& b);
 
 	class GradeTooHighException : public std::exception {
 		public:

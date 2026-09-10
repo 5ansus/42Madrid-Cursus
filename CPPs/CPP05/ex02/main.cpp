@@ -1,5 +1,5 @@
 #include "Bureaucrat.hpp"
-#include "Form.hpp"
+#include "AForm.hpp"
 
 int main () {
 	Bureaucrat b_default = Bureaucrat();
@@ -19,14 +19,14 @@ int main () {
 	b_default++;
 	std::cout << b_default << std::endl;
 
-	Form f1 = Form("FormularioLevel1", 1, 1);
+	AForm f1 = AForm("AFormularioLevel1", 1, 1);
 	std::cout << f1 << std::endl;
-	b_default.signForm(f1);
+	b_default.signAForm(f1);
 	std::cout << f1 << std::endl;
 
-	Form f_default;
+	AForm f_default;
 	std::cout << f_default << std::endl;
-	b_default.signForm(f_default);
+	b_default.signAForm(f_default);
 	std::cout << f_default << std::endl;
 
 

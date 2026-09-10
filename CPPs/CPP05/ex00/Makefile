@@ -12,23 +12,27 @@
 
 NAME = Bureaucrat
 SRC = main.cpp Bureaucrat.cpp
-CC = c++
-FLAGS = -Wall -Wextra -Werror -std=c++98
-OBJ = $(SRC:.cpp=.o)
+BUILD = ./BUILD/
+OBJ = $(addprefix $(BUILD), $(SRC:%.cpp=%.o))
+CXX = c++
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -MMD -MP -g3
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) $(FLAGS) $(OBJ) -o $(NAME)
+	$(CXX) $(CXXFLAGS) $(OBJ) -o $(NAME)
 
-%.o: %.cpp
-	$(CC) $(FLAGS) -c $< -o $@
+$(BUILD):
+	mkdir $@
+
+$(BUILD)%.o: %.cpp | $(BUILD)
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJ)
+	rm -rf $(BUILD)
 
 fclean: clean
-	rm -f $(NAME)
+	rm -rf $(NAME)
 
 re: fclean all
 

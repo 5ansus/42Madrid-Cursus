@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
-#include "Form.hpp"
 
 Bureaucrat::Bureaucrat() : _name("DefaultBureucrat"), _grade(150) {}
 
@@ -83,7 +82,7 @@ Bureaucrat Bureaucrat::operator--() {
 	return *this;
 }
 
-void Bureaucrat::signForm(Form& f){
+void Bureaucrat::signAForm(AForm& f){
 
 	try{
 		f.beSigned(*this);
