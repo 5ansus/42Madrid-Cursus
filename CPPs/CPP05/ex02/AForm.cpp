@@ -12,16 +12,16 @@
 
 #include "AForm.hpp"
 
-AForm::AForm() : _name("DefaultAForm"), _signed(false), _gradeSign(150), _gradeExecute(150) {}
+AForm::AForm() : _name("DefaultAForm"), _target("DefaultTarget"),  _signed(false), _gradeSign(150), _gradeExecute(150) {}
 
-AForm::AForm(std::string name, int gradeSign, int gradeExecute)
-: _name(name), _gradeSign(gradeSign), _gradeExecute(gradeExecute){
+AForm::AForm(std::string target, std::string name, int gradeSign, int gradeExecute)
+:  _name(name), _target(target), _gradeSign(gradeSign), _gradeExecute(gradeExecute){
 	if (gradeSign < 1 || gradeExecute < 1) throw AForm::GradeTooHighException();
 	if (gradeSign > 150 || gradeExecute > 150 ) throw AForm::GradeTooLowException();
 }
 
 AForm::AForm(const AForm& other)
-: _name(other._name), _signed(other._signed), _gradeSign(other._gradeSign), _gradeExecute(other._gradeExecute){
+: _name(other._name), _target(other._target), _signed(other._signed), _gradeSign(other._gradeSign), _gradeExecute(other._gradeExecute){
 	// if (other._grade < 1)
 	// 	throw AForm::GradeTooHighException();
 	// if (other._grade > 150)
@@ -49,6 +49,10 @@ const std::string& AForm::getName() const {
 	return _name;
 }
 
+const std::string& AForm::getTarget() const {
+	return _target;
+}
+
 int AForm::getGradeSign() const {
 	return _gradeSign;
 }
@@ -67,8 +71,14 @@ void AForm::beSigned(const Bureaucrat& b) {
 	this->_signed = true;
 }
 
+void AForm::execute(Bureaucrat const & executor) const
+{
+	if (executor.getGrade() > getGradeExecute())
+		throw AForm::GradeTooLowException();
+}
+
 std::ostream& operator<<(std::ostream& os, const AForm& AForm) {
-	os << "AForm " << AForm.getName() << " data:" << std::endl
+	os << "Form " << AForm.getName() << " data:" << std::endl
 	<< "\tIs signed: " << AForm.getSigned() << std::endl
 	<< "\tGrade needed for sign: " << AForm.getGradeSign() << std::endl
 	<< "\tGrade needed for execute: " << AForm.getGradeExecute() << std::endl;
