@@ -14,8 +14,8 @@
 
 AForm::AForm() : _name("DefaultAForm"), _target("DefaultTarget"),  _signed(false), _gradeSign(150), _gradeExecute(150) {}
 
-AForm::AForm(std::string target, std::string name, int gradeSign, int gradeExecute)
-:  _name(name), _target(target), _gradeSign(gradeSign), _gradeExecute(gradeExecute){
+AForm::AForm(std::string name, std::string target, int gradeSign, int gradeExecute)
+:  _name(name), _target(target), _signed(false), _gradeSign(gradeSign), _gradeExecute(gradeExecute){
 	if (gradeSign < 1 || gradeExecute < 1) throw AForm::GradeTooHighException();
 	if (gradeSign > 150 || gradeExecute > 150 ) throw AForm::GradeTooLowException();
 }

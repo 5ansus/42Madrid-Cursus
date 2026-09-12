@@ -52,7 +52,7 @@ int Bureaucrat::getGrade() const {
 }
 
 void Bureaucrat::setGrade(int grade) {
-	this->_grade = grade;
+	_grade = grade;
 }
 
 std::ostream& operator<<(std::ostream& os, const Bureaucrat& Bureaucrat) {

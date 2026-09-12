@@ -11,7 +11,7 @@
 # **************************************************************************** #
 
 NAME = AForms
-SRC = AForm.cpp Bureaucrat.cpp main.cpp
+SRC = ShrubberyCreationForm.cpp PresidentialPardonForm.cpp RobotomyRequestForm.cpp AForm.cpp Bureaucrat.cpp main.cpp
 BUILD = ./BUILD/
 OBJ = $(addprefix $(BUILD), $(SRC:%.cpp=%.o))
 CXX = c++
@@ -33,7 +33,10 @@ clean:
 
 fclean: clean
 	rm -rf $(NAME)
+	rm -f *_shrubbery
 
 re: fclean all
 
 .PHONY: all clean fclean re
+
+-include $(OBJ:%.o=%.d)

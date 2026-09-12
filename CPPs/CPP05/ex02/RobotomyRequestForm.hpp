@@ -3,6 +3,7 @@
 #define ROBOTOMYREQUESTFORM_HPP
 
 #include "AForm.hpp"
+#include <cstdlib>
 #define GRADE_EXEC_ROB 45
 #define GRADE_SIGN_ROB 72
 #define NAME_ROB "RobotomyRequestForm"

@@ -1,5 +1,8 @@
 #include "Bureaucrat.hpp"
-#include "AForm.hpp"
+#include "ShrubberyCreationForm.hpp"
+#include "RobotomyRequestForm.hpp"
+#include "PresidentialPardonForm.hpp"
+#include <ctime>
 
 int main () {
 	Bureaucrat b_default = Bureaucrat();
@@ -15,19 +18,20 @@ int main () {
 		std::cerr << '\t' << e.what() << std::endl;
 	}
 
+	ShrubberyCreationForm f1("TestFile");
+	b_default.setGrade(1);
 	std::cout << b_default << std::endl;
-	b_default++;
-	std::cout << b_default << std::endl;
-
-	AForm f1 = AForm("AFormularioLevel1", 1, 1);
-	std::cout << f1 << std::endl;
-	b_default.signAForm(f1);
-	std::cout << f1 << std::endl;
-
-	AForm f_default;
-	std::cout << f_default << std::endl;
-	b_default.signAForm(f_default);
-	std::cout << f_default << std::endl;
+	f1.execute(b_default);
 
 
+	std::srand(time(NULL));
+	RobotomyRequestForm f2("TestRobot");
+	f2.execute(b_default);
+	f2.execute(b_default);
+	f2.execute(b_default);
+	f2.execute(b_default);
+	f2.execute(b_default);
+
+	PresidentialPardonForm f3("Testperdon");
+	f3.execute(b_default);
 }

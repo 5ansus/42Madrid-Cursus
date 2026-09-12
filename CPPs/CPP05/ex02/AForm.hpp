@@ -22,11 +22,10 @@ class Bureaucrat;
 class AForm {
 	private:
 		const std::string	_name;
+		const std::string	_target;
 		bool				_signed;
 		const int			_gradeSign;
 		const int			_gradeExecute;
-		const std::string	_target;
-
 
 	public:
 		AForm(void);
