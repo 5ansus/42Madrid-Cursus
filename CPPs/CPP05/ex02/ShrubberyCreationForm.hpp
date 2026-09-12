@@ -6,7 +6,7 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                 +#+#+#+#+#+   +#+          */
 /*   Created: 2026/09/12 18:01:15 by sanferna          #+#    #+#             */
-/*   Updated: 2026/09/12 18:01:58 by sanferna         ###   ########.fr       */
+/*   Updated: 2026/09/12 18:38:24 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,10 @@
 
 class ShrubberyCreationForm : public AForm {
 	public:
+		ShrubberyCreationForm(const ShrubberyCreationForm &other);
+		~ShrubberyCreationForm(void);
+
+		ShrubberyCreationForm& operator=(const ShrubberyCreationForm& other);
 		ShrubberyCreationForm(std::string const & target);
 		void execute(Bureaucrat const & executor) const;
 

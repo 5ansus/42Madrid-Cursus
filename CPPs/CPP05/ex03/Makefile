@@ -1,18 +1,5 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   Makefile                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
-/*                                                 +#+#+#+#+#+   +#+          */
-/*   Created: 2026/09/12 18:01:15 by sanferna          #+#    #+#             */
-/*   Updated: 2026/09/12 18:01:58 by sanferna         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-
 NAME = AForms
-SRC = ShrubberyCreationForm.cpp PresidentialPardonForm.cpp RobotomyRequestForm.cpp AForm.cpp Bureaucrat.cpp main.cpp
+SRC = Intern.cpp ShrubberyCreationForm.cpp PresidentialPardonForm.cpp RobotomyRequestForm.cpp AForm.cpp Bureaucrat.cpp main.cpp
 BUILD = ./BUILD/
 OBJ = $(addprefix $(BUILD), $(SRC:%.cpp=%.o))
 CXX = c++

@@ -6,7 +6,7 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                 +#+#+#+#+#+   +#+          */
 /*   Created: 2026/09/12 18:01:15 by sanferna          #+#    #+#             */
-/*   Updated: 2026/09/12 18:02:13 by sanferna         ###   ########.fr       */
+/*   Updated: 2026/09/12 19:05:45 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,11 @@ class AForm {
 	};
 
 	class GradeTooLowException : public std::exception {
+		public:
+			const char* what() const throw();
+	};
+
+	class FormNotSigned : public std::exception {
 		public:
 			const char* what() const throw();
 	};

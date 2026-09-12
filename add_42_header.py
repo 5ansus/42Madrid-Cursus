@@ -11,7 +11,7 @@ from pathlib import Path
 
 
 DEFAULT_EXTS = {".cpp", ".hpp", ".h", ".hh", ".cc", ".c"}
-DEFAULT_FILES = {"Makefile"}
+DEFAULT_FILES = {}
 DEFAULT_EMAIL = "sanferna@student.42madrid.com"
 
 BORDER_LINE = "/* ************************************************************************** */"
@@ -451,7 +451,7 @@ def main() -> int:
     parser.add_argument(
         "--files",
         nargs="+",
-        default=["Makefile"],
+        default=[""],
         help="Specific file names to include",
     )
 

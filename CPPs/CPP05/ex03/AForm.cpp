@@ -6,7 +6,7 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                 +#+#+#+#+#+   +#+          */
 /*   Created: 2026/09/12 18:01:15 by sanferna          #+#    #+#             */
-/*   Updated: 2026/09/12 18:01:58 by sanferna         ###   ########.fr       */
+/*   Updated: 2026/09/12 19:06:07 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,10 @@ const char* AForm::GradeTooLowException::what() const throw() {
 	return "Grade too low";
 }
 
+const char* AForm::FormNotSigned::what() const throw() {
+	return "Form is not signed";
+}
+
 const std::string& AForm::getName() const {
 	return _name;
 }
@@ -76,6 +80,9 @@ void AForm::execute(Bureaucrat const & executor) const
 {
 	if (executor.getGrade() > getGradeExecute())
 		throw AForm::GradeTooLowException();
+
+	if (!getSigned())
+		throw AForm::FormNotSigned();
 }
 
 std::ostream& operator<<(std::ostream& os, const AForm& AForm) {

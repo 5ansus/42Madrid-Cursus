@@ -6,7 +6,7 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                 +#+#+#+#+#+   +#+          */
 /*   Created: 2026/09/12 18:01:15 by sanferna          #+#    #+#             */
-/*   Updated: 2026/09/12 18:01:58 by sanferna         ###   ########.fr       */
+/*   Updated: 2026/09/12 18:38:24 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,18 @@
 
 ShrubberyCreationForm::ShrubberyCreationForm(std::string const & target)
 	: AForm(NAME_SHRU, target, GRADE_SIGN_SHRU, GRADE_EXEC_SHRU){};
+
+ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &other)
+	:	AForm(other){}
+
+ShrubberyCreationForm::~ShrubberyCreationForm(void){}
+
+ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCreationForm &other)
+{
+	if (&other != this)
+		AForm::operator=(other);
+	return (*this);
+}
 
 void ShrubberyCreationForm::execute(Bureaucrat const & executor) const {
 	AForm::execute(executor);

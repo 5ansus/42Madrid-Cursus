@@ -1,28 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   Makefile                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
-/*                                                 +#+#+#+#+#+   +#+          */
-/*   Created: 2026/09/12 18:01:15 by sanferna          #+#    #+#             */
-/*   Updated: 2026/09/12 18:01:58 by sanferna         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: sanferna <sanferna@student.42madrid.com    +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2026/02/09 21:10:09 by sanferna          #+#    #+#              #
-#    Updated: 2026/02/09 21:20:49 by sanferna         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 NAME = AForms
 SRC = ShrubberyCreationForm.cpp PresidentialPardonForm.cpp RobotomyRequestForm.cpp AForm.cpp Bureaucrat.cpp main.cpp
 BUILD = ./BUILD/
