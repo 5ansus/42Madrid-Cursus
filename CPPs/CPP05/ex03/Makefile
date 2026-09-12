@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   PresidentialPardonForm.hpp                         :+:      :+:    :+:   */
+/*   Makefile                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                 +#+#+#+#+#+   +#+          */
@@ -11,18 +11,33 @@
 /* ************************************************************************** */
 
 
-#ifndef PRESIDENTIALPARDONFORM_HPP
-#define PRESIDENTIALPARDONFORM_HPP
+NAME = AForms
+SRC = ShrubberyCreationForm.cpp PresidentialPardonForm.cpp RobotomyRequestForm.cpp AForm.cpp Bureaucrat.cpp main.cpp
+BUILD = ./BUILD/
+OBJ = $(addprefix $(BUILD), $(SRC:%.cpp=%.o))
+CXX = c++
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -MMD -MP -g3
 
-#include "AForm.hpp"
-#define GRADE_EXEC_PRED 5
-#define GRADE_SIGN_PRED 25
-#define NAME_PRED "PresidentialPardonForm"
+all: $(NAME)
 
-class PresidentialPardonForm : public AForm {
-	public:
-		PresidentialPardonForm(std::string const & target);
-		void execute(Bureaucrat const & executor) const;
-};
+$(NAME): $(OBJ)
+	$(CXX) $(CXXFLAGS) $(OBJ) -o $(NAME)
 
-#endif
+$(BUILD):
+	mkdir $@
+
+$(BUILD)%.o: %.cpp | $(BUILD)
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
+clean:
+	rm -rf $(BUILD)
+
+fclean: clean
+	rm -rf $(NAME)
+	rm -f *_shrubbery
+
+re: fclean all
+
+.PHONY: all clean fclean re
+
+-include $(OBJ:%.o=%.d)

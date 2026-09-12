@@ -1,14 +1,15 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Bureaucrat.hpp                                      :+:      :+:    :+: */
+/*   Bureaucrat.hpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sanferna <sanferna@42student.com>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/09/08 18:03:24 by sanferna          #+#    #+#             */
-/*   Updated: 2026/09/08 18:03:26 by sanferna         ###   ########.fr       */
+/*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
+/*                                                 +#+#+#+#+#+   +#+          */
+/*   Created: 2026/09/12 18:01:15 by sanferna          #+#    #+#             */
+/*   Updated: 2026/09/12 18:01:58 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef BUREUCRAT_HPP
 #define BUREUCRAT_HPP
