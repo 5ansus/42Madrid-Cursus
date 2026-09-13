@@ -120,6 +120,20 @@ def get_fs_timestamp(path: Path) -> str:
     except OSError:
         return datetime.now().strftime("%Y/%m/%d %H:%M:%S")
 
+def set_file_mtime_from_updated(path: Path, updated: str) -> None:
+    if not updated or updated == "unknown":
+        return
+
+    try:
+        dt = datetime.strptime(updated, "%Y/%m/%d %H:%M:%S")
+    except ValueError:
+        return
+
+    try:
+        timestamp = dt.timestamp()
+        os.utime(path, (timestamp, timestamp))
+    except (OSError, OverflowError, ValueError):
+        pass
 
 def get_fs_created_timestamp(path: Path) -> str:
     """
@@ -620,6 +634,8 @@ def main() -> int:
                 new_content,
                 encoding="utf-8",
             )
+
+            set_file_mtime_from_updated(path, updated)
 
             print(
                 f"Updated: {rel_path}"
