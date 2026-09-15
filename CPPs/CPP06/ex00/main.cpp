@@ -1,33 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Converter.hpp                                      :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                 +#+#+#+#+#+   +#+          */
-/*   Created: 2026/09/12 20:08:31 by sanferna          #+#    #+#             */
-/*   Updated: 2026/09/15 19:31:18 by sanferna         ###   ########.fr       */
+/*   Created: 2026/09/13 11:10:32 by sanferna          #+#    #+#             */
+/*   Updated: 2026/09/15 19:29:57 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
-#ifndef CONVERTER_HPP
-#define CONVERTER_HPP
-#include <iostream>
-#include <string>
+#include "Converter.hpp"
 
-class Converter {
-	public:
+int main (int argc, char *argv[]){
+	if (argc == 2)
+	Converter::convert(argv[1]);
+}
+// int i;
+// try{
+// 	i = format_int();
+// 	i = format_char();
+// 	i = i;
 
-	private:
-		Converter();
-		Converter(const Converter& other);
-		Converter& operator=(const Converter& other);
-		~Converter();
+// }catch{
+// i == i;
 
-	public:
-		static void convert(const std::string& input);
-};
-
-#include "Converter.tpp"
-#endif
+// }
