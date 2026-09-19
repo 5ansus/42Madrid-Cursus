@@ -15,6 +15,21 @@ bool isType(const std::string& input, T* data)
 	return !ss.fail() && ss.eof();
 }
 
+// template <>
+// inline bool isType<float>(const std::string& input, float *data) {
+
+
+// 	std::stringstream ss(input);
+// 	ss >> *data;
+// 	if (ss.fail()) return false;
+
+// 	if (ss.eof()) return true;
+
+// 	char suffix; --> Al leer solo un char no marca el eof
+// 	ss >> suffix;
+
+// 	return (suffix == 'f' && ss.eof());
+// }
 
 template <>
 inline bool isType<float>(const std::string& input, float *data)
@@ -30,7 +45,7 @@ inline bool isType<float>(const std::string& input, float *data)
 	ss >> suffix;
 
 	if (suffix.empty())
-		return false;
+		return true;
 
 	return suffix == "f" && ss.eof();
 }
@@ -57,43 +72,42 @@ std::string get_integer_string(const T& input)
 
 // template<typename T, typename >
 
+// void	print_value(int i, const std::string)z
 
 template<typename T>
-void	print_to_all_types(T casted_value){
-	std::string	casted_string;
-
-	casted_string = get_integer_string(casted_value);
-
-	int i = static_cast<int>(casted_value);
-	if (get_integer_string(i) == casted_string)
-		std::cout << "int: " << i << std::endl;
-
-
-	float f = static_cast<float>(casted_value);
+void print_decimal(T number, std::string casted_string, const std::string data_str){
+	std::string num_str(num);
 	if (get_integer_string(f) == casted_string){
-		// if (!formatted && f){
-		// 	std::cout << std::fixed << std::setprecision(10);
-		// 	formatted = true;
-		// }
-		std::cout << "float: " << f << "f" << std::endl;
+		if (num_str.find('.') != std::string::npos)
+			std::cout << data_str << ": " << std::setprecision(10) << num_str << std::endl;
+		else
+			std::cout << data_str << ": " << std::setprecision(1) << num_str << std::endl;
 	}
-
-	double d = static_cast<double>(casted_value);
-	if (get_integer_string(d) == casted_string)
-		std::cout << "double: " << d << std::endl;
+	return 0
 }
+
+
 
 template<typename T>
 bool genericConversion(const std::string& input){
 	T			casted_value;
 
-	// bool		formatted = false;
-	// std::stringstream	temp;
-
 	if (!isType<T>(input, &casted_value))
 		return false;
 
-	print_to_all_types(casted_value);
+	const std::string casted_string = get_integer_string(casted_value);
+
+	int i = static_cast<int>(casted_value);
+	if (get_integer_string(i) == casted_string)
+		std::cout << "int: " << i << std::endl;
+
+	double d = static_cast<double>(casted_value);
+	if (get_integer_string(d) == casted_string)
+		std::cout << "double: " << d << std::endl;
+
+	float f = static_cast<float>(casted_value);
+	if (get_integer_string(f) == casted_string)
+		std::cout << "float: " << f << std::endl;
 
 	return true;
 }

@@ -13,7 +13,25 @@
 
 #include "Converter.hpp"
 
+// float	Converter::is_special_float(const std::string& input){
+// 	if (input == "+inff")
+// 		return std::numeri
+
+// }
+
 void Converter::convert(const std::string& input){
+
+	// float	special_float = Converter::is_special_float(input);
+
+	// if (special_float != 0)
+	// 	return print_to_all_types(special_float);
+std::stringstream ss("-inff");
+float f;
+
+if (ss >> f)
+    std::cout << "Es un float" << std::endl;
+else
+    std::cout << "No es un float" << std::endl;
 	if (genericConversion<int>(input))
 		return ;
 	std::cerr << "No es un int" << std::endl;

@@ -26,7 +26,8 @@ class Converter {
 		~Converter();
 
 	public:
-		static void convert(const std::string& input);
+		static void		convert(const std::string& input);
+		static float	is_special_float(const std::string& input);
 };
 
 #include "Converter.tpp"
