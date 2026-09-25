@@ -22,12 +22,20 @@ class Converter {
 		Converter(const Converter& other);
 		Converter& operator=(const Converter& other);
 		~Converter();
-		static const int DECIMAL_PRECISION = 10;
 
 	public:
 		static void		convert(const std::string& input);
-		static float	is_special_float(const std::string& input);
+		static const int DECIMAL_PRECISION = 6;
+
 };
 
+void print_char(char number);
+void print_decimal(float number);
+void print_decimal(double number);
+void print_error(const std::string& msg);
+bool is_special_string(const std::string& input, float *data);
+bool is_special_string(const std::string& input, double *data);
+
 #include "Converter.tpp"
+
 #endif
