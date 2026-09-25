@@ -21,13 +21,13 @@ template <>
 inline bool isType<float>(const std::string& input, float *data)
 {
 	std::stringstream ss(input);
+	std::string suffix;
 
 	ss >> *data;
 
 	if (ss.fail())
 		return false;
 
-	std::string suffix;
 	ss >> suffix;
 
 	if (suffix.empty())
@@ -36,6 +36,31 @@ inline bool isType<float>(const std::string& input, float *data)
 	return suffix == "f" && ss.eof();
 }
 
+template <>
+inline bool isType<char>(const std::string& input, char *data)
+{
+	std::stringstream ss(input);
+	char prefix;
+	std::string suffix;
+
+	ss >> prefix;
+	if (ss.fail() || prefix != '\'')
+		return false;
+
+	ss >> *data;
+
+	if (ss.fail())
+		return false;
+
+	ss >> suffix;
+
+	if (suffix.empty())
+		return false;
+
+	return suffix == "'" && ss.eof();
+}
+
+
 template <typename T, typename V>
 T cast(V* input_parseado)
 {
@@ -43,13 +68,19 @@ T cast(V* input_parseado)
 }
 
 template <typename T>
-std::string get_integer_string(const T& input)
+inline std::string get_integer_string(const T& input)
 {
 	std::stringstream input_str;
 	input_str << std::fixed << std::setprecision(Converter::DECIMAL_PRECISION) << input;
 	std::string ret = input_str.str();
 	size_t point_pos = ret.find('.');
 	return ret.substr(0, point_pos);
+}
+
+template <>
+inline std::string get_integer_string(const char& input)
+{
+	return get_integer_string<int>(input);
 }
 
 template <typename T>
