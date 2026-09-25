@@ -17,13 +17,12 @@
 #include <string>
 
 class Converter {
-	public:
-
 	private:
 		Converter();
 		Converter(const Converter& other);
 		Converter& operator=(const Converter& other);
 		~Converter();
+		static const int DECIMAL_PRECISION = 10;
 
 	public:
 		static void		convert(const std::string& input);
