@@ -6,9 +6,10 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                 +#+#+#+#+#+   +#+          */
 /*   Created: 2026/09/12 20:08:23 by sanferna          #+#    #+#             */
-/*   Updated: 2026/09/15 19:46:44 by sanferna         ###   ########.fr       */
+/*   Updated: 2026/09/25 20:42:29 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "Converter.hpp"
 
@@ -56,10 +57,6 @@ void Converter::convert(const std::string& input) {
 			std::cerr << "No es un double" << std::endl;
 		#endif
 	std::cerr << "Entered value: <" << input << "> not a supported type" << std::endl;
-}
-
-void print_char(char number) {
-	std::cout << "char:" << format_decimal(number) << "f" << std::endl;
 }
 
 void print_decimal(float number) {
