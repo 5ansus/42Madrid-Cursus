@@ -1,5 +1,7 @@
 #include "iter.hpp"
 
+#include <iostream>
+
 template <typename T>
 void print_values(T* array, int len){
 
