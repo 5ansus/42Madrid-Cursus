@@ -1,7 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   whatever.hpp                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
+/*                                                 +#+#+#+#+#+   +#+          */
+/*   Created: 2026/09/18 21:55:34 by sanferna          #+#    #+#             */
+/*   Updated: 2026/09/26 13:01:44 by sanferna         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef WHATEVER_HPP
 #define WHATEVER_HPP
-
-#include <iostream>
 
 template <typename T>
 void swap(T &d1, T &d2){
