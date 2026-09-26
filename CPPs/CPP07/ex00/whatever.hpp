@@ -4,10 +4,10 @@
 #include <iostream>
 
 template <typename T>
-void swap(T *d1, T *d2){
-	T temp = *d1;
-	*d1 = *d2;
-	*d2 = temp;
+void swap(T &d1, T &d2){
+	T temp = d1;
+	d1 = d2;
+	d2 = temp;
 }
 
 template <typename T>

@@ -12,7 +12,7 @@ int main() {
 	int n2 = 7;
 
 	print_values(n1, n2);
-	swap(&n1, &n2);
+	swap(n1, n2);
 	print_values(n1, n2);
 
 	std::cout << "El min es: " << min(n1, n2) << std::endl;
