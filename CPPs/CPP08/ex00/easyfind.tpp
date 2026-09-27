@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   easyfind.tpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sansus <sanferna@student.42madrid.com>     +#+  +:+       +#+        */
+/*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                 +#+#+#+#+#+   +#+          */
-/*   Created: 2026/09/27 12:49:23 by sansus            #+#    #+#             */
-/*   Updated: 2026/09/27 16:49:11 by sansus           ###   ########.fr       */
+/*   Created: 2026/09/27 12:49:23 by sanferna          #+#    #+#             */
+/*   Updated: 2026/09/27 16:49:11 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

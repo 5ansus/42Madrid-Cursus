@@ -5,7 +5,7 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: sanferna <sanferna@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/09/27 16:53:37 by sansus            #+#    #+#             */
+/*   Created: 2026/09/27 16:53:37 by sanferna          #+#    #+#             */
 /*   Updated: 2026/09/27 18:29:11 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -15,8 +15,8 @@
 Span::Span() : _maxSize(0) {};
 Span::Span(unsigned int N) : _maxSize(N) {};
 Span::Span(const Span& other) : _maxSize(other._maxSize), _data(other._data) {};
-Span	Span::operator=(const Span& other){
-	if (this != &other)
+Span&	Span::operator=(const Span& other){
+	if (this == &other)
 		return (*this);
 	_maxSize = other._maxSize;
 	_data = other._data;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Span.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sansus <sanferna@student.42madrid.com>     +#+  +:+       +#+        */
+/*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                 +#+#+#+#+#+   +#+          */
-/*   Created: 2026/09/27 16:52:51 by sansus            #+#    #+#             */
-/*   Updated: 2026/09/27 18:09:46 by sansus           ###   ########.fr       */
+/*   Created: 2026/09/27 16:52:51 by sanferna            #+#    #+#           */
+/*   Updated: 2026/09/27 18:09:46 by sanferna           ###   ########.fr     */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ class Span {
 	public:
 		Span();
 		Span(const Span& other);
-		Span operator=(const Span& other);
+		Span& operator=(const Span& other);
 		Span(unsigned int);
 		~Span();
 
