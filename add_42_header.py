@@ -10,7 +10,7 @@ from datetime import datetime
 from pathlib import Path
 
 
-DEFAULT_EXTS = {".cpp", ".hpp", ".h", ".hh", ".cc", ".c"}
+DEFAULT_EXTS = {".cpp", ".hpp", ".tpp", ".h", ".hh", ".cc", ".c"}
 DEFAULT_FILES = {}
 DEFAULT_EMAIL = "sanferna@student.42madrid.com"
 
@@ -451,21 +451,14 @@ def main() -> int:
     parser.add_argument(
         "--ext",
         nargs="+",
-        default=[
-            ".cpp",
-            ".hpp",
-            ".h",
-            ".hh",
-            ".cc",
-            ".c",
-        ],
+        default=sorted(DEFAULT_EXTS),
         help="File extensions to include",
     )
 
     parser.add_argument(
         "--files",
         nargs="+",
-        default=[""],
+        default=sorted(DEFAULT_FILES),
         help="Specific file names to include",
     )
 
