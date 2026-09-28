@@ -6,12 +6,11 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                 +#+#+#+#+#+   +#+          */
 /*   Created: 2026/09/28 23:20:59 by sanferna          #+#    #+#             */
-/*   Updated: 2026/09/28 01:23:51 by sanferna         ###   ########.fr       */
+/*   Updated: 2026/09/28 02:00:10 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "BitcoinExchange.hpp"
-
 
 static bool validate_date(const std::string& date_str){
 	std::stringstream	ss;
@@ -25,7 +24,7 @@ static bool validate_date(const std::string& date_str){
 
 	ss << date_str;
 	ss >> year;
-	if (ss.fail() || year < 1900)
+	if (ss.fail() || year < 0)
 		throw std::runtime_error("Error on the year");
 	ss >> sep;
 	if (ss.fail() || sep != '-')
@@ -67,7 +66,6 @@ static bool validate_date(const std::string& date_str){
 		|| date.tm_mon != month - 1
 		|| date.tm_year != year - 1900)
 		return false;
-		// throw std::runtime_error("input date: " + date_str + " is wrong");
 
 	return true;
 }
@@ -78,21 +76,14 @@ void	DB::add_db_line(const std::string& line){
 
 	ss << line;
 	std::string		date_str;
-	// std::string		price_str;
 	double			price;
-	// char			sep;
 	std::string			rest;
 
 	std::getline(ss, date_str, ',');
-	// if (ss.fail())
-	// 	throw std::runtime_error("Error while reading 'date' line: " + line);
+
 	if (!::validate_date(date_str))
 		throw std::runtime_error("Line: " + line + " has invalid date");
-	// ss >> sep;
-	// if (ss.fail())
-	// 	throw std::runtime_error("Error while reading 'separator' line: " + line);
-	// if (sep != ',')
-	// 	throw std::runtime_error("Wrong separator for line: " + line);
+
 	ss >> price;
 	if (ss.fail())
 		throw std::runtime_error("Error while reading 'price' line: " + line);
@@ -101,7 +92,6 @@ void	DB::add_db_line(const std::string& line){
 	ss >> rest;
 	if (!ss.eof())
 		throw std::runtime_error("Error while reading line: " + line + " :Has extra characthers");
-
 
 	if (_values.find(date_str) != _values.end() && _values.find(date_str)->second != price){
 		throw std::runtime_error("Error: duplicated key " + date_str + " with different values.");
@@ -123,9 +113,33 @@ DB::DB(const std::string& filename){
 		throw std::runtime_error("ERROR: " + filename + " don't have the spected header: " + EXPECTED_HEADER);
 
 	while (std::getline(file, line)) {
-		add_db_line(line);
+		try
+		{
+			add_db_line(line);
+		}
+		catch(const std::runtime_error& e)
+		{
+			file.close();
+			throw e;
+		}
+
 	}
 }
 
 DB::~DB(){
+}
+
+double DB::calculate_value(const std::string& date, double amount)
+{
+	double	unit_price;
+	std::map<std::string, double>::iterator found = _values.lower_bound(date);
+
+	if (found->first == date)
+		unit_price = found->second;
+	else if (found == _values.begin())
+		unit_price = 0;
+	else
+		unit_price = (--found)->second;
+
+	return (amount * unit_price);
 }

@@ -6,13 +6,12 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                 +#+#+#+#+#+   +#+          */
 /*   Created: 2026/09/28 23:21:10 by sanferna          #+#    #+#             */
-/*   Updated: 2026/09/28 01:03:59 by sanferna         ###   ########.fr       */
+/*   Updated: 2026/09/28 02:02:40 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BITCOINEXCHANGE_HPP
 #define BITCOINEXCHANGE_HPP
-
 
 #include <iostream>
 #include <fstream>
@@ -31,31 +30,15 @@ class DB{
 		DB(const DB& other);
 		DB& operator=(const DB& other);
 		void add_db_line(const std::string& line);
+		double calculate_value(const std::string& date, double amount);
+		std::string&	process_input_line(const std::string& input);
 
 	public:
 		DB(const std::string& filename);
 		~DB();
+		void	process_input_file(const std::string& filename);
+
 
 };
-
-
-
-// class Date{
-// 	public:
-// 		const unsigned int y;
-// 		const unsigned int m;
-// 		const unsigned int d;
-
-// 	private:
-// 		tm _date;
-// 		Date();
-// 		Date(const Date& other);
-// 		Date& operator=(const Date& other);
-// 		~Date();
-
-// 		Date(const std::string& date_str);
-
-
-// };
 
 #endif
