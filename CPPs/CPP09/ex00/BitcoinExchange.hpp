@@ -6,7 +6,7 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                 +#+#+#+#+#+   +#+          */
 /*   Created: 2026/09/28 23:21:10 by sanferna          #+#    #+#             */
-/*   Updated: 2026/09/28 02:02:40 by sanferna         ###   ########.fr       */
+/*   Updated: 2026/09/28 19:51:19 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,10 @@
 #include <map>
 #include <ctime>
 #include <sstream>
+#include <stdexcept>
 
 #define EXPECTED_HEADER "date,exchange_rate"
+#define EXPECTED_INPUT_HEADER "date | value"
 
 class DB{
 	private:
@@ -30,13 +32,19 @@ class DB{
 		DB(const DB& other);
 		DB& operator=(const DB& other);
 		void add_db_line(const std::string& line);
-		double calculate_value(const std::string& date, double amount);
-		std::string&	process_input_line(const std::string& input);
+		void	print_calculate(const std::string& date, double amount);
+		void	process_input_line(const std::string& input);
 
 	public:
 		DB(const std::string& filename);
 		~DB();
 		void	process_input_file(const std::string& filename);
+
+		class	ErrorInputLine : public std::runtime_error {
+			public:
+				ErrorInputLine(const std::string& what_arg);
+				virtual ~ErrorInputLine() throw();
+		};
 
 
 };
