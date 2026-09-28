@@ -6,7 +6,7 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                 +#+#+#+#+#+   +#+          */
 /*   Created: 2026/09/28 19:56:47 by sanferna          #+#    #+#             */
-/*   Updated: 2026/09/28 21:29:43 by sanferna         ###   ########.fr       */
+/*   Updated: 2026/09/29 01:38:53 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,31 @@
 #define RPP_HPP
 
 #include <iostream>
+#include <string>
+#include <sstream>
 #include <stack>
+
+enum Oper {
+	NONE = 0,
+	SUM = '+',
+	SUB = '-',
+	MUL = '*',
+	DIV = '/',
+};
+
+Oper getOperator(char op);
+int apply_operation(std::stack<int>& pila, Oper operador);
 
 class RPN {
 	private:
-		std::stack<int> _pila;
 		RPN();
 		RPN(const RPN& other);
 		RPN& operator=(const RPN& other);
 		~RPN();
 
 	public:
-		
+		static void process_input(const std::string& input);
+
 };
+
 #endif
