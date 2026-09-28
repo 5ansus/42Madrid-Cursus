@@ -6,13 +6,16 @@
 /*   By: sanferna <sanferna@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                 +#+#+#+#+#+   +#+          */
 /*   Created: 2026/09/28 23:20:59 by sanferna          #+#    #+#             */
-/*   Updated: 2026/09/28 19:54:02 by sanferna         ###   ########.fr       */
+/*   Updated: 2026/09/28 21:20:36 by sanferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "BitcoinExchange.hpp"
 
 static bool validate_date(const std::string& date_str){
+	if (date_str.find('+') != std::string::npos)
+		return false;
 	std::stringstream	ss;
 	tm date;
 	int	year;
@@ -70,6 +73,8 @@ static bool validate_date(const std::string& date_str){
 }
 
 void	DB::add_db_line(const std::string& line){
+
+
 	std::stringstream	ss;
 
 	ss << line;
@@ -143,9 +148,11 @@ void DB::print_calculate(const std::string& date, double amount)
 }
 
 void	DB::process_input_line(const std::string& line){
+
 	std::stringstream	ss;
 
 	ss << line;
+
 	std::string			date_str;
 	char				sep;
 	double				amount;
