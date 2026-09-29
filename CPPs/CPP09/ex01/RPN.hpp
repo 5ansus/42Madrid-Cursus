@@ -34,9 +34,9 @@ class RPN {
 		RPN();
 		RPN(const RPN& other);
 		RPN& operator=(const RPN& other);
-		~RPN();
 
 	public:
+		~RPN();
 		static void process_input(const std::string& input);
 
 };
