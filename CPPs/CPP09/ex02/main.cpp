@@ -13,27 +13,81 @@
 
 #include "PmergeMe.hpp"
 
-#include "PmergeMe.hpp"
-
-static void print_vector(const p_vect& v) {
-	for (p_vect::size_type i = 0; i < v.size(); ++i)
-		std::cout << v[i] << (i + 1 == v.size() ? '\n' : ' ');
+template <typename T>
+static void print_data(const T& data) {
+	for (typename T::const_iterator i = data.begin(); i != data.end(); ++i)
+		std::cout << *i << " " ;
+	std::cout << std::endl;
 }
 
-int main(){
+template <typename T>
+static double exec_pmerge(T& data) {
+	clock_t start = clock();
+		PmergeMe::MergeInsertionSort(data);
+	clock_t end = clock();
+
+	double ms = (static_cast<double>(end - start) / CLOCKS_PER_SEC) * 1000.0;
+	return ms;
+}
+
+#include <ctime>
+
+int main(int argc, char* argv[]) {
+
+	if (argc < 2){
+		std::cerr << "Error" << std::endl;
+		return 1;
+	}
 	p_vect numbers;
-	int values[] = {8, 3, 5, 1, 9, 2, 7, 4, 6};
+	p_deque numbers_deque;
+	std::stringstream	ss;
+	std::string	extra;
+	int	num;
 
-	for (int i = 0; i < 9; ++i)
-		numbers.push_back(values[i]);
-
+	if (argc == 2)
+	{
+		ss << argv[1];
+		while (ss >> num){
+			if (num < 0){
+				std::cerr << "Error" << std::endl;
+				return 1;
+			}
+			numbers.push_back(num);
+			numbers_deque.push_back(num);
+		}
+		if (!ss.eof()) {
+			std::cerr << "Error" << std::endl;
+			return 1;
+		}
+	}else{
+		for (int i = 1; i < argc; ++i){
+			if (argv[i][0] == '\0')
+				continue;
+			ss.clear();
+			ss << argv[i];
+			ss >> num;
+			if (num < 0 || !ss.eof()){
+				std::cerr << "Error" << std::endl;
+				return 1;
+			}
+			numbers.push_back(num);
+			numbers_deque.push_back(num);
+		}
+	}
 	std::cout << "Before: ";
-	print_vector(numbers);
+	print_data(numbers);
+	std::cout << std::endl;
 
-	PmergeMe::MergeInsertionSort(numbers);
+	double ms_vector = exec_pmerge(numbers);
+	double ms_deque = exec_pmerge(numbers_deque);
 
 	std::cout << "After:  ";
-	print_vector(numbers);
+	print_data(numbers);
+	std::cout << std::endl;
+
+	std::cout << "Time to process a range of " << numbers.size() << " elements with std::vector : "<< ms_vector << " ms\n";
+	std::cout << "Time to process a range of " << numbers_deque.size() << " elements with std::deque : "<< ms_deque << " ms\n";
 
 	return 0;
 }
+
