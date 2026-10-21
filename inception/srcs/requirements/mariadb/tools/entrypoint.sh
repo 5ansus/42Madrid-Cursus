@@ -25,7 +25,7 @@ until mysqladmin --socket=/run/mysqld/mysqld.sock ping >/dev/null 2>&1; do
     sleep 1
 done
 
-mysql --socket=/run/mysqld/mysqld.sock <<-EOSQL
+mysql mysql --protocol=socket --socket=/run/mysqld/mysqld.sock -uroot -p"${DB_ROOT_PASSWORD}" <<-EOSQL
     ALTER USER 'root'@'localhost' IDENTIFIED BY '${DB_ROOT_PASSWORD}';
     CREATE DATABASE IF NOT EXISTS \`${MYSQL_DATABASE}\`;
     CREATE USER IF NOT EXISTS '${MYSQL_USER}'@'%' IDENTIFIED BY '${DB_PASSWORD}';
