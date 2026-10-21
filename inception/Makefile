@@ -11,7 +11,7 @@ export
 all: up
 
 build:
-	@mkdir -p /home/$(LOGIN)/data/mariadb /home/$(LOGIN)/data/wordpress
+	@mkdir -p /home/sanferna/data/mariadb /home/sanferna/data/wordpress
 	$(DOCKER_COMPOSE) build
 
 up: build
